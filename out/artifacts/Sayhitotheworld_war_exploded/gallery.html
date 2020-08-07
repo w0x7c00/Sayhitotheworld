@@ -1,0 +1,486 @@
+﻿<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0; maximum-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title></title>
+    <!-- Reset CSS -->
+    <link href="css/reset.css" rel="stylesheet" type="text/css">
+    <!-- Custom Fonts -->
+    <link href="css/fonts.css" rel="stylesheet" type="text/css">
+    <!-- Bootstrap -->
+    <link href="assets/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <!-- Select2 -->
+    <link href="assets/select2/css/select2.min.css" rel="stylesheet" type="text/css">
+    <!-- Font Awesome -->
+    <link href="assets/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <!-- Magnific Popup -->
+    <link href="assets/magnific-popup/css/magnific-popup.css" rel="stylesheet" type="text/css">
+    <!-- Iconmoon -->
+    <link href="assets/iconmoon/css/iconmoon.css" rel="stylesheet" type="text/css">
+    <!-- Custom Style -->
+    <link href="css/custom.css" rel="stylesheet" type="text/css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="js/html5shiv.min.js"></script>
+    <script src="js/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+<body>
+
+
+<!-- Start Preloader -->
+<div id="loading">
+    <div class="element">
+        <div class="sk-folding-cube">
+            <div class="sk-cube1 sk-cube"></div>
+            <div class="sk-cube2 sk-cube"></div>
+            <div class="sk-cube4 sk-cube"></div>
+            <div class="sk-cube3 sk-cube"></div>
+        </div>
+    </div>
+</div>
+<!-- End Preloader -->
+<!-- Start Header -->
+<header>
+    <!-- Start Header Middle -->
+    <div class="container header-middle">
+        <div class="row"> <span class="col-xs-6 col-sm-3"><a href="index.html"><img src="images/logo.png"
+                                                                                    class="img-responsive"
+                                                                                    alt=""></a></span>
+            <div class="col-xs-6 col-sm-3"></div>
+            <div class="col-xs-6 col-sm-9">
+                <div class="contact clearfix">
+                    <ul class="hidden-xs">
+                        <li><span>电子邮箱/email</span> <a href="mailto:info@edumart.org">sayhitotheworld.com@gmail.com</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Header Middle -->
+    <!-- Start Navigation -->
+    <nav class="navbar navbar-inverse">
+        <div class="container">
+            <div class="navbar-header">
+                <button aria-controls="navbar" aria-expanded="false" data-target="#navbar" data-toggle="collapse"
+                        class="navbar-toggle collapsed" type="button"><span class="sr-only">Toggle navigation</span>
+                    <span
+                            class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span>
+                </button>
+            </div>
+            <div class="navbar-collapse collapse" id="navbar">
+                <ul class="nav navbar-nav">
+                    <li><a href="index.html"><strong>首页</strong></a></li>
+                    <li><a href="register.html"><strong>用户注册</strong></a></li>
+                    <li><a href="about.html"><strong>关于我们</strong></a></li>
+                    <li><a href="gallery.html"><strong>教师信息</strong></a></li>
+                    <li><a href="assets/howtobe7.6.pdf" download="howtobe"><strong>How to become a teacher</strong></a>
+                    </li>
+                    <li></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!-- End Navigation -->
+</header>
+<!-- End Header -->
+
+<!-- Start Banner -->
+
+<div class="inner-banner blog">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="content">
+                    <h1><strong>教师信息</strong></h1>
+                    <p>... ...</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- End Banner -->
+
+<!-- Start Campus Tour -->
+
+<style>
+    .photo {
+        text-align: center ;
+        padding-top: 20px;
+    }
+
+    .photo > img {
+        max-height: 260px;
+        max-width: 100%;
+    }
+
+    .teacher-info-page {
+        width: 100%;
+    }
+
+    .teacher-item {
+        width: 80%;
+        height: 300px;
+        margin: 20px auto;
+        cursor: pointer;
+    }
+
+    .simple-info {
+        padding: 30px;
+        max-height: 100%;
+    }
+
+    .self-say {
+        padding: 20px;
+    }
+
+    .clear-float {
+        clear: both;
+    }
+
+    .shadow-border{
+        -moz-box-shadow:1px 1px 5px #333333; -webkit-box-shadow:1px 1px 5px #333333; box-shadow:1px 1px 5px #333333;
+    }
+
+    .shadow-border:hover{
+        -moz-box-shadow:1px 1px 20px #333333; -webkit-box-shadow:1px 1px 20px #333333; box-shadow:1px 1px 20px #333333;
+    }
+
+    .show-box{
+        border-left: transparent 4px solid;
+    }
+
+    .show-box:hover{
+        border-left: cornflowerblue 4px solid;
+    }
+
+    @media (max-width: 500px){
+        .teacher-item{
+            width: 100%;
+        }
+    }
+
+</style>
+
+<div class="teacher-info-page container-fluid">
+    <div class="row teacher-item shadow-border show-box">
+        <div class="photo col-lg-4 col-md-4  col-xs-6 col-sm-6">
+            <img src="images/教师1 (2).jpg" alt="教师图片..."/>
+        </div>
+        <div class="simple-info col-lg-4 col-md-4  col-xs-6 col-sm-6">
+            <ul>
+                <li>
+                    <span><strong>教师姓名</strong></span>
+                    <br/>
+                    <span>Aarshika Singh</span>
+                </li>
+                <li>
+                    <span><strong>毕业学校</strong></span>
+                    <br/>
+                    <span>Jacobs University Bremen</span>
+                </li>
+                <li>
+                    <span><strong>语言</strong></span>
+                    <br/>
+                    <span>印地语（母语） 英语 德语 梵语</span>
+                </li>
+                <li>
+                    <span><strong>每小时收费</strong></span>
+                    <br/>
+                    <span>CNY -</span>
+                </li>
+            </ul>
+        </div>
+        <div class="self-say col-lg-4 col-md-4 hidden-xs hidden-sm">
+            <div class="panel panel-default">
+                <div class="panel-heading panel-title"><strong>简介</strong></div>
+                <div class="panel-body">我是一名积极进取，努力工作的学生，对学习和教授新语言和新文化感兴趣。有兴趣担任兼职语言讲师。
+                </div>
+            </div>
+        </div>
+        <div class="clear-float"></div>
+
+    </div>
+
+    <div class="row teacher-item shadow-border show-box">
+        <div class="photo col-lg-4 col-md-4  col-xs-6 col-sm-6">
+            <img src="images/教师2 (2).jpg" alt="教师图片..."/>
+        </div>
+        <div class="simple-info col-lg-4 col-md-4  col-xs-6 col-sm-6">
+            <ul>
+                <li>
+                    <span><strong>教师姓名</strong></span>
+                    <br/>
+                    <span>Mounia Kannas</span>
+                </li>
+                <li>
+                    <span><strong>毕业学校</strong></span>
+                    <br/>
+                    <span>Chouaib Doukkali University</span>
+                </li>
+                <li>
+                    <span><strong>语言</strong></span>
+                    <br/>
+                    <span>英语 阿拉伯语 法语</span>
+                </li>
+                <li>
+                    <span><strong>每小时收费</strong></span>
+                    <br/>
+                    <span>CNY -</span>
+                </li>
+            </ul>
+        </div>
+        <div class="self-say col-lg-4 col-md-4 hidden-xs hidden-sm">
+            <div class="panel panel-default">
+                <div class="panel-heading panel-title"><strong>简介</strong></div>
+                <div class="panel-body">我有过辅导儿童英语家教的经历，拥有很好的沟通能力与学生建立关爱关系的能力●良好的组织能力●适应新环境的能力●Microsoft Office应用程序(Word, PowerPoint, Excel等)有良好的了解
+                </div>
+            </div>
+        </div>
+        <div class="clear-float"></div>
+    </div>
+
+</div>
+
+
+<!--<section class="campus-tour padding-lg">-->
+<!--    &lt;!&ndash;教师个人信息&ndash;&gt;-->
+<!--    <div class="details">-->
+<!--        <div class="info">-->
+<!--            <div class="left">-->
+<!--                <div class="photo">-->
+<!--                    <img src="images/教师1 (2).jpg" alt="陈义"/>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--            <div class="middle">-->
+<!--                <ul>-->
+<!--                    <li>-->
+<!--                        <span><strong>教师姓名</strong></span>-->
+<!--                        <br/>-->
+<!--                        <span>Aarshika Singh</span>-->
+<!--                    </li>-->
+<!--                    <li>-->
+<!--                        <span><strong>毕业学校</strong></span>-->
+<!--                        <br/>-->
+<!--                        <span>Jacobs University Bremen</span>-->
+<!--                    </li>-->
+<!--                    <li>-->
+<!--                        <span><strong>语言</strong></span>-->
+<!--                        <br/>-->
+<!--                        <span>印地语（母语） 英语 德语 梵语</span>-->
+<!--                    </li>-->
+<!--                    <li>-->
+<!--                        <span><strong>每小时收费</strong></span>-->
+<!--                        <br/>-->
+<!--                        <span>CNY -</span>-->
+<!--                    </li>-->
+<!--                </ul>-->
+<!--            </div>-->
+<!--            <div class="bref-intro">-->
+<!--                <h5>简介</h5>-->
+<!--                <textarea class="hidden-xs" cols="60" rows="9" :value="value">我是一名积极进取，努力工作的学生，对学习和教授新语言和新文化感兴趣。有兴趣担任兼职语言讲师。-->
+
+<!--创新的教学理念●规划和管理●互动课堂教材●MS-Word MS-PowerPoint-->
+
+<!--在线教学技术●例如Skype, Microsoft Teams,Zoom等-->
+
+<!--成就与兴趣●大学外部奖学金持有者/公开演讲/学习新语言/志愿服务/阅读和写作-->
+<!--</textarea>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--    <div class="details">-->
+<!--        <div class="info">-->
+<!--            <div class="left">-->
+<!--                <div class="photo">-->
+<!--                    <img src="images/教师2 (2).jpg" alt="陈义"/>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--            <div class="middle">-->
+<!--                <ul>-->
+<!--                    <li>-->
+<!--                        <span><strong>教师姓名</strong></span>-->
+<!--                        <br/>-->
+<!--                        <span>Mounia Kannas</span>-->
+<!--                    </li>-->
+<!--                    <li>-->
+<!--                        <span><strong>毕业学校</strong></span>-->
+<!--                        <br/>-->
+<!--                        <span>Chouaib Doukkali University</span>-->
+<!--                    </li>-->
+<!--                    <li>-->
+<!--                        <span><strong>语言</strong></span>-->
+<!--                        <br/>-->
+<!--                        <span>英语 阿拉伯语 法语</span>-->
+<!--                    </li>-->
+<!--                    <li>-->
+<!--                        <span><strong>每小时收费</strong></span>-->
+<!--                        <br/>-->
+<!--                        <span>CNY -</span>-->
+<!--                    </li>-->
+<!--                </ul>-->
+<!--            </div>-->
+<!--            <div class="bref-intro hidden-xs">-->
+<!--                <h5>简介</h5>-->
+<!--                <textarea style="width: 100%" value="value">我有过辅导儿童英语家教的经历，拥有很好的沟通能力与学生建立关爱关系的能力●良好的组织能力●适应新环境的能力●Microsoft Office应用程序(Word, PowerPoint, Excel等)有良好的了解-->
+<!--</textarea>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--    <div class="text-center">-->
+<!--        <ul class="pagination blue">-->
+<!--            <li><a href="#" aria-label="Previous"> <span aria-hidden="true"><i class="fa fa-angle-left"-->
+<!--                                                                               aria-hidden="true"></i> Back</span> </a>-->
+<!--            </li>-->
+<!--            <li><a href="#">1</a></li>-->
+<!--            <li><a href="#">2</a></li>-->
+<!--            <li><a href="#">3</a></li>-->
+<!--            <li><a href="#">4</a></li>-->
+<!--            <li><a href="#" aria-label="Next"> <span aria-hidden="true">Next <i class="fa fa-angle-right"-->
+<!--                                                                                aria-hidden="true"></i></span> </a></li>-->
+<!--        </ul>-->
+<!--    </div>-->
+<!--</section>-->
+
+<!-- End Campus Tour -->
+
+<!-- Start Footer -->
+
+<footer class="footer">
+    <!-- Start Footer Top -->
+    <div class="container">
+        <div class="row row1">
+            <div class="col-sm-9 clearfix">
+                <div class="foot-nav">
+                    <h3></h3>
+                    <ul>
+                        <li><a href="#"></a></li>
+                        <li><a href="#"></a></li>
+                        <li><a href="#"></a></li>
+                        <li><a href="#"></a></li>
+                        <li><a href="#"></a></li>
+                    </ul>
+                </div>
+                <div class="foot-nav">
+                    <h3></h3>
+                    <ul>
+                        <li><a href="#"></a></li>
+                        <li><a href="#"></a></li>
+                        <li><a href="#"></a></li>
+                        <li><a href="#"></a></li>
+                        <li><a href="#"></a></li>
+                    </ul>
+                </div>
+                <div class="foot-nav">
+                    <h3></h3>
+                    <ul>
+                        <li><a href="#"></a></li>
+                        <li><a href="#"></a></li>
+                        <li><a href="#"></a></li>
+                        <li><a href="#"></a></li>
+                        <li><a href="#"></a></li>
+                    </ul>
+                </div>
+                <div class="foot-nav">
+                    <h3 class="text-right">say hi to the world</h3>
+                    <ul>
+                        <li><a href="#"></a></li>
+                        <li><a href="#"></a></li>
+                        <li><a href="#"></a></li>
+                        <li><a href="#"></a></li>
+                        <li><a href="#"></a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-sm-3">
+                <div class="footer-logo hidden-xs"><a href="index.html"><img src="images/footer-logo.png"
+                                                                             class="img-responsive" alt=""></a></div>
+                <ul class="terms clearfix">
+
+                    <li><a href="#"></a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- End Footer Top -->
+    <!-- Start Footer Bottom -->
+    <div class="bottom">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-4">
+                    <div class="connect-us">
+                        <h3>Connect with Us</h3>
+                        <ul class="follow-us clearfix">
+                            <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+                            <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+                            <li><a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a></li>
+                            <li><a href="#"><i class="fa fa-google-plus" aria-hidden="true"></i></a></li>
+                            <li><a href="#"><i class="fa fa-youtube-play" aria-hidden="true"></i></a></li>
+                            <li><a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="subscribe">
+                        <h3></h3>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="instagram">
+                        <h3>@say hi to the world</h3>
+                        <ul class="clearfix">
+                            <li><a href="#">
+                                <figure><img src="images/insta-img1.jpg" class="img-responsive" alt=""></figure>
+                            </a></li>
+                            <li><a href="#">
+                                <figure><img src="images/insta-img2.jpg" class="img-responsive" alt=""></figure>
+                            </a></li>
+                            <li><a href="#">
+                                <figure><img src="images/insta-img3.jpg" class="img-responsive" alt=""></figure>
+                            </a></li>
+                            <li><a href="#">
+                                <figure><img src="images/insta-img4.jpg" class="img-responsive" alt=""></figure>
+                            </a></li>
+                            <li><a href="#">
+                                <figure><img src="images/insta-img5.jpg" class="img-responsive" alt=""></figure>
+                            </a></li>
+                            <li><a href="#">
+                                <figure><img src="images/insta-img6.jpg" class="img-responsive" alt=""></figure>
+                            </a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Footer Bottom -->
+</footer>
+
+<!-- End Footer -->
+
+<!-- Scroll to top -->
+<a href="#" class="scroll-top"><i class="fa fa-chevron-up" aria-hidden="true"></i></a>
+
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script type="text/javascript" src="js/jquery.min.js"></script>
+<!-- Bootsrap JS -->
+<script type="text/javascript" src="assets/bootstrap/js/bootstrap.min.js"></script>
+<!-- Select2 JS -->
+<script type="text/javascript" src="assets/select2/js/select2.min.js"></script>
+<!-- Magnific Popup JS -->
+<script type="text/javascript" src="assets/magnific-popup/js/magnific-popup.min.js"></script>
+<!-- Isotop JS -->
+<script type="text/javascript" src="assets/isotope/js/isotope.min.js"></script>
+<!-- Custom JS -->
+<script type="text/javascript" src="js/custom.js"></script>
+</body>
+
+</html>
