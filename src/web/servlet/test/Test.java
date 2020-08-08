@@ -4,6 +4,7 @@ package web.servlet.test;
 import com.google.gson.Gson;
 import tool.BasicTool;
 import web.dataBasePacket.User;
+import web.email.BasicEmailTool;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -18,11 +19,7 @@ public class Test extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         BasicTool.setCharacterEncoding(req,resp);
-        User user = new User();
-        user.user_name = "davis";
-        boolean result = user.set();
-        user.user_name = "davis2,passwo='123'";
-        user.insert();
-        resp.getWriter().write(""+result);
+        BasicEmailTool.sendMail("3126044501@qq.com","TEST");
+        resp.getWriter().write(""+123);
     }
 }

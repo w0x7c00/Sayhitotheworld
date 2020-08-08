@@ -16,4 +16,10 @@ public class BasicTool {
         httpSession.removeAttribute("user");
         httpSession.removeAttribute("admin");
     }
+    public static boolean checkEmailFormat(String email){
+        return true;
+    }
+    public static String generateRandomEmailCode(){
+        return "123456";
+    }
 }
