@@ -1,6 +1,7 @@
 package web.servlet.logAndRegister;
 
 import tool.BasicTool;
+import tool.FormatCheckTool;
 import web.email.BasicEmailTool;
 import web.servlet.logAndRegister.sql.UserSearchEmail;
 import web.sessionPacket.RegisterSessionPacket;
@@ -27,7 +28,7 @@ public class UserSendRegisterEmail extends HttpServlet {
         int state = 0;
         long appendInf = 0;
         String email = req.getParameter("email");
-        if(email==null||(!BasicTool.checkEmailFormat(email))){
+        if(email==null||(!FormatCheckTool.checkEmail(email))){
             state = 3;
         }
         else{

@@ -4,7 +4,7 @@ public class RegisterSessionPacket implements SessionPacketInterface{
     public String emailCode;
     public String email;
     public long time;
-    public final long divideTime = 60;
+    public final long divideTime = 60000;    //间隔时间 60000ms = 60s
 
     public RegisterSessionPacket(){
         this.time = 0;

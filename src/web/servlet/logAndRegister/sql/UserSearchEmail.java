@@ -15,11 +15,11 @@ public class UserSearchEmail extends BasicSQLRunner {
             ResultSet rs = st.executeQuery();
             if(rs.next()){
                 //已经存在
-                return true;
+                return false;
             }
             else {
                 //不存在
-                return false;
+                return true;
             }
         }
         catch (SQLException e){

@@ -19,7 +19,8 @@ public class Test extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         BasicTool.setCharacterEncoding(req,resp);
-        BasicEmailTool.sendMail("3126044501@qq.com","TEST");
-        resp.getWriter().write(""+123);
+        //BasicEmailTool.sendMail("3126044501@qq.com","TEST");
+        String re = BasicTool.generateRandomEmailCode();
+        resp.getWriter().write(re);
     }
 }

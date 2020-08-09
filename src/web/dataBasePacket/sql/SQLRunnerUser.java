@@ -26,6 +26,22 @@ public class SQLRunnerUser extends BasicSQLRunner {
         }
     }
 
+    //用于UserSessionPacket的扩展功能
+    public boolean setByEmailUser(User user){
+        String email = user.email;
+        String preSQL = "select * from user where email=?";
+        try{
+            PreparedStatement st = con.prepareStatement(preSQL);
+            st.setString(1,email);
+            ResultSet result = st.executeQuery();
+            return user.setWithResultSet(result);
+        }
+        catch (SQLException e){
+            e.printStackTrace();
+            return false;
+        }
+    }
+
     //当更新不存在的列时是不会产生SQLException的
     //除非数据库出现问题否则只会返回true
     public boolean updateUser(User user){

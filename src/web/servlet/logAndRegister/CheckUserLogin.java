@@ -19,10 +19,10 @@ public class CheckUserLogin extends HttpServlet {
         BasicTool.setCharacterEncoding(req,resp);
         HttpSession httpSession = req.getSession();
         if(httpSession.getAttribute("user")==null){
-            resp.getWriter().write("{state:1}");
+            resp.getWriter().write("{state:0}");
         }
         else{
-            resp.getWriter().write("{state:0}");
+            resp.getWriter().write("{state:1}");
         }
     }
 }

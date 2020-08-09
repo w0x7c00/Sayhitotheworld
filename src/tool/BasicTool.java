@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.util.Random;
 
 public class BasicTool {
     public static void setCharacterEncoding(HttpServletRequest req, HttpServletResponse resp) throws IOException {
@@ -16,10 +17,13 @@ public class BasicTool {
         httpSession.removeAttribute("user");
         httpSession.removeAttribute("admin");
     }
-    public static boolean checkEmailFormat(String email){
-        return true;
-    }
     public static String generateRandomEmailCode(){
-        return "123456";
+        Random random = new Random();
+        random.setSeed(System.currentTimeMillis());
+        int m = random.nextInt(1000000);
+        while(m<100000){
+            m*=10;
+        }
+        return ""+m;
     }
 }
