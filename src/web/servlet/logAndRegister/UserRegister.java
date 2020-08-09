@@ -24,11 +24,13 @@ public class UserRegister extends HttpServlet {
         int state = 0;
         BasicTool.setCharacterEncoding(req,resp);
         String user_name = req.getParameter("user_name");
-
+        String password = req.getParameter("password");
+        String emailCode = req.getParameter("emailCode");
 
         //检查输入字段
-
-
+        if(user_name==null||password==null||emailCode==null){
+            state = 2;//不正确的字段或者格式
+        }
 
         //检查用户名可用性
         User user = new User();
