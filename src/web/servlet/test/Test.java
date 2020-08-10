@@ -20,7 +20,13 @@ public class Test extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         BasicTool.setCharacterEncoding(req,resp);
         //BasicEmailTool.sendMail("3126044501@qq.com","TEST");
-        String re = BasicTool.generateRandomEmailCode();
-        resp.getWriter().write(re);
+        int a =9;
+        try{
+            a = Integer.parseInt("abc123");
+        }
+        catch (NumberFormatException e){
+            a = 999111;
+        }
+        resp.getWriter().write(a+"");
     }
 }

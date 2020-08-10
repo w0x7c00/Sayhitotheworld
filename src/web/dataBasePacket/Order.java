@@ -12,6 +12,7 @@ public class Order extends BasicDataBasePacket {
     public short state;
     public long create_time;
     public String teacher_name;
+    public String email;
     @Override
     public boolean setWithResultSet(ResultSet rs) {
         try {
@@ -24,6 +25,7 @@ public class Order extends BasicDataBasePacket {
             this.state = rs.getShort("state");
             this.create_time = rs.getLong("create_time");
             this.teacher_name = rs.getString("teacher_name");
+            this.email = rs.getString("email");
             return true;
         }
         catch (SQLException e){

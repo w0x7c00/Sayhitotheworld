@@ -32,7 +32,7 @@ public class SQLRunnerOrder extends BasicSQLRunner implements SafeSQLInterface {
     @Override
     public boolean update(DataBasePacketInterface dataBasePacketInterface){
         Order order = (Order)dataBasePacketInterface;
-        String preSQL = "update order set user_name=?,amount=?,state=?,teacher_name=?,create_time=? where order_id = ?";
+        String preSQL = "update order set user_name=?,amount=?,state=?,teacher_name=?,create_time=?,email=? where order_id = ?";
         try{
             PreparedStatement st = con.prepareStatement(preSQL);
             st.setString(1,order.user_name);
@@ -40,7 +40,8 @@ public class SQLRunnerOrder extends BasicSQLRunner implements SafeSQLInterface {
             st.setShort(3,order.state);
             st.setString(4,order.teacher_name);
             st.setLong(5,order.create_time);
-            st.setInt(6,order.order_id);
+            st.setString(6,order.email);
+            st.setInt(7,order.order_id);
             st.executeUpdate();
             return true;
         }
@@ -71,10 +72,11 @@ public class SQLRunnerOrder extends BasicSQLRunner implements SafeSQLInterface {
 
     //不存在列时成功插入返回true
     //不成功插入返回false
+    //order不需要插入order_id
     @Override
     public boolean insert(DataBasePacketInterface dataBasePacketInterface){
         Order order = (Order)dataBasePacketInterface;
-        String preSQL = "insert into order (user_name,amount,state,teacher_name,create_time,order_id) values (?,?,?,?,?,?) ";
+        String preSQL = "insert into order (user_name,amount,state,teacher_name,create_time,email) values (?,?,?,?,?,?) ";
         try{
             PreparedStatement st = con.prepareStatement(preSQL);
             st.setString(1,order.user_name);
@@ -82,7 +84,7 @@ public class SQLRunnerOrder extends BasicSQLRunner implements SafeSQLInterface {
             st.setShort(3,order.state);
             st.setString(4,order.teacher_name);
             st.setLong(5,order.create_time);
-            st.setInt(6,order.order_id);
+            st.setString(6,order.email);
             st.executeUpdate();
             return true;
         }
