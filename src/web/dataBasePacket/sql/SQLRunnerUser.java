@@ -3,15 +3,19 @@
 package web.dataBasePacket.sql;
 
 import sql.BasicSQLRunner;
+import sql.SafeSQLInterface;
+import web.dataBasePacket.DataBasePacketInterface;
 import web.dataBasePacket.User;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class SQLRunnerUser extends BasicSQLRunner {
+public class SQLRunnerUser extends BasicSQLRunner implements SafeSQLInterface {
     //通过user的user_name查询表
     //不存在时返回false
-    public boolean setUser(User user){
+    @Override
+    public boolean set(DataBasePacketInterface dataBasePacketInterface){
+        User user = (User)dataBasePacketInterface;
         String user_name = user.user_name;
         String preSQL = "select * from user where user_name=?";
         try{
@@ -27,7 +31,8 @@ public class SQLRunnerUser extends BasicSQLRunner {
     }
 
     //用于UserSessionPacket的扩展功能
-    public boolean setByEmailUser(User user){
+    public boolean setByEmailUser(DataBasePacketInterface dataBasePacketInterface){
+        User user = (User)dataBasePacketInterface;
         String email = user.email;
         String preSQL = "select * from user where email=?";
         try{
@@ -44,7 +49,9 @@ public class SQLRunnerUser extends BasicSQLRunner {
 
     //当更新不存在的列时是不会产生SQLException的
     //除非数据库出现问题否则只会返回true
-    public boolean updateUser(User user){
+    @Override
+    public boolean update(DataBasePacketInterface dataBasePacketInterface){
+        User user = (User)dataBasePacketInterface;
         String preSQL = "update user set password=?,email=?,name=?,balance=?,create_time=? where user_name = ?";
         try{
             PreparedStatement st = con.prepareStatement(preSQL);
@@ -65,14 +72,16 @@ public class SQLRunnerUser extends BasicSQLRunner {
 
     //删除不存在的列时是不会产生SQLException的
     //除非数据库出现问题否则只会返回true
-    public boolean deleteUser(User user){
+    @Override
+    public boolean delete(DataBasePacketInterface dataBasePacketInterface){
+        User user = (User)dataBasePacketInterface;
         String user_name = user.user_name;
         String preSQL = "delete from user where user_name=?";
         try{
             PreparedStatement st = con.prepareStatement(preSQL);
             st.setString(1,user_name);
-            ResultSet result = st.executeQuery();
-            return user.setWithResultSet(result);
+            st.executeUpdate();
+            return true;
         }
         catch (SQLException e){
             e.printStackTrace();
@@ -82,7 +91,9 @@ public class SQLRunnerUser extends BasicSQLRunner {
 
     //不存在列时成功插入返回true
     //不成功插入返回false
-    public boolean insertUser(User user){
+    @Override
+    public boolean insert(DataBasePacketInterface dataBasePacketInterface){
+        User user = (User)dataBasePacketInterface;
         String preSQL = "insert into user (user_name,password,email,name,balance,create_time) values (?,?,?,?,?,?)";
         try{
             PreparedStatement st = con.prepareStatement(preSQL);

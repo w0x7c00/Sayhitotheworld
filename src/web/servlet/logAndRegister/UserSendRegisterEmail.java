@@ -43,7 +43,8 @@ public class UserSendRegisterEmail extends HttpServlet {
                 if(httpSession.getAttribute("userRegister")==null){
                     //没有发送邮件记录即可发送邮件并且创建session
                     String emailCode = BasicTool.generateRandomEmailCode();
-                    if(BasicEmailTool.sendMail(email,emailCode)){
+                    String emailContext = "<h1>Sayhitotheworld</h1><h4>验证码：</h4><strong>"+emailCode+"</strong>";
+                    if(BasicEmailTool.sendMail(email,emailContext)){
                         //发送成功
                         state = 1;
                         //创建session
@@ -60,10 +61,11 @@ public class UserSendRegisterEmail extends HttpServlet {
                     //有发送记录则检查时间间隔
                     RegisterSessionPacket registerSessionPacket = (RegisterSessionPacket) httpSession.getAttribute("userRegister");
                     String emailCode = BasicTool.generateRandomEmailCode();
+                    String emailContext = "<h1>Sayhitotheworld</h1><h4>验证码：</h4><strong>"+emailCode+"</strong>";
                     long divide_time = registerSessionPacket.set(email,emailCode);
                     if(divide_time == -1){
                         //成功重置
-                        if(BasicEmailTool.sendMail(email,emailCode)){
+                        if(BasicEmailTool.sendMail(email,emailContext)){
                             //发送成功
                             state = 1;
                         }

@@ -5,7 +5,7 @@ import web.dataBasePacket.sql.SQLRunnerUser;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class User implements DataBasePacketInterface{
+public class User extends BasicDataBasePacket {
     //所有字段都不能为null
     public String user_name;
     public String password;
@@ -38,7 +38,7 @@ public class User implements DataBasePacketInterface{
     @Override
     public boolean insert() {
         SQLRunnerUser sqlRunnerUser = new SQLRunnerUser();
-        boolean result = sqlRunnerUser.insertUser(this);
+        boolean result = sqlRunnerUser.insert(this);
         sqlRunnerUser.close();
         return result;
     }
@@ -47,7 +47,7 @@ public class User implements DataBasePacketInterface{
     @Override
     public boolean update() {
         SQLRunnerUser sqlRunnerUser = new SQLRunnerUser();
-        boolean result = sqlRunnerUser.updateUser(this);
+        boolean result = sqlRunnerUser.update(this);
         sqlRunnerUser.close();
         return result;
     }
@@ -56,7 +56,7 @@ public class User implements DataBasePacketInterface{
     @Override
     public boolean delete() {
         SQLRunnerUser sqlRunnerUser = new SQLRunnerUser();
-        boolean result = sqlRunnerUser.deleteUser(this);
+        boolean result = sqlRunnerUser.delete(this);
         sqlRunnerUser.close();
         return result;
     }
@@ -65,7 +65,7 @@ public class User implements DataBasePacketInterface{
     @Override
     public boolean set() {
         SQLRunnerUser sqlRunnerUser = new SQLRunnerUser();
-        boolean result = sqlRunnerUser.setUser(this);
+        boolean result = sqlRunnerUser.set(this);
         sqlRunnerUser.close();
         return result;
     }

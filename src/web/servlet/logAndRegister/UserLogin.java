@@ -12,7 +12,7 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 //输入字段 user_name/email password  type: 0-邮箱登录 1-用户名登录
-//输出字段：state  -0 登陆失败（账号或密码不正确）    -1 登录成功     -2 登录失败（已经登录过了）   -3 登录失败（用户名不正确） -4 登录失败（密码不正确）   -5 登陆失败 （输入字段不正确）
+//输出字段：state  -0 登陆失败（账号或密码不正确/附加state 预留）    -1 登录成功     -2 登录失败（已经登录过了）   -3 登录失败（用户名不正确） -4 登录失败（密码不正确）   -5 登陆失败 （输入字段不正确）
 //-6 邮箱不正确   -7 不正确的type值
 @WebServlet("/userLogin")
 public class UserLogin extends HttpServlet {

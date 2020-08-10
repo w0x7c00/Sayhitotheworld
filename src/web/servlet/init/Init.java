@@ -1,4 +1,4 @@
-package web.servlet;
+package web.servlet.init;
 
 import sql.BasicSQLRunner;
 

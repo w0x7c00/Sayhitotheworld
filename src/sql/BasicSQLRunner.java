@@ -24,7 +24,7 @@ public class BasicSQLRunner {
             e.printStackTrace();
         }
     }
-    public ResultSet query(String sql_str){
+    public ResultSet unsafeQuery(String sql_str){
         System.out.println("SQL do query:");
         System.out.println(sql_str);
         try{
@@ -36,7 +36,7 @@ public class BasicSQLRunner {
             return null;
         }
     }
-    public boolean update(String sql_str){     //update delete insert均可以使用
+    public boolean unsafeUpdate(String sql_str){     //update delete insert均可以使用
         System.out.println("SQL do update:");
         System.out.println(sql_str);
         try{
@@ -49,6 +49,11 @@ public class BasicSQLRunner {
             return false;
         }
     }
+
+    public boolean unsafeInsert(String sql_str){
+        return  unsafeUpdate(sql_str);
+    }
+
     public void close(){
         try{
             con.close();
@@ -59,7 +64,7 @@ public class BasicSQLRunner {
     }
     //LAST_INSERT_ID是基于Connection的，只要每个线程都使用独立的Connection对象，LAST_INSERT_ID函数将返回该Connection对AUTO_INCREMENT列最新的insert or update*作生成的第一个record的ID。这个值不能被其它客户端（Connection）影响，保证了你能够找回自己的 ID 而不用担心其它客户端的活动，而且不需要加锁。使用单INSERT语句插入多条记录, LAST_INSERT_ID返回一个列表。
     public int getLastInsertId(){    //使用事务时不能使用这个函数
-        ResultSet rs = query("select LAST_INSERT_ID()");
+        ResultSet rs = unsafeQuery("select LAST_INSERT_ID()");
         if (rs==null){
             return -1;
         }
