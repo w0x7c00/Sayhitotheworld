@@ -87,6 +87,7 @@ public class CreateOrder extends HttpServlet {
                 }
             }
         }
+        resp.getWriter().write("{state:"+state+"}");
     }
 
     private void sendOrderMsgToTeacher(Order order){
