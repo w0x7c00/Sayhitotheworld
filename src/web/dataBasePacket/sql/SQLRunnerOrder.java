@@ -72,7 +72,6 @@ public class SQLRunnerOrder extends BasicSQLRunner implements SafeSQLInterface {
 
     //不存在列时成功插入返回true
     //不成功插入返回false
-    //order不需要插入order_id
     @Override
     public boolean insert(DataBasePacketInterface dataBasePacketInterface){
         Order order = (Order)dataBasePacketInterface;
