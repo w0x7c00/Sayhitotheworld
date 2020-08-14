@@ -26,4 +26,8 @@ public class BasicTool {
         }
         return ""+m;
     }
+
+    public static String generateRedeemCode(){
+        return "ABC123";
+    }
 }

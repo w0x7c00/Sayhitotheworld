@@ -15,7 +15,7 @@ import java.io.IOException;
 //无输入字段
 //输出字段： state：  - 0 保留     -1 成功     -2 未登录
 //         data:
-@WebServlet("/adminBasicInformation")
+//@WebServlet("/adminBasicInformation")
 public class AdminBasicInformation extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
