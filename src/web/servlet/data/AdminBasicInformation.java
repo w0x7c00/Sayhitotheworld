@@ -32,10 +32,12 @@ public class AdminBasicInformation extends HttpServlet {
             state = 1;
         }
         Gson gson = new Gson();
+        adminBasicInformationPacket.state=state;
         resp.getWriter().write(gson.toJson(adminBasicInformationPacket));
     }
 
     public class AdminBasicInformationPacket{
+        public int state=0;
         public String data = "123";
     }
 }

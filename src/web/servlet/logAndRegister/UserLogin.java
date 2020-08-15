@@ -1,6 +1,7 @@
 package web.servlet.logAndRegister;
 
 import tool.BasicTool;
+import tool.FormatCheckTool;
 import web.sessionPacket.UserSessionPacket;
 
 import javax.servlet.ServletException;
@@ -12,8 +13,7 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 //输入字段 user_name/email password  type: 0-邮箱登录 1-用户名登录
-//输出字段：state  -0 登陆失败（账号或密码不正确/附加state 预留）    -1 登录成功     -2 登录失败（已经登录过了）   -3 登录失败（用户名不正确） -4 登录失败（密码不正确）   -5 登陆失败 （输入字段不正确）
-//-6 邮箱不正确   -7 不正确的type值
+//输出字段：state  -0 登陆失败 -1 登录成功   -2 字段错误    -3 已经登录过   -4 用户名或邮箱不存在  -5 密码不正确
 @WebServlet("/userLogin")
 public class UserLogin extends HttpServlet {
     @Override
@@ -21,71 +21,66 @@ public class UserLogin extends HttpServlet {
         BasicTool.setCharacterEncoding(req,resp);
         int state = 0;
         String type = req.getParameter("type");
-        if("1".equals(type)){
-            //用户名登陆
-            String user_name = req.getParameter("user_name");
-            String password = req.getParameter("password");
-            if(user_name == null || password ==null){
-                state = 5;
-            }
-            else{
-                HttpSession httpSession = req.getSession();
-                if(httpSession.getAttribute("user")!=null){
-                    state = 2;
-                }
-                else {
+        if(req.getSession().getAttribute("user")==null){
+            if("1".equals(type)){
+                //用户名登陆
+                String user_name = req.getParameter("user_name");
+                String password = req.getParameter("password");
+                if(FormatCheckTool.checkUserName(user_name)&&FormatCheckTool.checkPassword(password)){
+                    HttpSession httpSession = req.getSession();
                     BasicTool.clearSession(httpSession);
                     UserSessionPacket userSessionPacket = new UserSessionPacket();
                     userSessionPacket.user_name = user_name;
-                    if(userSessionPacket.set()){
-                        if(userSessionPacket.password.equals(password)){
-                            state =1;
-                            httpSession.setAttribute("user",userSessionPacket);
+                    if (userSessionPacket.set()) {
+                        if (userSessionPacket.password.equals(password)) {
+                            state = 1;
+                            httpSession.setAttribute("user", userSessionPacket);
                         }
-                        else{
-                            state =4;
+                        else {
+                            state = 5;
                         }
                     }
-                    else{
-                        state = 3;
+                    else {
+                        state = 4;
                     }
-                }
-            }
-        }
-        else if("0".equals(type)){
-            //邮箱登录
-            String email = req.getParameter("email");
-            String password = req.getParameter("password");
-            if(email==null||password==null){
-                state = 5;
-            }
-            else{
-                HttpSession httpSession = req.getSession();
-                if(httpSession.getAttribute("user")!=null){
-                    state = 2;
                 }
                 else{
+                    state =2;
+                }
+            }
+            else if("0".equals(type)){
+                //邮箱登录
+                String email = req.getParameter("email");
+                String password = req.getParameter("password");
+                if(FormatCheckTool.checkEmail(email)&&FormatCheckTool.checkPassword(password)){
+                    HttpSession httpSession = req.getSession();
                     BasicTool.clearSession(httpSession);
                     UserSessionPacket userSessionPacket = new UserSessionPacket();
                     userSessionPacket.email = email;
-                    if(userSessionPacket.setByEmail()){
-                        if(userSessionPacket.password.equals(password)){
-                            state =1;
-                            httpSession.setAttribute("user",userSessionPacket);
+                    if (userSessionPacket.setByEmail()) {
+                        if (userSessionPacket.password.equals(password)) {
+                            state = 1;
+                            httpSession.setAttribute("user", userSessionPacket);
                         }
-                        else{
-                            state =4;
+                        else {
+                            state = 5;
                         }
                     }
-                    else{
-                        state = 6;
+                    else {
+                        state = 4;
                     }
                 }
+                else{
+                    state =2;
+                }
+            }
+            else{
+                state = 2;
             }
         }
         else{
-            state = 7;
+            state = 3;
         }
-        resp.getWriter().write("{state:"+state+"}");
+        resp.getWriter().write(BasicTool.getStateStr(state));
     }
 }

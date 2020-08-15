@@ -8,7 +8,7 @@ import java.sql.SQLException;
 
 public class TeacherSearchEmail extends BasicSQLRunner {
     public boolean checkEmailIsAvailable(String email){
-        String preSQL = "select * from teacher_inf where email = ?";
+        String preSQL = "select * from teacher where email = ?";
         try{
             PreparedStatement st = con.prepareStatement(preSQL);
             st.setString(1,email);

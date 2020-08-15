@@ -17,11 +17,18 @@ import java.sql.SQLException;
 //public int price;  //半小时价格
 //public long create_time;
 //public short state;
+//
+//public String email;
+//public String education;
+//public String language;
+//public String pic;
+//public int age;
+//public String self_introduction;
 public class SQLRunnerTeacher extends BasicSQLRunner implements SafeSQLInterface {
     @Override
     public boolean insert(DataBasePacketInterface dataBasePacketInterface) {
         Teacher teacher = (Teacher)dataBasePacketInterface;
-        String preSQL = "insert into teacher (teacher_name,password,sex,name,balance,price,create_time,state) values (?,?,?,?,?,?,?,?)";
+        String preSQL = "insert into teacher (teacher_name,password,sex,name,balance,price,create_time,state,email,education,language,pic,age,self_introduction) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
         try{
             PreparedStatement st = con.prepareStatement(preSQL);
             st.setString(1,teacher.teacher_name);
@@ -32,6 +39,14 @@ public class SQLRunnerTeacher extends BasicSQLRunner implements SafeSQLInterface
             st.setInt(6,teacher.price);
             st.setLong(7,teacher.create_time);
             st.setShort(8,teacher.state);
+
+            st.setString(9,teacher.email);
+            st.setString(10,teacher.education);
+            st.setString(11,teacher.language);
+            st.setString(12,teacher.pic);
+            st.setInt(13,teacher.age);
+            st.setString(14,teacher.self_introduction);
+
             st.executeUpdate();
             return true;
         }
@@ -44,7 +59,7 @@ public class SQLRunnerTeacher extends BasicSQLRunner implements SafeSQLInterface
     @Override
     public boolean update(DataBasePacketInterface dataBasePacketInterface) {
         Teacher teacher = (Teacher)dataBasePacketInterface;
-        String preSQL = "update teacher set password=?,sex=?,name=?,balance=?,price=?,create_time=?,state=? where teacher_name=?";
+        String preSQL = "update teacher set password=?,sex=?,name=?,balance=?,price=?,create_time=?,state=?,email=?,education=?,language=?,pic=?,age=?,self_introduction=? where teacher_name=?";
         try{
             PreparedStatement st = con.prepareStatement(preSQL);
             st.setString(1,teacher.password);
@@ -54,7 +69,14 @@ public class SQLRunnerTeacher extends BasicSQLRunner implements SafeSQLInterface
             st.setInt(5,teacher.price);
             st.setLong(6,teacher.create_time);
             st.setShort(7,teacher.state);
-            st.setString(8,teacher.teacher_name);
+
+            st.setString(8,teacher.email);
+            st.setString(9,teacher.education);
+            st.setString(10,teacher.language);
+            st.setString(11,teacher.pic);
+            st.setInt(12,teacher.age);
+            st.setString(13,teacher.self_introduction);
+            st.setString(14,teacher.teacher_name);
             st.executeUpdate();
             return true;
         }

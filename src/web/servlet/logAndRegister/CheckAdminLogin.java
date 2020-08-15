@@ -16,10 +16,10 @@ public class CheckAdminLogin extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         BasicTool.setCharacterEncoding(req,resp);
         if(req.getSession().getAttribute("admin")==null){
-            resp.getWriter().write("{state:0}");
+            resp.getWriter().write(BasicTool.getStateStr(0));
         }
         else{
-            resp.getWriter().write("{state:1}");
+            resp.getWriter().write(BasicTool.getStateStr(1));
         }
     }
 }

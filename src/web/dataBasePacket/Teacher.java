@@ -1,6 +1,5 @@
 package web.dataBasePacket;
 
-import web.dataBasePacket.sql.SQLRunnerOrder;
 import web.dataBasePacket.sql.SQLRunnerTeacher;
 
 import java.sql.ResultSet;
@@ -16,6 +15,13 @@ public class Teacher extends BasicDataBasePacket{
     public long create_time;
     public short state;
 
+    public String email;
+    public String education;
+    public String language;
+    public String pic;
+    public int age;
+    public String self_introduction;
+
     @Override
     public boolean setWithResultSet(ResultSet rs) {
         try {
@@ -30,6 +36,13 @@ public class Teacher extends BasicDataBasePacket{
             this.price = rs.getInt("price");
             this.create_time = rs.getLong("create_time");
             this.state = rs.getShort("state");
+
+            this.email = rs.getString("email");
+            this.education = rs.getString("education");
+            this.language = rs.getString("language");
+            this.pic = rs.getString("pic");
+            this.age = rs.getInt("age");
+            this.self_introduction = rs.getString("self_introduction");
             return true;
         }
         catch (SQLException e){

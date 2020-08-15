@@ -16,7 +16,7 @@ import java.io.IOException;
 
 //前提：浏览器本地检查字段格式并且通过
 //输入字段：email
-//输出字段： state     -0 发送邮件失败，检查邮箱格式或者检查邮箱是否存在        -1 发送邮件成功    -2 请求间隔时间过短    -3 邮件格式错误    -4 已经绑定过的邮箱
+//输出字段： state     -0 保留    -1 发送邮件成功    -2 字段错误    -3 请求间隔时间过短    -4 已经绑定过的邮箱    -5 发送邮件失败，检查邮箱格式或者检查邮箱是否存在
 //         appendInf     当state为2时值为间隔的时间/ms
 @WebServlet("/userSendRegisterEmail")
 public class UserSendRegisterEmail extends HttpServlet {
@@ -28,10 +28,7 @@ public class UserSendRegisterEmail extends HttpServlet {
         int state = 0;
         long appendInf = 0;
         String email = req.getParameter("email");
-        if(email==null||(!FormatCheckTool.checkEmail(email))){
-            state = 3;
-        }
-        else{
+        if(FormatCheckTool.checkEmail(email)){
             UserSearchEmail userSearchEmail = new UserSearchEmail();
             boolean result = userSearchEmail.checkEmailIsAvailable(email);
             userSearchEmail.close();
@@ -54,7 +51,7 @@ public class UserSendRegisterEmail extends HttpServlet {
                     }
                     else{
                         //发送失败
-                        state = 0;
+                        state = 5;
                     }
                 }
                 else{
@@ -71,17 +68,20 @@ public class UserSendRegisterEmail extends HttpServlet {
                         }
                         else{
                             //发送失败
-                            state = 0;
+                            state = 5;
                         }
                     }
                     else{
                         //重置失败 时间不够
                         //设置state 并且添加附加信息为时间间隔
-                        state = 2;
+                        state = 3;
                         appendInf = divide_time;
                     }
                 }
             }
+        }
+        else{
+            state = 2;
         }
         resp.getWriter().write("{state:"+state+",appendInf:"+appendInf+"}");
     }
