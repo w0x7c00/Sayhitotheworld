@@ -22,6 +22,10 @@ public class Teacher extends BasicDataBasePacket{
     public int age;
     public String self_introduction;
 
+    public short second_language;
+    public short country;
+    public short country_to_live;
+
     @Override
     public boolean setWithResultSet(ResultSet rs) {
         try {
@@ -43,6 +47,10 @@ public class Teacher extends BasicDataBasePacket{
             this.pic = rs.getString("pic");
             this.age = rs.getInt("age");
             this.self_introduction = rs.getString("self_introduction");
+
+            this.country = rs.getShort("country");
+            this.second_language = rs.getShort("second_language");
+            this.country_to_live = rs.getShort("country_to_live");
             return true;
         }
         catch (SQLException e){

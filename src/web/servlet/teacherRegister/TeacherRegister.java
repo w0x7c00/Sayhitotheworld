@@ -3,7 +3,6 @@ package web.servlet.teacherRegister;
 import tool.BasicTool;
 import tool.FormatCheckTool;
 import web.dataBasePacket.Teacher;
-import web.dataBasePacket.User;
 import web.sessionPacket.RegisterSessionPacket;
 
 import javax.servlet.ServletException;
@@ -38,6 +37,10 @@ import java.io.IOException;
 //public String pic;
 //public int age;
 //public String self_introduction;
+//
+//public short second_language;
+//public short country;
+//public short country_to_live;
 
 @WebServlet("/teacherRegister")
 public class TeacherRegister extends HttpServlet {
@@ -58,11 +61,17 @@ public class TeacherRegister extends HttpServlet {
         String self_introduction = req.getParameter("self_introduction");
         String emailCode = req.getParameter("emailCode");
 
+        String second_language_str = req.getParameter("second_language");
+        String country_str = req.getParameter("country");
+        String country_to_live_str = req.getParameter("country_to_live");
+
         short sex = BasicTool.str2short(sex_str);
         int price = BasicTool.str2int(price_str);
         int age = BasicTool.str2int(age_str);
         short language = BasicTool.str2short(language_str);
-
+        short second_language = BasicTool.str2short(second_language_str);
+        short country = BasicTool.str2short(country_str);
+        short country_to_live = BasicTool.str2short(country_to_live_str);
         //检查输入字段
         //email格式不用检查
         //name、user_name、password格式必须要检查
@@ -78,6 +87,9 @@ public class TeacherRegister extends HttpServlet {
                 &&FormatCheckTool.checkLanguage(language)
                 &&FormatCheckTool.checkPrice(price)
                 &&FormatCheckTool.checkSex(sex)
+                &&FormatCheckTool.checkLanguage(second_language)
+                &&FormatCheckTool.checkCountry(country)
+                &&FormatCheckTool.checkCountry(country_to_live)
         ){
             //检查教师名是否存在
             Teacher teacher = new Teacher();

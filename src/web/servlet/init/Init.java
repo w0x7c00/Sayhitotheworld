@@ -1,6 +1,7 @@
 package web.servlet.init;
 
 import sql.BasicSQLRunner;
+import tool.ServerConfig;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -13,7 +14,7 @@ import java.io.IOException;
 public class Init extends HttpServlet {
     @Override
     public void init() throws ServletException {
-        BasicSQLRunner.initSQL();
+        ServerConfig.initGlobalConfig();
     }
 
     @Override

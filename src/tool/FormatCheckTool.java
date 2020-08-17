@@ -110,4 +110,10 @@ public class FormatCheckTool extends BasicTool{
         }
         return true;
     }
+    public static boolean checkCountry(short country){
+        if(country==-1){
+            return false;
+        }
+        return true;
+    }
 }

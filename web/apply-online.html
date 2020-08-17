@@ -29,6 +29,7 @@
       <script src="js/respond.min.js"></script>
     <![endif]-->
 
+
 </head>
 <body class="fill-bg"> 
 
@@ -54,30 +55,31 @@
         <h1><strong>How to become a teacher</strong></h1>
       </div>
       <div class="cnt-block">
-        <form action="#" method="get" class="form-outer">
+        <form id="teacher-submit-form" action="#" method="post" class="form-outer" enctype="multipart/form-data">
+          <h4 style="margin-bottom: 30px">Input Your Self Information</h4>
           <div class="row">
             <div class="col-sm-6">
-              <input name="first name" type="text" placeholder"">
+              <input name="name" type="text" placeholder="Name">
             </div>
             <div class="col-sm-6">
-              <input name="last name" type="text" placeholder="姓">
+              <input name="age" type="text" placeholder="AGE">
             </div>
           </div>
           <div class="row">
             <div class="col-sm-6">
-              <input name="Street" type="text" placeholder="街道">
+              <input name="language" type="text" placeholder="mother language">
             </div>
             <div class="col-sm-6">
-              <input name="Apartment" type="text" placeholder="住址">
+              <input name="second_language" type="text" placeholder="Second Language">
             </div>
           </div>
           <div class="row">
             <div class="col-sm-6">
-              <input name="Zip Code" type="text" placeholder="Zip Code">
+              <input name="country" type="text" placeholder="country">
             </div>
-            <div class="col-sm-6">
-              <select class="custom_select">
-                <option value="State">State</option>
+            <div class="col-sm-6" style="margin-bottom: 30px">
+              <select id="cur-country" class="custom_select">
+                <option value="State">Current country of residence</option>
                 <option value="Tamilnadu">Tamilnadu</option>
                 <option value="Karnataka">Karnataka</option>
               </select>
@@ -85,103 +87,56 @@
           </div>
           <div class="row">
             <div class="col-sm-6">
-              <select class="custom_select">
-                <option value="Country">Country</option>
-                <option value="UK">UK</option>
-                <option value="USA">USA</option>
-                <option value="UAE">UAE</option>
-              </select>
-            </div>
-            <div class="col-sm-6 clearfix">
-              <input name="country code" type="text" placeholder="+91" class="country-code">
-              <input name="Phone Number" type="text" placeholder="000-000-0000" class="phone-no">
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-sm-6">
-              <input name="Email" type="text" placeholder="Email">
+              <input name="price" type="text" placeholder="expect salary per hour(USD)">
             </div>
             <div class="col-sm-6">
               <select class="custom_select">
-                <option value="Program">Program</option>
-                <option value="Program">Program2</option>
-                <option value="Program">Program3</option>
+                <option value="State">gender</option>
+                <option value="Tamilnadu">male</option>
+                <option value="Karnataka">female</option>
               </select>
             </div>
           </div>
-          <div class="row">
-            <div class="col-sm-6">
-              <select class="custom_select">
-                <option value="How did you hear about us?">How did you hear about us?</option>
-                <option value="How did you hear about us?">How did you hear about us?</option>
-                <option value="How did you hear about us?">How did you hear about us?</option>
-              </select>
-            </div>
-            <div class="col-sm-6">
-              <div class="date">
-                <input type='text' class="datepicker" placeholder="Graduation Year" />
-                <span class="icon-calander-icon"></span> </div>
-            </div>
+
+          <div>
+            <h4 style="margin-bottom: 30px">Input your picture</h4>
           </div>
           <div class="row">
-            <div class="col-sm-6 clearfix">
-              <div class="col-left">
-                <h2>Gender</h2>
-                <ul class="select-opt clearfix">
-                  <li>
-                    <input id="f-option" name="selector" type="radio">
-                    <label for="f-option">Male</label>
-                    <div class="check"></div>
-                  </li>
-                  <li>
-                    <input id="s-option" name="selector" type="radio">
-                    <label for="s-option">Female</label>
-                    <div class="check">
-                      <div class="inside"></div>
-                    </div>
-                  </li>
-                </ul>
-              </div>
-              <div class="col-left">
-                <h2>Degree Received?</h2>
-                <ul class="select-opt clearfix">
-                  <li>
-                    <input id="y-option" name="selector" type="radio">
-                    <label for="y-option">Yes</label>
-                    <div class="check"></div>
-                  </li>
-                  <li>
-                    <input id="n-option" name="selector" type="radio">
-                    <label for="n-option">No</label>
-                    <div class="check">
-                      <div class="inside"></div>
-                    </div>
-                  </li>
-                </ul>
-              </div>
-            </div>
+            <input type="file" name="upload" />
+          </div>
+
+<!--          create account-->
+          <div>
+            <h4 style="margin-bottom: 30px">Create Your Teacher Account</h4>
+          </div>
+
+          <div class="row">
             <div class="col-sm-6">
-              <div class="col-left">
-                <h2>English is your primary language?</h2>
-                <ul class="select-opt clearfix">
-                  <li>
-                    <input id="z-option" name="selector" type="radio">
-                    <label for="z-option">Yes</label>
-                    <div class="check"></div>
-                  </li>
-                  <li>
-                    <input id="o-option" name="selector" type="radio">
-                    <label for="o-option">No</label>
-                    <div class="check">
-                      <div class="inside"></div>
-                    </div>
-                  </li>
-                </ul>
-              </div>
+              <input name="email" type="text" placeholder="email">
+            </div>
+            <div class="col-sm-3">
+              <input name="emailCode" type="text" placeholder="CHECK CODE">
+            </div>
+            <div class="col-sm-3">
+              <button class="btn">GET Email Check Code</button>
             </div>
           </div>
+
+          <div class="row">
+            <div class="col-sm-6">
+              <input name="teacher_name" type="text" placeholder="Account name">
+            </div>
+            <div class="col-sm-6">
+              <input name="password" type="text" placeholder="password">
+            </div>
+          </div>
+
+          <div class="row">
+              <textarea placeholder="self introduction(No more than 1000 characters)"></textarea>
+          </div>
+
           <div class="button-outer">
-            <button class="btn">Get Started Now <span class="icon-more-icon"></span></button>
+            <button type="button" class="btn" onclick="TeacherRegisterFormSubmit()">Get Started Now <span class="icon-more-icon"></span></button>
           </div>
         </form>
       </div>
@@ -195,11 +150,16 @@
 <!-- Bootsrap JS --> 
 <script type="text/javascript" src="assets/bootstrap/js/bootstrap.min.js"></script> 
 <!-- Select2 JS --> 
-<script type="text/javascript" src="assets/select2/js/select2.min.js"></script> 
+<script type="text/javascript" src="assets/select2/js/select2.min.js"></script>
 <!-- Date Picker JS --> 
 <script type="text/javascript" src="assets/datepicker/js/datepicker.js"></script> 
 <!-- Custom JS --> 
 <script type="text/javascript" src="js/custom.js"></script>
+
+<script>
+  function TeacherRegisterFormSubmit() {
+    console.log($("#cur-country").value)
+  }
+</script>
 </body>
 </html>
-
