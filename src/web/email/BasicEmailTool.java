@@ -12,7 +12,7 @@ public class BasicEmailTool {
     static final String smtphost = "smtp.qq.com";//smtp服务器地址
     static final String from = "1209895097@qq.com"; // 邮件发送人的邮件地址
     static final String username = "1209895097@qq.com"; // 发件人的邮件帐户
-    static final String password = "vmfajkhhijhyjehg"; // 发件人的邮件密码
+    static final String password = "mwywxqovlqwkfhig"; // 发件人的邮件密码
 
     /**
      * @param email    接收人的邮箱地址

@@ -54,7 +54,8 @@ public class TeacherRegister extends HttpServlet {
         String name = req.getParameter("name");
         String price_str = req.getParameter("price");
         String email = req.getParameter("email");
-        String education = req.getParameter("education");
+        //String education = req.getParameter("education");
+        String education = "CQU";
         String language_str = req.getParameter("language");
         String pic = req.getParameter("pic");
         String age_str = req.getParameter("age");
@@ -113,7 +114,7 @@ public class TeacherRegister extends HttpServlet {
                         //插入记录
                         teacher.price=price;
                         teacher.education=education;
-                        teacher.language=language_str;
+                        teacher.language=language;
                         teacher.pic=pic;
                         teacher.age=age;
                         teacher.self_introduction=self_introduction;
@@ -124,6 +125,10 @@ public class TeacherRegister extends HttpServlet {
                         teacher.email = email;
                         teacher.balance = 0;
                         teacher.create_time = System.currentTimeMillis();
+                        teacher.country_to_live = country_to_live;
+                        teacher.country=country;
+                        teacher.second_language=second_language;
+                        teacher.state = 0;
                         if(teacher.insert()){
                             //插入数据成功
                             //删除session

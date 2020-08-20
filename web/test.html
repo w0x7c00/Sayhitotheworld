@@ -5,12 +5,32 @@
     <h1>文件上传实例 - 菜鸟教程</h1>
 </head>
 <body>
+    <form id="form1" enctype="multipart/form-data">
+        <input name="file" type="file">
+    </form>
+    <form id="form2" enctype="multipart/form-data">
 
-<form method="post" action="/test" enctype="multipart/form-data">
-    选择一个文件:
-    <input type="file" name="uploadFile" />
-    <br/><br/>
-    <input type="submit" value="上传" />
-</form>
+    </form>
+<button onclick="func1()">btn</button>
 </body>
+
+<script type="text/javascript" src="js/jquery.min.js"></script>
+<script>
+    function func1() {
+        $("#form1 input").clone().appendTo("#form2");
+        var formData2 = new FormData(document.getElementById("form2"));
+        $.ajax({
+            type: 'post',
+            url: "/uploadFile",
+            data: formData2,
+            cache: false,
+            processData: false,
+            contentType: false,
+        }).success(function (data) {
+            alert(data);
+        }).error(function () {
+            alert("上传失败");
+        });
+    }
+</script>
 </html>

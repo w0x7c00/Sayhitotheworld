@@ -46,7 +46,7 @@ public class SQLRunnerTeacher extends BasicSQLRunner implements SafeSQLInterface
 
             st.setString(9,teacher.email);
             st.setString(10,teacher.education);
-            st.setString(11,teacher.language);
+            st.setShort(11,teacher.language);
             st.setString(12,teacher.pic);
             st.setInt(13,teacher.age);
             st.setString(14,teacher.self_introduction);
@@ -79,7 +79,7 @@ public class SQLRunnerTeacher extends BasicSQLRunner implements SafeSQLInterface
 
             st.setString(8,teacher.email);
             st.setString(9,teacher.education);
-            st.setString(10,teacher.language);
+            st.setShort(10,teacher.language);
             st.setString(11,teacher.pic);
             st.setInt(12,teacher.age);
             st.setString(13,teacher.self_introduction);

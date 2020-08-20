@@ -17,7 +17,7 @@ import java.io.IOException;
 //前提：浏览器本地检查字段格式并且通过
 //输入字段：email
 //输出字段：state     -0 保留    -1 发送邮件成功    -2 字段错误    -3 请求间隔时间过短    -4 已经绑定过的邮箱    -5 发送邮件失败，检查邮箱格式或者检查邮箱是否存在
-//         appendInf     当state为2时值为间隔的时间/ms
+//         append_inf     当state为2时值为间隔的时间/ms
 @WebServlet("/teacherSendRegisterEmail")
 public class TeacherSendRegisterEmail extends HttpServlet {
     @Override
@@ -83,6 +83,6 @@ public class TeacherSendRegisterEmail extends HttpServlet {
         else{
             state = 2;
         }
-        resp.getWriter().write("{state:"+state+",appendInf:"+appendInf+"}");
+        resp.getWriter().write("{\"state\":"+state+",\"append_inf\":"+appendInf+"}");
     }
 }

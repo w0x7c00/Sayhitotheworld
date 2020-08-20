@@ -55,7 +55,7 @@ theme.
 /* 01. General Style */
 /* ================================================== */
 
-@import url(../../../fonts.googleapis.com/css�family=Roboto_300,400,500,700.css0');
+@import url(../../../fonts.googleapis.com/css�family=Roboto_300,400,500,700.css0');
 
 body {
 	font-family: 'Roboto', sans-serif;
@@ -4138,10 +4138,10 @@ ol.ord-listing li:last-child {
 	float: left;
 	width: 16%;
 }
-.form-outer input.phone-no {
-	float: right;
-	width: calc(84% - 18px);
-}
+/*.form-outer input.phone-no {*/
+/*	float: right;*/
+/*	width: calc(84% - 18px);*/
+/*}*/
 .register .cnt-block textarea {
 	width: 100%;
 	height: 122px;
@@ -4153,7 +4153,7 @@ ol.ord-listing li:last-child {
 	border-bottom: 1px #dae4e8 solid;
 	font-size: 12px;
 	font-weight: 700;
-	text-transform: uppercase;
+	/*text-transform: uppercase;*/
 	color: #7f8385;
 	resize: none;
 }
@@ -5941,4 +5941,9 @@ a.btn-circle:hover {
 		padding: 6px 12px;
 		font-size: 12px;
 	}
+}
+
+/*css修正*/
+.form-outer .select2{
+	margin-bottom: 30px;
 }

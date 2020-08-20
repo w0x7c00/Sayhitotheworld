@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1.0; maximum-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
 <meta name="description" content="">
 <meta name="author" content="">
 <title></title>
@@ -28,6 +28,7 @@
       <script src="js/html5shiv.min.js"></script>
       <script src="js/respond.min.js"></script>
     <![endif]-->
+
 
 </head>
 <body class="fill-bg"> 
@@ -54,152 +55,303 @@
         <h1><strong>How to become a teacher</strong></h1>
       </div>
       <div class="cnt-block">
-        <form action="#" method="get" class="form-outer">
+        <form id="teacher-submit-form" action="/teacherRegister" method="post" class="form-outer">
+          <h4 style="margin-bottom: 30px">Input Your Self Information</h4>
           <div class="row">
             <div class="col-sm-6">
-              <input name="first name" type="text" placeholder"">
+              <input id="input-name" name="name" type="text" placeholder="Name">
             </div>
             <div class="col-sm-6">
-              <input name="last name" type="text" placeholder="姓">
+              <input id="input-age" name="age" type="text" placeholder="AGE">
             </div>
           </div>
           <div class="row">
             <div class="col-sm-6">
-              <input name="Street" type="text" placeholder="街道">
+              <input id="input-language" name="language" type="text" class="hidden">
+              <select id="select-language" class="custom_select">
+                <option value="-1">mother language</option>
+              </select>
             </div>
             <div class="col-sm-6">
-              <input name="Apartment" type="text" placeholder="住址">
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-sm-6">
-              <input name="Zip Code" type="text" placeholder="Zip Code">
-            </div>
-            <div class="col-sm-6">
-              <select class="custom_select">
-                <option value="State">State</option>
-                <option value="Tamilnadu">Tamilnadu</option>
-                <option value="Karnataka">Karnataka</option>
+              <input id="input-second-language" name="second_language" type="text" class="hidden">
+              <select id="select-second-language" class="custom_select">
+                <option value="-1">Second Language</option>
               </select>
             </div>
           </div>
           <div class="row">
             <div class="col-sm-6">
-              <select class="custom_select">
-                <option value="Country">Country</option>
-                <option value="UK">UK</option>
-                <option value="USA">USA</option>
-                <option value="UAE">UAE</option>
+              <input id="input-country" name="country" type="text" class="hidden">
+              <select id="select-country" class="custom_select">
+                <option value="-1">country</option>
               </select>
             </div>
-            <div class="col-sm-6 clearfix">
-              <input name="country code" type="text" placeholder="+91" class="country-code">
-              <input name="Phone Number" type="text" placeholder="000-000-0000" class="phone-no">
-            </div>
-          </div>
-          <div class="row">
             <div class="col-sm-6">
-              <input name="Email" type="text" placeholder="Email">
-            </div>
-            <div class="col-sm-6">
-              <select class="custom_select">
-                <option value="Program">Program</option>
-                <option value="Program">Program2</option>
-                <option value="Program">Program3</option>
+                <input id="input-cur-country" name="country_to_live" type="text" class="hidden">
+                <select id="select-cur-country" class="custom_select">
+                <option value="-1">Current country of residence</option>
               </select>
             </div>
           </div>
           <div class="row">
             <div class="col-sm-6">
-              <select class="custom_select">
-                <option value="How did you hear about us?">How did you hear about us?</option>
-                <option value="How did you hear about us?">How did you hear about us?</option>
-                <option value="How did you hear about us?">How did you hear about us?</option>
+              <input id="input-price" name="price" type="text" placeholder="expect salary per hour(USD)">
+            </div>
+            <div class="col-sm-6">
+              <input id="input-gender" name="sex" class="hidden">
+              <select id="select-gender" class="custom_select">
+                <option value="-1">gender</option>
+                <option value="0">male</option>
+                <option value="1">female</option>
               </select>
             </div>
-            <div class="col-sm-6">
-              <div class="date">
-                <input type='text' class="datepicker" placeholder="Graduation Year" />
-                <span class="icon-calander-icon"></span> </div>
+          </div>
+
+          <div class="row">
+            <div class="col-sm-12">
+              <textarea id="input-self-introduction" name="self_introduction" placeholder="self introduction(No more than 1000 characters)"></textarea>
             </div>
+          </div>
+
+<!--          upload picture-->
+          <div>
+            <h4 style="margin-bottom: 30px">Input your picture</h4>
           </div>
           <div class="row">
-            <div class="col-sm-6 clearfix">
-              <div class="col-left">
-                <h2>Gender</h2>
-                <ul class="select-opt clearfix">
-                  <li>
-                    <input id="f-option" name="selector" type="radio">
-                    <label for="f-option">Male</label>
-                    <div class="check"></div>
-                  </li>
-                  <li>
-                    <input id="s-option" name="selector" type="radio">
-                    <label for="s-option">Female</label>
-                    <div class="check">
-                      <div class="inside"></div>
-                    </div>
-                  </li>
-                </ul>
-              </div>
-              <div class="col-left">
-                <h2>Degree Received?</h2>
-                <ul class="select-opt clearfix">
-                  <li>
-                    <input id="y-option" name="selector" type="radio">
-                    <label for="y-option">Yes</label>
-                    <div class="check"></div>
-                  </li>
-                  <li>
-                    <input id="n-option" name="selector" type="radio">
-                    <label for="n-option">No</label>
-                    <div class="check">
-                      <div class="inside"></div>
-                    </div>
-                  </li>
-                </ul>
-              </div>
-            </div>
+            <input id="input-pic" name="temp-for-upload" type="file" accept="image/*"/>
+            <input id="hidden-pic" name ="pic" type="text" class="hidden">
+          </div>
+
+
+
+<!--          create account-->
+          <div>
+            <h4 style="margin-bottom: 30px">Create Your Teacher Account</h4>
+          </div>
+
+          <div class="row">
             <div class="col-sm-6">
-              <div class="col-left">
-                <h2>English is your primary language?</h2>
-                <ul class="select-opt clearfix">
-                  <li>
-                    <input id="z-option" name="selector" type="radio">
-                    <label for="z-option">Yes</label>
-                    <div class="check"></div>
-                  </li>
-                  <li>
-                    <input id="o-option" name="selector" type="radio">
-                    <label for="o-option">No</label>
-                    <div class="check">
-                      <div class="inside"></div>
-                    </div>
-                  </li>
-                </ul>
-              </div>
+              <input id="input-email" name="email" type="email" placeholder="email">
+            </div>
+            <div class="col-sm-3">
+              <input id="input-emailCode" name="emailCode" type="text" placeholder="CHECK CODE">
+            </div>
+            <div class="col-sm-3">
+              <button style="width: 100%" type="button" onclick="getEmailCode(this)" class="btn" id="btn-get-email-code">GET Check Code</button>
             </div>
           </div>
+
+          <div class="row">
+            <div class="col-sm-6">
+              <input id="input-teacher-name" name="teacher_name" type="text" placeholder="Account name">
+            </div>
+            <div class="col-sm-6">
+              <input id="input-password" name="password" type="text" placeholder="password">
+            </div>
+          </div>
+
           <div class="button-outer">
-            <button class="btn">Get Started Now <span class="icon-more-icon"></span></button>
+            <button type="button" class="btn" onclick="TeacherRegisterFormSubmit()">Get Started Now <span class="icon-more-icon"></span></button>
           </div>
         </form>
+
+<!--        隐藏的form 用于图片ajax上传-->
+        <form enctype="multipart/form-data" id="temp-form"  class="hidden">
+
+        </form>
+
       </div>
     </div>
   </div>
 </section>
-<!-- End apply online --> 
+<!-- End apply online -->
+
 
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) --> 
 <script type="text/javascript" src="js/jquery.min.js"></script> 
-<!-- Bootsrap JS --> 
-<script type="text/javascript" src="assets/bootstrap/js/bootstrap.min.js"></script> 
+<!-- Bootsrap JS -->
+
+<script type="text/javascript" src="assets/bootstrap/js/bootstrap.min.js"></script>
 <!-- Select2 JS --> 
-<script type="text/javascript" src="assets/select2/js/select2.min.js"></script> 
+<script type="text/javascript" src="assets/select2/js/select2.min.js"></script>
 <!-- Date Picker JS --> 
 <script type="text/javascript" src="assets/datepicker/js/datepicker.js"></script> 
 <!-- Custom JS --> 
 <script type="text/javascript" src="js/custom.js"></script>
+
+<script type="text/javascript" src="js/common.js"></script>
+
+<script>
+  //init
+  // 带json后缀文件请求会自动解析为json obj
+  $.get("/json/languageCode.json", function (data) {
+    for (var i = 0; i < data.length; i++) {
+      var name = data[i][1];
+      var new_opt = "<option value=\"" + i + "\">" + name + "</option>";
+      $("#select-language").append(new_opt);
+      $("#select-second-language").append(new_opt);
+    }
+  })
+  $.get("/json/countryCode.json", function (data) {
+    for (var i = 0; i < data.length; i++) {
+      var name = data[i][1];
+      var new_opt = "<option value=\"" + i + "\">" + name + "</option>";
+      $("#select-country").append(new_opt);
+      $("#select-cur-country").append(new_opt);
+    }
+  })
+
+  function TeacherRegisterFormSubmit() {
+    //表单填充
+    $("#input-country").val($("#select-country  option:selected").val());
+    $("#input-cur-country").val($("#select-cur-country  option:selected").val());
+    $("#input-language").val($("#select-language  option:selected").val());
+    $("#input-second-language").val($("#select-second-language  option:selected").val());
+    $("#input-gender").val($("#select-gender option:selected").val());
+    //字段检查
+    if(checkName($("#input-name").val())){
+      if(checkAge($("#input-age").val())){
+        if(checkLanguage($("#input-language").val())){
+          if(checkLanguage($("#input-second-language").val())){
+            if(checkCountry($("#input-country").val())){
+              if(checkCountry($("#input-cur-country").val())){
+                if(checkPrice($("#input-price").val())){
+                  if(checkGender($("#input-gender").val())){
+                    if(checkSelfIntroduction($("#input-self-introduction").val())){
+                      if(checkFile($("#input-pic").val())){
+                        if(checkUserName($("#input-teacher-name").val())){
+                          if(checkPassword($("#input-password").val())){
+                            if(checkEmail($("#input-email").val())){
+                              if(checkEmailCode($("#input-emailCode").val())){
+                                //完成所有检查
+                                $("#input-pic").clone().appendTo("#temp-form");
+                                var myFormData = new FormData(document.getElementById("temp-form"));
+                                $.ajax({
+                                  type: 'post',
+                                  url: "/uploadFile",
+                                  data: myFormData,
+                                  cache: false,
+                                  processData: false,
+                                  contentType: false,
+                                  dataType: "json",
+                                }).success(function (data) {
+                                  console.log(data);
+                                  var pic_name = data.append_inf;
+                                  $("#hidden-pic").val(pic_name);
+                                  // 移除temp-input
+                                  $("#temp-form").empty();
+                                  $("#teacher-submit-form").submit();
+                                }).error(function () {
+                                  alert("Upload Picture Fail!");
+                                });
+                              }
+                              else{
+                                alertAfterCheck($("#input-emailCode"),"Unexcepted Email Code");
+                              }
+                            }
+                            else{
+                              alertAfterCheck($("#input-email"),"Unexcepted Email");
+                            }
+                          }
+                          else{
+                            alertAfterCheck($("#input-password"),"Unexcepted Password");
+                          }
+                        }
+                        else{
+                          alertAfterCheck($("#input-teacher-name"),"Unexcepted Account Name");
+                        }
+                      }
+                      else {
+                        alertAfterCheck($("#input-pic"),"Unexcepted Picture");
+                      }
+                    }
+                    else{
+                      alertAfterCheck($("#input-self-introduction"),"Unexcepted Self Introduction");
+                    }
+                  }
+                  else{
+                    alertAfterCheck($("#input-gender"),"Unexcepted Gender");
+                  }
+                }
+                else {
+                  alertAfterCheck($("#input-price"),"Unexcepted Salary");
+                }
+              }
+              else{
+                alertAfterCheck($("#input-cur-country"),"Unexcepted Current Country");
+              }
+            }
+            else{
+              alertAfterCheck($("#input-country"),"Unexcepted Country");
+            }
+          }
+          else{
+            alertAfterCheck($("#input-second-language"),"Unexcepted Second Language");
+          }
+        }
+        else{
+          alertAfterCheck($("#input-language"),"Unexcepted Mother Language");
+        }
+      }
+      else{
+        alertAfterCheck($("#input-age"),"Unexcepted Age");
+      }
+    }
+    else{
+      alertAfterCheck($("#input-name"),"Unexpected Name");
+    }
+  }
+
+  // -0 保留    -1 发送邮件成功    -2 字段错误    -3 请求间隔时间过短    -4 已经绑定过的邮箱    -5 发送邮件失败，检查邮箱格式或者检查邮箱是否存在
+  function getEmailCode(me) {
+    var email_str = $("#input-email").val()
+
+    if (!checkEmail(email_str)) {
+      customAlert("Unexpected Email Format!");
+      return;
+    }
+    $(me).text("Sending...");
+    $(me).addClass("disabled");
+    $(me).attr("onclick", "null");
+    $.post("/teacherSendRegisterEmail", {"email": email_str}, function (data) {
+      var state = data.state;
+      if (state == 1) {
+        $(me).text("GET Check Code");
+        $(me).removeClass("disabled");
+        $(me).attr("onclick", "getEmailCode(this)");
+        customAlert("success send email");
+      } else if (state == 2) {
+        $(me).text("GET Check Code");
+        $(me).removeClass("disabled");
+        $(me).attr("onclick", "getEmailCode(this)");
+        customAlert("Unexpected Input");
+      } else if (state == 3) {
+        $(me).text("GET Check Code");
+        $(me).removeClass("disabled");
+        $(me).attr("onclick", "getEmailCode(this)");
+        customAlert("After " + (Math.trunc(60 - data.append_inf / 1000) + "second you can retry!"));
+      } else if (state == 4) {
+        $(me).text("GET Check Code");
+        $(me).removeClass("disabled");
+        $(me).attr("onclick", "getEmailCode(this)");
+        customAlert("This email is used by other account");
+      } else {
+        $(me).text("GET Check Code");
+        $(me).removeClass("disabled");
+        $(me).attr("onclick", "getEmailCode(this)");
+        customAlert("Unexpected Email Format");
+      }
+    }, "json")
+  }
+
+  function customAlert(msg) {
+    window.alert(msg);
+  }
+
+  function alertAfterCheck($input,msg) {
+    alert(msg);
+  }
+</script>
+
 </body>
 </html>
-

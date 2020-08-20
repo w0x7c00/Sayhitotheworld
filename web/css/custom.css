@@ -5942,3 +5942,8 @@ a.btn-circle:hover {
 		font-size: 12px;
 	}
 }
+
+/*css修正*/
+.form-outer .select2{
+	margin-bottom: 30px;
+}

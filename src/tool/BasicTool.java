@@ -62,10 +62,10 @@ public class BasicTool {
     }
 
     public static String getStateStr(int state){
-        return "{state:"+state+"}";
+        return "{\"state\":"+state+"}";
     }
 
-    public static boolean handlePicUpload(HttpServletRequest request){
+    public static String handlePicUpload(HttpServletRequest request){
         // 上传文件存储目录
         String UPLOAD_DIRECTORY = "uploadImage";
 
@@ -76,7 +76,7 @@ public class BasicTool {
         // 检测是否为多媒体上传
         if (!ServletFileUpload.isMultipartContent(request)) {
             // 如果不是则停止
-            return false;
+            return null;
         }
 
         // 配置上传参数
@@ -125,23 +125,24 @@ public class BasicTool {
                         String tail = null;
                         if(matcher.find()){
                             tail = matcher.group(0);
-                            String filePath = uploadPath + File.separator + System.currentTimeMillis()+tail;
+                            String customFileName = System.currentTimeMillis() +tail;
+                            String filePath = uploadPath + File.separator + customFileName;
                             File storeFile = new File(filePath);
                             // 保存文件到硬盘
                             item.write(storeFile);
-                            return true;
+                            return customFileName;
                         }
                         else{
-                            return false;
+                            return null;
                         }
                     }
                 }
             }
-            return false;
+            return null;
         }
         catch (Exception e) {
             e.printStackTrace();
-            return true;
+            return null;
         }
     }
 }

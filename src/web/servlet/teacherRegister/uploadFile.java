@@ -1,8 +1,6 @@
-package web.servlet.test;
-
+package web.servlet.teacherRegister;
 
 import tool.BasicTool;
-
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -11,15 +9,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-
-@WebServlet("/test")
-public class Test extends HttpServlet {
-    @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        BasicTool.setCharacterEncoding(req,resp);
-        resp.getWriter().write(req.getServletContext().getRealPath("/img"));
-    }
-
+@WebServlet("/uploadFile")
+public class uploadFile extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String result = BasicTool.handlePicUpload(req);
@@ -30,7 +21,11 @@ public class Test extends HttpServlet {
         else{
             state=0;
         }
-        System.out.println(null+"");
-        resp.getWriter().write("{\"state\":"+state+",\"append_inf\":"+result+"}");
+        resp.getWriter().write("{\"state\":"+state+",\"append_inf\":\""+result+"\"}");
+    }
+
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        resp.getWriter().write("123");
     }
 }

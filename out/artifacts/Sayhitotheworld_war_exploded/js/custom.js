@@ -43,9 +43,7 @@
                 minimumResultsForSearch: Infinity
             });
             var $elements = $(".custom_select");
-            $elements.select2({
-                minimumResultsForSearch: Infinity
-            });
+            $elements.select2();
 
             /*************************************
              * Bootstrap Dropdown Menu on hover  *

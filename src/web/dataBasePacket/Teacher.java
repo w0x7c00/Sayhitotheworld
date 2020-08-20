@@ -17,7 +17,7 @@ public class Teacher extends BasicDataBasePacket{
 
     public String email;
     public String education;
-    public String language;
+    public short language;
     public String pic;
     public int age;
     public String self_introduction;
@@ -43,7 +43,7 @@ public class Teacher extends BasicDataBasePacket{
 
             this.email = rs.getString("email");
             this.education = rs.getString("education");
-            this.language = rs.getString("language");
+            this.language = rs.getShort("language");
             this.pic = rs.getString("pic");
             this.age = rs.getInt("age");
             this.self_introduction = rs.getString("self_introduction");
