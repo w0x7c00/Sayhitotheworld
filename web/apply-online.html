@@ -209,6 +209,8 @@
     $("#input-second-language").val($("#select-second-language  option:selected").val());
     $("#input-gender").val($("#select-gender option:selected").val());
     //字段检查
+
+    //for test...
     if(checkName($("#input-name").val())){
       if(checkAge($("#input-age").val())){
         if(checkLanguage($("#input-language").val())){
@@ -235,7 +237,30 @@
                                   contentType: false,
                                   dataType: "json",
                                 }).success(function (data) {
-                                  console.log(data);
+                                  //返回字段：state： -0 保留  -1 成功注册   -2 字段错误   -3 已存在的教师  -4 未发送过验证码（没有session）-5 验证码不正确/重新发送 -6 图片不符合要求 -7 数据库/服务器故障(不符合长度要求的字段)
+                                  var state = data.state;
+                                  switch (state) {
+                                    case 1:
+                                      //成功
+                                          break;
+                                    case 2:
+                                      customAlert("Unexcepted Input");
+                                      break;
+                                    case 3:
+                                      customAlert("The account number if exist");
+                                      break;
+                                    case 4:
+                                      customAlert("Please Click Get Email Code Before Submit Your Form!");
+                                      break;
+                                    case 5:
+                                      customAlert("Incorrect Email Code");
+                                      break;
+                                    case 6:
+                                      customAlert("Unexpected Picture Upload");
+                                      break;
+                                    default:
+                                      customAlert("Unexpected Input(too long)");
+                                  }
                                   var pic_name = data.append_inf;
                                   $("#hidden-pic").val(pic_name);
                                   // 移除temp-input
