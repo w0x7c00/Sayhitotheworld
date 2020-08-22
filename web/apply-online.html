@@ -12,8 +12,9 @@
 <!-- Custom Fonts -->
 <link href="css/fonts.css" rel="stylesheet" type="text/css">
 <!-- Bootstrap -->
-<link href="assets/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+<!--<link href="assets/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css">-->
 <!-- Select2 -->
+  <link href="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.css" rel="stylesheet" type="text/css">
 <link href="assets/select2/css/select2.min.css" rel="stylesheet" type="text/css">
 <!-- Font Awesome -->
 <link href="assets/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
@@ -59,47 +60,47 @@
           <h4 style="margin-bottom: 30px">Input Your Self Information</h4>
           <div class="row">
             <div class="col-sm-6">
-              <input id="input-name" name="name" type="text" placeholder="Name">
+              <input onchange="inputCheck(this,checkName)" valid-msg ="  Allowed Name" invalid-msg = "  Unexpected Name" id="input-name" name="name" type="text" placeholder="Name">
             </div>
             <div class="col-sm-6">
-              <input id="input-age" name="age" type="text" placeholder="AGE">
+              <input onchange="inputCheck(this,checkAge)" valid-msg="  Allowed Name"  invalid-msg="  Unexcepted Age" id="input-age" name="age" type="text" placeholder="AGE">
             </div>
           </div>
           <div class="row">
             <div class="col-sm-6">
-              <input id="input-language" name="language" type="text" class="hidden">
-              <select id="select-language" class="custom_select">
+              <input id="input-language"  name="language" type="text" class="hidden" invalid-msg=" Can`t Be Empty" valid-msg=" Allowed Language">
+              <select onchange="selectOnchange(this,checkLanguage)" id="select-language" class="custom_select">
                 <option value="-1">mother language</option>
               </select>
             </div>
             <div class="col-sm-6">
-              <input id="input-second-language" name="second_language" type="text" class="hidden">
-              <select id="select-second-language" class="custom_select">
+              <input id="input-second-language" name="second_language" type="text" class="hidden" valid-msg=" Allowed Second Language" invalid-msg=" Can`t Be Empty">
+              <select id="select-second-language" class="custom_select" onchange="selectOnchange(this,checkLanguage)">
                 <option value="-1">Second Language</option>
               </select>
             </div>
           </div>
           <div class="row">
             <div class="col-sm-6">
-              <input id="input-country" name="country" type="text" class="hidden">
-              <select id="select-country" class="custom_select">
+              <input id="input-country" name="country" type="text" class="hidden" valid-msg=" Allowed" invalid-msg=" Can`t Be Empty">
+              <select id="select-country" class="custom_select" onchange="selectOnchange(this,checkCountry)">
                 <option value="-1">country</option>
               </select>
             </div>
             <div class="col-sm-6">
-                <input id="input-cur-country" name="country_to_live" type="text" class="hidden">
-                <select id="select-cur-country" class="custom_select">
+                <input id="input-cur-country" name="country_to_live" type="text" class="hidden" valid-msg=" Allowed" invalid-msg=" Can`t Be Empty">
+                <select id="select-cur-country" class="custom_select" onchange="selectOnchange(this,checkCountry)">
                 <option value="-1">Current country of residence</option>
               </select>
             </div>
           </div>
           <div class="row">
             <div class="col-sm-6">
-              <input id="input-price" name="price" type="text" placeholder="expect salary per hour(USD)">
+              <input id="input-price" name="price" type="text" placeholder="expect salary per hour(USD)" valid-msg=" Allowed" invalid-msg=" Unexpected Salary" onchange="inputCheck(this,checkPrice)">
             </div>
             <div class="col-sm-6">
-              <input id="input-gender" name="sex" class="hidden">
-              <select id="select-gender" class="custom_select">
+              <input id="input-gender" name="sex" class="hidden" valid-msg=" Allowed" invalid-msg=" Can`t Be Empty">
+              <select id="select-gender" class="custom_select" onchange="selectOnchange(this,checkGender)">
                 <option value="-1">gender</option>
                 <option value="0">male</option>
                 <option value="1">female</option>
@@ -109,7 +110,7 @@
 
           <div class="row">
             <div class="col-sm-12">
-              <textarea id="input-self-introduction" name="self_introduction" placeholder="self introduction(No more than 1000 characters)"></textarea>
+              <textarea id="input-self-introduction" name="self_introduction" placeholder="self introduction(No more than 1000 characters)" valid-msg=" Allowed" invalid-msg=" Unexpected Salary" onchange="inputCheck(this,checkSelfIntroduction)"></textarea>
             </div>
           </div>
 
@@ -118,8 +119,11 @@
             <h4 style="margin-bottom: 30px">Input your picture</h4>
           </div>
           <div class="row">
-            <input id="input-pic" name="temp-for-upload" type="file" accept="image/*"/>
-            <input id="hidden-pic" name ="pic" type="text" class="hidden">
+            <div>
+              <input id="input-pic" name="temp-for-upload" type="file" accept="image/*" valid-msg=" Allowed" invalid-msg=" Can`t Be Empty" onchange="inputCheck(this,checkFile)">
+<!--              这个flag恒为true 因为是临时input 不需要判定-->
+              <input id="hidden-pic" name ="pic" type="text" class="hidden" check-flag =true>
+            </div>
           </div>
 
 
@@ -131,10 +135,10 @@
 
           <div class="row">
             <div class="col-sm-6">
-              <input id="input-email" name="email" type="email" placeholder="email">
+              <input id="input-email" name="email" type="email" placeholder="email" valid-msg=" Allowed" invalid-msg=" Unexpected Email" onchange="inputCheck(this,checkEmail)">
             </div>
             <div class="col-sm-3">
-              <input id="input-emailCode" name="emailCode" type="text" placeholder="CHECK CODE">
+              <input id="input-emailCode" name="emailCode" type="text" placeholder="CHECK CODE" valid-msg=" Allowed" invalid-msg=" Unexpected Email Code" onchange="inputCheck(this,checkEmailCode)">
             </div>
             <div class="col-sm-3">
               <button style="width: 100%" type="button" onclick="getEmailCode(this)" class="btn" id="btn-get-email-code">GET Check Code</button>
@@ -143,10 +147,10 @@
 
           <div class="row">
             <div class="col-sm-6">
-              <input id="input-teacher-name" name="teacher_name" type="text" placeholder="Account name">
+              <input id="input-teacher-name" name="teacher_name" type="text" placeholder="Account name" valid-msg=" Allowed" invalid-msg=" Unexpected Account Name" onchange="inputCheck(this,checkUserName)">
             </div>
             <div class="col-sm-6">
-              <input id="input-password" name="password" type="text" placeholder="password">
+              <input id="input-password" name="password" type="text" placeholder="password" valid-msg=" Allowed" invalid-msg=" Unexpected Password" onchange="inputCheck(this,checkPassword)">
             </div>
           </div>
 
@@ -184,6 +188,9 @@
 <script>
   //init
   // 带json后缀文件请求会自动解析为json obj
+
+
+
   $.get("/json/languageCode.json", function (data) {
     for (var i = 0; i < data.length; i++) {
       var name = data[i][1];
@@ -201,130 +208,75 @@
     }
   })
 
+  function showEmptyAlert($item) {
+    $item.parent().append("<span class='input-check-span'><i style='color: RGB(255,150,0);font-size: 13px;font-weight: bolder' class='glyphicon glyphicon-remove'></i><i style='color: RGB(255,150,0);font-size: 13px;font-weight: bolder'>"+"Please Input"+"</i></span>");
+  }
+  
   function TeacherRegisterFormSubmit() {
-    //表单填充
-    $("#input-country").val($("#select-country  option:selected").val());
-    $("#input-cur-country").val($("#select-cur-country  option:selected").val());
-    $("#input-language").val($("#select-language  option:selected").val());
-    $("#input-second-language").val($("#select-second-language  option:selected").val());
-    $("#input-gender").val($("#select-gender option:selected").val());
     //字段检查
+    var $input_list = $(".form-outer input");
+    $input_list.push($(".form-outer textarea")[0]);
+    for(var i =0;i<$input_list.length;i++){
+       var $item = $($input_list[i]);
+       var submit_flag = true;
+       if(typeof($item.attr("check-flag"))=="undefined"){
+         //存在未填写的内容
+         submit_flag = false;
+         showEmptyAlert($item);
+       }
+       else if($item.attr("check-flag")===false){
+         submit_flag = false;
+       }
+    }
+    //通过submit
+    if(!submit_flag){
+      return;
+    }
 
-    //for test...
-    if(checkName($("#input-name").val())){
-      if(checkAge($("#input-age").val())){
-        if(checkLanguage($("#input-language").val())){
-          if(checkLanguage($("#input-second-language").val())){
-            if(checkCountry($("#input-country").val())){
-              if(checkCountry($("#input-cur-country").val())){
-                if(checkPrice($("#input-price").val())){
-                  if(checkGender($("#input-gender").val())){
-                    if(checkSelfIntroduction($("#input-self-introduction").val())){
-                      if(checkFile($("#input-pic").val())){
-                        if(checkUserName($("#input-teacher-name").val())){
-                          if(checkPassword($("#input-password").val())){
-                            if(checkEmail($("#input-email").val())){
-                              if(checkEmailCode($("#input-emailCode").val())){
-                                //完成所有检查
-                                $("#input-pic").clone().appendTo("#temp-form");
-                                var myFormData = new FormData(document.getElementById("temp-form"));
-                                $.ajax({
-                                  type: 'post',
-                                  url: "/uploadFile",
-                                  data: myFormData,
-                                  cache: false,
-                                  processData: false,
-                                  contentType: false,
-                                  dataType: "json",
-                                }).success(function (data) {
-                                  //返回字段：state： -0 保留  -1 成功注册   -2 字段错误   -3 已存在的教师  -4 未发送过验证码（没有session）-5 验证码不正确/重新发送 -6 图片不符合要求 -7 数据库/服务器故障(不符合长度要求的字段)
-                                  var state = data.state;
-                                  switch (state) {
-                                    case 1:
-                                      //成功
-                                          break;
-                                    case 2:
-                                      customAlert("Unexcepted Input");
-                                      break;
-                                    case 3:
-                                      customAlert("The account number if exist");
-                                      break;
-                                    case 4:
-                                      customAlert("Please Click Get Email Code Before Submit Your Form!");
-                                      break;
-                                    case 5:
-                                      customAlert("Incorrect Email Code");
-                                      break;
-                                    case 6:
-                                      customAlert("Unexpected Picture Upload");
-                                      break;
-                                    default:
-                                      customAlert("Unexpected Input(too long)");
-                                  }
-                                  var pic_name = data.append_inf;
-                                  $("#hidden-pic").val(pic_name);
-                                  // 移除temp-input
-                                  $("#temp-form").empty();
-                                  $("#teacher-submit-form").submit();
-                                }).error(function () {
-                                  alert("Upload Picture Fail!");
-                                });
-                              }
-                              else{
-                                alertAfterCheck($("#input-emailCode"),"Unexcepted Email Code");
-                              }
-                            }
-                            else{
-                              alertAfterCheck($("#input-email"),"Unexcepted Email");
-                            }
-                          }
-                          else{
-                            alertAfterCheck($("#input-password"),"Unexcepted Password");
-                          }
-                        }
-                        else{
-                          alertAfterCheck($("#input-teacher-name"),"Unexcepted Account Name");
-                        }
-                      }
-                      else {
-                        alertAfterCheck($("#input-pic"),"Unexcepted Picture");
-                      }
-                    }
-                    else{
-                      alertAfterCheck($("#input-self-introduction"),"Unexcepted Self Introduction");
-                    }
-                  }
-                  else{
-                    alertAfterCheck($("#input-gender"),"Unexcepted Gender");
-                  }
-                }
-                else {
-                  alertAfterCheck($("#input-price"),"Unexcepted Salary");
-                }
-              }
-              else{
-                alertAfterCheck($("#input-cur-country"),"Unexcepted Current Country");
-              }
-            }
-            else{
-              alertAfterCheck($("#input-country"),"Unexcepted Country");
-            }
-          }
-          else{
-            alertAfterCheck($("#input-second-language"),"Unexcepted Second Language");
-          }
-        }
-        else{
-          alertAfterCheck($("#input-language"),"Unexcepted Mother Language");
-        }
+    $("#input-pic").clone().appendTo("#temp-form");
+    var myFormData = new FormData(document.getElementById("temp-form"));
+    $.ajax({
+      type: 'post',
+      url: "/uploadFile",
+      data: myFormData,
+      cache: false,
+      processData: false,
+      contentType: false,
+      dataType: "json",
+    }).success(function (data) {
+      //返回字段：state： -0 保留  -1 成功注册   -2 字段错误   -3 已存在的教师  -4 未发送过验证码（没有session）-5 验证码不正确/重新发送 -6 图片不符合要求 -7 数据库/服务器故障(不符合长度要求的字段)
+      var state = data.state;
+      switch (state) {
+        case 1:
+          //成功
+          break;
+        case 2:
+          customAlert("Unexcepted Input");
+          break;
+        case 3:
+          customAlert("The account number if exist");
+          break;
+        case 4:
+          customAlert("Please Click Get Email Code Before Submit Your Form!");
+          break;
+        case 5:
+          customAlert("Incorrect Email Code");
+          break;
+        case 6:
+          customAlert("Unexpected Picture Upload");
+          break;
+        default:
+          customAlert("Unexpected Input(too long)");
       }
-      else{
-        alertAfterCheck($("#input-age"),"Unexcepted Age");
-      }
-    }
-    else{
-      alertAfterCheck($("#input-name"),"Unexpected Name");
-    }
+      var pic_name = data.append_inf;
+      $("#hidden-pic").val(pic_name);
+      // 移除temp-input
+      $("#temp-form").empty();
+      $("#teacher-submit-form").submit();
+    }).error(function () {
+      alert("Upload Picture Fail!");
+    });
+
   }
 
   // -0 保留    -1 发送邮件成功    -2 字段错误    -3 请求间隔时间过短    -4 已经绑定过的邮箱    -5 发送邮件失败，检查邮箱格式或者检查邮箱是否存在
@@ -341,31 +293,19 @@
     $.post("/teacherSendRegisterEmail", {"email": email_str}, function (data) {
       var state = data.state;
       if (state == 1) {
-        $(me).text("GET Check Code");
-        $(me).removeClass("disabled");
-        $(me).attr("onclick", "getEmailCode(this)");
         customAlert("success send email");
       } else if (state == 2) {
-        $(me).text("GET Check Code");
-        $(me).removeClass("disabled");
-        $(me).attr("onclick", "getEmailCode(this)");
         customAlert("Unexpected Input");
       } else if (state == 3) {
-        $(me).text("GET Check Code");
-        $(me).removeClass("disabled");
-        $(me).attr("onclick", "getEmailCode(this)");
         customAlert("After " + (Math.trunc(60 - data.append_inf / 1000) + "second you can retry!"));
       } else if (state == 4) {
-        $(me).text("GET Check Code");
-        $(me).removeClass("disabled");
-        $(me).attr("onclick", "getEmailCode(this)");
         customAlert("This email is used by other account");
       } else {
-        $(me).text("GET Check Code");
-        $(me).removeClass("disabled");
-        $(me).attr("onclick", "getEmailCode(this)");
         customAlert("Unexpected Email Format");
       }
+      $(me).text("GET Check Code");
+      $(me).removeClass("disabled");
+      $(me).attr("onclick", "getEmailCode(this)");
     }, "json")
   }
 
@@ -376,6 +316,56 @@
   function alertAfterCheck($input,msg) {
     alert(msg);
   }
+
+
+  function inputCheck(documentElement,checkFunc) {
+    var $d = $(documentElement);
+    var value = $d.val();
+    var $parent = $d.parent();
+    console.log($parent);
+    var $span = $parent.children("span.input-check-span");
+    if(checkFunc(value)){
+      //检测通过
+      //span需要特殊的标志 .class=input-check-span 否则会与动态生成的select中span相互冲突
+      if($span.length==1){
+        //已存在此元素
+        $d.attr("check-flag",true);
+        $span.children("i:first").removeClass("glyphicon-remove").addClass('glyphicon-ok').css("color","RGB(23,164,59)");
+        $span.children("i:last").text($d.attr("valid-msg")).css("color","RGB(23,164,59)");
+      }
+      else{
+        //不存在此元素
+        $d.attr("check-flag",true);
+        $parent.append("<span class='input-check-span'><i style='color: RGB(23,164,59);font-size: 13px;font-weight: bolder' class='glyphicon glyphicon-ok'></i><i style='color: RGB(23,164,59);font-size: 13px;font-weight: bolder'>"+$d.attr("valid-msg")+"</i></span>");
+      }
+    }
+    else{
+      //检测不通过
+      if($span.length==1){
+        //已存在此元素
+        $d.attr("check-flag",false);
+        $span.children("i:first").removeClass("glyphicon-ok").addClass('glyphicon-remove').css("color","RGB(255,150,0)");
+        $span.children("i:last").text($d.attr("invalid-msg")).css("color","RGB(255,150,0)");
+      }
+      else{
+        //不存在此元素
+        $d.attr("check-flag",false);
+        $parent.append("<span class='input-check-span'><i style='color: RGB(255,150,0);font-size: 13px;font-weight: bolder' class='glyphicon glyphicon-remove'></i><i style='color: RGB(255,150,0);font-size: 13px;font-weight: bolder'>"+$d.attr("invalid-msg")+"</i></span>");
+      }
+    }
+  }
+
+  function selectOnchange(selectElement,checkFunc) {
+    var $select = $(selectElement);
+    var value = $select.children("option:selected").val();
+    var $input = $select.parent().children("input");
+    $input.val(value);
+    console.log($("#input-language").val())
+    console.log($input[0]);
+    inputCheck($input[0],checkFunc);
+  }
+
+
 </script>
 
 </body>
