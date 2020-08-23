@@ -192,6 +192,7 @@
 
 
   $.get("/json/languageCode.json", function (data) {
+    console.log("la:"+data.length);
     for (var i = 0; i < data.length; i++) {
       var name = data[i][1];
       var new_opt = "<option value=\"" + i + "\">" + name + "</option>";
@@ -200,6 +201,7 @@
     }
   })
   $.get("/json/countryCode.json", function (data) {
+    console.log("cou:"+data.length);
     for (var i = 0; i < data.length; i++) {
       var name = data[i][1];
       var new_opt = "<option value=\"" + i + "\">" + name + "</option>";
