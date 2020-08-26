@@ -29,7 +29,20 @@
       <script src="js/html5shiv.min.js"></script>
       <script src="js/respond.min.js"></script>
     <![endif]-->
-
+  <style>
+    .form-outer input{
+      margin-bottom: 0;
+    }
+    .form-outer .select2.select2-container {
+      margin-bottom: 0;
+    }
+    .form-outer .row div{
+      padding-bottom: 30px;
+    }
+    .form-outer textarea{
+      margin-bottom: 0 !important;
+    }
+  </style>
 
 </head>
 <body class="fill-bg"> 
@@ -46,7 +59,46 @@
     </div>
   </div>
 </div>
-<!-- End Preloader --> 
+<!-- End Preloader -->
+
+<!--Start Form Information Modal-->
+<div class="modal fade" id="instruction-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Instruction</h4>
+      </div>
+      <div class="modal-body">
+        abc
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Yes,I have read it.</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!--End Form Information Modal-->
+
+<!--Start Alert Modal-->
+<div class="modal fade" id="alertModal" tabindex="-1" role="dialog" aria-labelledby="alertModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="alertModalLabel">INFO</h4>
+      </div>
+      <div class="modal-body custom-alert-context">
+        abc
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Ok</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!--End Alert Modal-->
+
 <!-- Start apply online -->
 <section class="login-wrapper register">
   <div class="inner">
@@ -109,8 +161,16 @@
           </div>
 
           <div class="row">
+            <div class="col-sm-6">
+              <input id="input-education" name="education" type="text" placeholder="University" valid-msg=" Allowed" invalid-msg=" Unexpected University(No more than 100 characters)" onchange="inputCheck(this,checkEducation)">
+            </div>
+            <div class="col-sm-6">
+            </div>
+          </div>
+
+          <div class="row">
             <div class="col-sm-12">
-              <textarea id="input-self-introduction" name="self_introduction" placeholder="self introduction(No more than 1000 characters)" valid-msg=" Allowed" invalid-msg=" Unexpected Salary" onchange="inputCheck(this,checkSelfIntroduction)"></textarea>
+              <textarea id="input-self-introduction" name="self_introduction" placeholder="self introduction(No more than 1000 characters)" valid-msg=" Allowed" invalid-msg=" Unexpected Self Introduction" onchange="inputCheck(this,checkSelfIntroduction)"></textarea>
             </div>
           </div>
 
@@ -150,7 +210,7 @@
               <input id="input-teacher-name" name="teacher_name" type="text" placeholder="Account name" valid-msg=" Allowed" invalid-msg=" Unexpected Account Name" onchange="inputCheck(this,checkUserName)">
             </div>
             <div class="col-sm-6">
-              <input id="input-password" name="password" type="text" placeholder="password" valid-msg=" Allowed" invalid-msg=" Unexpected Password" onchange="inputCheck(this,checkPassword)">
+              <input id="input-password" name="password" type="password" placeholder="password" valid-msg=" Allowed" invalid-msg=" Unexpected Password" onchange="inputCheck(this,checkPassword)">
             </div>
           </div>
 
@@ -188,9 +248,7 @@
 <script>
   //init
   // 带json后缀文件请求会自动解析为json obj
-
-
-
+  $("#instruction-modal").modal('show');
   $.get("/json/languageCode.json", function (data) {
     console.log("la:"+data.length);
     for (var i = 0; i < data.length; i++) {
@@ -246,41 +304,61 @@
       contentType: false,
       dataType: "json",
     }).success(function (data) {
+        var state = data.state;
+        if(state==0){
+          customAlert("Upload Picture Fail!Please Check Your Picture Format!")
+        }
+        else{
+          var pic_name = data.append_inf;
+          $("#hidden-pic").val(pic_name);
+
+          //使用ajax提交最终表单
+          submitFormAfterCheck();
+        }
+      }).error(function () {
+      customAlert("Upload Picture Fail!Please Check Your Network Connection!");
+    });
+
+    // 移除temp-input
+    $("#temp-form").empty();
+  }
+
+  function submitFormAfterCheck() {
+    $.ajax({
+      type: 'post',
+      url: "/teacherRegister",
+      data: $("#teacher-submit-form").serialize(),
+      dataType: "json",
+    }).success(function (data) {
       //返回字段：state： -0 保留  -1 成功注册   -2 字段错误   -3 已存在的教师  -4 未发送过验证码（没有session）-5 验证码不正确/重新发送 -6 图片不符合要求 -7 数据库/服务器故障(不符合长度要求的字段)
       var state = data.state;
       switch (state) {
         case 1:
-          //成功
+          customAlert("Success Register");
           break;
         case 2:
-          customAlert("Unexcepted Input");
+          customAlert("Incorrect Input!");
           break;
         case 3:
-          customAlert("The account number if exist");
+          customAlert("Account already in existence!");
           break;
         case 4:
           customAlert("Please Click Get Email Code Before Submit Your Form!");
           break;
         case 5:
-          customAlert("Incorrect Email Code");
+          customAlert("Incorrect Email Code!Check Your Code Or Resend Email Code!");
           break;
         case 6:
-          customAlert("Unexpected Picture Upload");
+          customAlert("Incorrect Picture Upload");
           break;
         default:
-          customAlert("Unexpected Input(too long)");
+          customAlert("Incorrect Input(too long)");
       }
-      var pic_name = data.append_inf;
-      $("#hidden-pic").val(pic_name);
-      // 移除temp-input
-      $("#temp-form").empty();
-      $("#teacher-submit-form").submit();
     }).error(function () {
-      alert("Upload Picture Fail!");
+      customAlert("Submit Form Fail!Please Check Your Network Connection!");
     });
-
   }
-
+  
   // -0 保留    -1 发送邮件成功    -2 字段错误    -3 请求间隔时间过短    -4 已经绑定过的邮箱    -5 发送邮件失败，检查邮箱格式或者检查邮箱是否存在
   function getEmailCode(me) {
     var email_str = $("#input-email").val()
@@ -295,11 +373,11 @@
     $.post("/teacherSendRegisterEmail", {"email": email_str}, function (data) {
       var state = data.state;
       if (state == 1) {
-        customAlert("success send email");
+        customAlert("success send email(If you don`t receive email,check the eamil you have input or resend email. )");
       } else if (state == 2) {
         customAlert("Unexpected Input");
       } else if (state == 3) {
-        customAlert("After " + (Math.trunc(60 - data.append_inf / 1000) + "second you can retry!"));
+        customAlert("After " + (Math.trunc(60 - data.append_inf / 1000) + " second you can retry!"));
       } else if (state == 4) {
         customAlert("This email is used by other account");
       } else {
@@ -312,19 +390,14 @@
   }
 
   function customAlert(msg) {
-    window.alert(msg);
+    $("#alertModal .custom-alert-context").text(msg);
+    $("#alertModal").modal("show");
   }
-
-  function alertAfterCheck($input,msg) {
-    alert(msg);
-  }
-
 
   function inputCheck(documentElement,checkFunc) {
     var $d = $(documentElement);
     var value = $d.val();
     var $parent = $d.parent();
-    console.log($parent);
     var $span = $parent.children("span.input-check-span");
     if(checkFunc(value)){
       //检测通过
@@ -362,12 +435,8 @@
     var value = $select.children("option:selected").val();
     var $input = $select.parent().children("input");
     $input.val(value);
-    console.log($("#input-language").val())
-    console.log($input[0]);
     inputCheck($input[0],checkFunc);
   }
-
-
 </script>
 
 </body>

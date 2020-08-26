@@ -7,84 +7,38 @@
 /* Part1:Form Input Format Check  */
 
 /*Reachable Max Value*/
-var MAX_NAME_LENGTH = 254;
-var MAX_USER_NAME_LENGTH = 20;
-var MAX_PASSWORD_LENGTH = 20;
-var EMAIL_CODE_LENGTH = 6;
-var MAX_SELF_INTRODUCTION_LENGTH = 1000;
+var MAX_AGE = 120;
+var MIN_AGE = 0;
+var MAX_PASSWORD_LENGTH = 25;
+var MAX_PRICE = 20;
 function checkUserName(input) {
-    if(input===""){
-        return false;
-    }
-    try{
-        if(input.length<=MAX_USER_NAME_LENGTH){
-            return true;
-        }
-        else{
-            return false;
-        }
-    }
-    catch(e){
-        return false;
-    }
+    return /^[a-zA-Z0-9_]{6,25}$/.test(input);
 }
 
 function checkPassword(input) {
-    if (input===""){
-        return false;
-    }
-    try{
-        if(input.length<=MAX_PASSWORD_LENGTH){
-            return true;
-        }
-    }
-    catch (e) {
-        return false;
-    }
+    return (/^.*(?=.{6,})(?=.*\d)(?=.*[A-Za-z])(?=.*[!@#$%^&*?]*).*$/.test(input))&&(input.length<=MAX_PASSWORD_LENGTH);
 }
 
 
 function checkName(input) {
-    if(input===""){
-        return false;
-    }
-    else{
-        if(input.length<=MAX_NAME_LENGTH){
-            return true;
-        }
-        else{
-            return true;
-        }
-    }
+    return /^[^\d]{2,254}$/.test(input);
 }
 
 function checkLanguage(input) {
-    if(input==="-1"){
-        return false;
-    }
-    else {
-        return true;
-    }
+    return input !== "-1";
 }
 
 function checkCountry(input) {
-    if(input==="-1"){
-        return false;
-    }
-    else {
-        return true;
-    }
+    return input !== "-1";
 }
 
 function checkPrice(input) {
+    if(!(/^\d{1，2}$/.test(input))){
+        return false;
+    }
     try{
-        parseInt(input);
-        if(input===""){
-            return false;
-        }
-        else {
-            return true;
-        }
+        var input_int = parseInt(input);
+        return input_int <= MAX_PRICE;
     }
     catch (e) {
         return false;
@@ -92,59 +46,31 @@ function checkPrice(input) {
 }
 
 function checkGender(input) {
-    try{
-        if(input==="1"||input==="0"){
-            return true;
-        }
-        else{
-            return false;
-        }
-    }
-    catch (e) {
-        return false;
-    }
+    return input === "1" || input === "0";
 }
 
 function checkEmailCode(input) {
-    try{
-        if(input.length==EMAIL_CODE_LENGTH){
-            parseInt(input);
-            return true;
-        }
-        else{
-            return false;
-        }
-    }
-    catch (e) {
-        return false;
-    }
+    return /^\d{6}$/.test(input);
 }
 
 function checkEmail(input) {
-    if(input===""){
-        return false;
-    }
-    else{
-        return true;
-    }
+    return /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/.test(input);
 }
 
 function checkFile(input) {
-    if(input===""){
-        return false;
-    }
-    else{
-        return true;
-    }
+    return /^.+$/.test(input);
 }
 
 function checkAge(input) {
+    if(!/^\d{1,3}$/.test(input)){
+        return false;
+    }
     try{
         if (input===""){
             return false;
         }
         input = parseInt(input);
-        if(input>0&&input<=120){
+        if(input>MIN_AGE&&input<=MAX_AGE){
             return true;
         }
         else{
@@ -157,11 +83,10 @@ function checkAge(input) {
 }
 
 function checkSelfIntroduction(input) {
-    if(input.length<=MAX_SELF_INTRODUCTION_LENGTH){
-        return true;
-    }
-    else{
-        return false;
-    }
+    return /^.{1,1000}$/.test(input);
+}
+
+function checkEducation(input) {
+    return /^.{1,100}$/.test(input);
 }
 /* Part1:Form Input Format Check  */

@@ -5944,16 +5944,6 @@ a.btn-circle:hover {
 }
 
 /*css修正*/
-
-.form-outer input{
-	/*覆盖预定义的30px margin*/
-	margin-bottom: 0;
-}
-
 .form-outer .select2{
-	margin-bottom: 0;
-}
-
-.form-outer .row>div {
 	margin-bottom: 30px;
 }

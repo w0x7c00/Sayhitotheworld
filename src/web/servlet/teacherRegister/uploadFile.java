@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+//返回字段： state -0 失败    -1 成功
+//          append_inf 图片名称
 @WebServlet("/uploadFile")
 public class uploadFile extends HttpServlet {
     @Override
