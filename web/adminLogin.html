@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Title</title>
+    <link href="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="css/login.css"/>
+<!--    与login使用同一个css-->
+</head>
+<body>
+<div class="body">
+    <p class="logo">管理员登录</p>
+    <div class="body_count">
+        <div class="login_count">
+            <div id="all">
+                <ul id="card">
+                    <li class="active">
+                        <!--输入框-->
+                        <div class="login_bot_count">
+                            <img src="images/tubiao-07.png" alt="" />
+                            <input placeholder="请输入账号"id="login-username"/>
+                        </div>
+                        <div class="login_bot_count">
+                            <img src="images/tubiao-06.png" alt="" />
+                            <input placeholder="请输入密码"id="login-password"/>
+                        </div>
+                        <div class="login_bot">
+                            <a>忘记密码?</a>
+                            <p><input id="login-checkbox" type="checkbox"/>记住密码</p>
+                        </div>
+                        <button id = "login-btn" class="login_button">登录</button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript" src="https://cdn.bootcdn.net/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script type="text/javascript" src="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script>
+    $("#login-btn").click(function () {
+        $.ajax({
+            type: "POST",
+            async:false,
+            dataType: "json",
+            url: "/adminLogin" ,
+            data: {"admin_name":document.getElementById("login-username").value,"password":document.getElementById("login-password").value},
+            success: function (data) {
+                var state = data.state;
+                //输出字段: state  -0 登陆失败（账号或密码不正确/附加state 预留）    -1 登录成功   -2 字段错误    -3 已经登录过   -4 用户名不存在 -5 密码不正确
+                switch (state) {
+                    case 1:
+                        window.location.href = "/admin.html";
+                        break;
+                    case 2:
+                        alert("字段错误！");
+                        break;
+                    case 3:
+                        alert("已经登录过了");
+                        window.location.href = "/admin.html";
+                        break;
+                    case 4:
+                        alert("用户名不存在！");
+                        break;
+                    case 5:
+                        alert("密码不正确！");
+                        break;
+                    default:
+                        alert("登录失败：无法预料的异常情况！");
+                }
+            },
+            error : function() {
+                console.log("网络异常，请检查网络连接！");
+            }
+        });
+    });
+</script>
+</body>
+</html>
