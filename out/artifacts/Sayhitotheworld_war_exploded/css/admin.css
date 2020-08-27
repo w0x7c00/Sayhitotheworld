@@ -1,0 +1,160 @@
+/*测试使用*/
+.blue-border{
+    border-color: darkblue;border-style: dashed;border-width: 1px
+}
+.black-border{
+    border-color: #0f0f0f;border-style: dashed;border-width: 1px
+}
+.white-border{
+    border-color: #c0c0c0;border-style: dashed;border-width: 1px
+}
+/*测试使用*/
+*{
+    margin: 0;
+    padding: 0;
+}
+
+.body{
+    margin: 0;
+    padding-top: 0;
+}
+
+.div-head{
+    /*background-color: #252c35;*/
+    height: 55px;
+    background-color: #222222;
+    width: 100%;
+    /*-moz-box-shadow:0px 0px 15px #000; -webkit-box-shadow:0px 0px 15px #000; box-shadow:0px 0px 15px #000;*/
+    position: fixed;
+    z-index: 1001;
+}
+
+#close-open-control{
+    font-size: 20px;
+    color: white;
+    text-align: center;
+}
+
+.div-inv{
+    height: 55px;
+}
+.div-main{
+    width: 100%;
+    /*background-color: #252c35;*/
+    background-color: white;
+}
+.l-nav{
+    width: 285px;
+    position: fixed;
+    /*background-color: #2b333e;*/
+    background-color: #ededed;
+    height: 520px;
+}
+.r-context{
+    float: right;
+    /*background-color: #252c35;*/
+    background-color: #ffffff;
+}
+.clear-float{
+    clear:both;
+}
+.outer-ul{
+    width: 100%;
+}
+.outer-ul>li{
+    height: 55px;
+    border-left: transparent 4px solid;
+    padding: 17px 45px;
+    color: #5F718A;
+}
+.outer-ul>li:hover{
+    border-left: deepskyblue 4px solid;
+    background-color: #252c35;
+    cursor: pointer;
+    /*color: #367fa6;*/
+    color: white;
+}
+.outer-ul>li>p{
+    font-size: 16px;
+    font-weight: 500;
+    text-align: center;
+}
+.outer-ul>li.active{
+    border-left: deepskyblue 4px solid;
+    background-color: #252c35;
+    /*color: #367fa6;*/
+    color: white;
+}
+
+.inner-ul{
+    width: 100%;
+    display: none;
+}
+.inner-ul>li{
+    height: 55px;
+    border-left: transparent 4px solid;
+    padding: 17px 45px;
+    color: white;
+    background-color: #dadada;
+}
+.inner-ul>li:hover{
+    cursor: pointer;
+}
+
+.inner-ul>li>p{
+
+}
+
+#context-container{
+    width: 100%;
+}
+
+#context-head{
+    height: 50px;
+    color: #666666;
+    font-size: 18px;
+    background-color: #dadada;
+    margin-bottom: 40px;
+}
+#context-head p{
+    position: relative;
+    top: 10px;
+    float: left;
+}
+
+#context-head p:hover{
+    color: #222222;
+    cursor: pointer;
+}
+
+#page-1-head-welcome{
+    border-left: #0AB4F7 solid 4px;
+    background-color: #ededed;
+    margin-left: 40px;
+    margin-right: 40px;
+    height: 60px;
+    font-size: 20px;
+    padding-top: 15px;
+    padding-left: 15px;
+    margin-bottom: 30px;
+}
+
+.context-inner-div{
+    margin-right: 40px;
+    margin-left: 40px;
+}
+
+
+/*标识为一个page 需要有id 与page-link可以连接*/
+.page{
+    display: none;
+}
+
+.page-active{
+    display: block;
+}
+
+/*用于与一个page相互连接   需要有target-page属性*/
+.page-link{
+
+}

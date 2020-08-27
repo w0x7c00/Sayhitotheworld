@@ -1,0 +1,59 @@
+/**
+ * author :  DELL
+ * create time : 2020-08-25 15:58 
+ */
+.gallery_container {
+    margin-top: 50px;
+}
+
+.gallery_detail {
+    display: flex;
+    box-shadow: 1px 1px 5px #333333;
+    cursor: pointer;
+}
+
+.gallery_detail:hover {
+    box-shadow: 2px 2px 8px #333333;
+}
+
+.gallery_detail .left {
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    padding: 40px
+}
+
+.gallery_detail .left .photo-con {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.gallery_detail .left .photo-con p {
+    font-size: 28px;
+}
+
+.gallery_detail .left .gallery_info {
+    width: 50%;
+}
+.gallery_detail .left .gallery_info p {
+    border-bottom: 4px solid #aacc69;
+}
+.gallery_detail .left p {
+    font-size: 28px;
+    height: 60px;
+    line-height: 60px;
+}
+
+
+.gallery_detail .right {
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    padding: 40px
+}
+
+.gallery_detail .right h3 {
+    margin-bottom: 30px;
+}

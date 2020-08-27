@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Admin Page</title>
+    <link href="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="./css/admin.css">
+</head>
+<body class ="body">
+<!--头部导航栏-->
+<div class="container-fluid div-head">
+    <div style="height: 100%">
+        <div id="close-open-control" style="float: left"><img style="height: 40px;position: relative;top:7px" src="images/left.png"></div>
+        <div style="float:left;height: 100%"><p style="height:100%;text-align:center;font-size: 25px;color: white;position: relative;top: 8px;left: 20px"><span>管理员后台</span></p></div>
+        <div class="clear-float"></div>
+    </div>
+</div>
+<!--    防止margin对其后的父元素击穿 使用间隔div代替margin-->
+<div class="div-inv"></div>
+<div class="div-main" id="div-main">
+    <div id="left-nav" class = "l-nav" show="true">
+        <ul class="outer-ul">
+            <li class="page-link" target-page="#page-1">
+                <p><span class="glyphicon glyphicon-user"></span>  管理员个人信息</p>
+            </li>
+            <li class="page-link" target-page="#page-2">
+                <p><span class="glyphicon glyphicon-pencil"></span>  发布公告</p>
+            </li>
+            <li class="page-link" target-page="#page-3">
+                <p><span class="glyphicon glyphicon-globe"></span>  教师信息审核</p>
+            </li>
+            <li class="page-link" target-page="#page-4">
+                <p><span class="glyphicon glyphicon-comment"></span>  社团信息修改审核</p>
+            </li>
+            <li class="inner-li" target-ul="#ul-2">
+                <p><span class="glyphicon glyphicon-user"></span>  用户管理</p>
+            </li>
+            <ul id="ul-2" class="inner-ul">
+                <li class="page-link" target-page="#page-5"><p>用户信息</p></li>
+                <li class="page-link" target-page="#page-6"><p>用户禁用</p></li>
+                <li class="page-link" target-page="#page-7"><p>黑名单</p></li>
+            </ul>
+            <li class="page-link" target-page="#page-8">
+                <p><span class="glyphicon glyphicon-list-alt"></span>  社团换届审核</p>
+            </li>
+            <li class="inner-li" target-ul="#ul-5" id="super_user_li">
+                <p><span class="glyphicon glyphicon-lock"></span>  超级管理员选项</p>
+            </li>
+            <ul id="ul-5" class="inner-ul">
+                <li class="page-link" target-page="#page-9"><p>启动换届系统</p></li>
+                <li class="page-link" target-page="#page-10"><p>修改社团信息</p></li>
+                <li class="page-link" target-page="#page-11"><p>社团注册</p></li>
+                <li class="page-link" target-page="#page-12"><p>社团删除</p></li>
+            </ul>
+        </ul>
+    </div>
+    <div id="right-context" class="r-context">
+        <div class="container-fluid" id="context-head">
+            <p><span class="glyphicon glyphicon-home"></span>  主页</p>
+            <div class="clear-float"></div>
+        </div>
+        <div id="context-container">
+            <div class="page page-active" id="page-1">
+                <div id="page-1-head-welcome" class="hidden-xs">
+                    <p>欢迎管理员 : 萌萌</p>
+                </div>
+                <div class="panel panel-default context-inner-div">
+                    <div class="panel-heading panel-title">管理员信息</div>
+                    <div class="panel-body">
+                        <div class="list-group edit-list">
+                            <a href="#" class="list-group-item">
+                                <h4 class="list-group-item-heading">姓名</h4>
+                                <p class="list-group-item-text" id="name"></p>
+                                <input class="form-control" style="display: none">
+                            </a>
+                            <a href="#" class="list-group-item">
+                                <h4 class="list-group-item-heading">用户名</h4>
+                                <p class="list-group-item-text" id="admin_name"></p>
+                            </a>
+                            <a href="#" class="list-group-item">
+                                <h4 class="list-group-item-heading">权限级</h4>
+                                <p class="list-group-item-text" id="level"></p>
+                            </a>
+                            <a href="#" class="list-group-item">
+                                <h4 class="list-group-item-heading">注册时间</h4>
+                                <p class="list-group-item-text" id="registe_time"></p>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="page" id="page-2">
+                <div class="panel panel-default context-inner-div">
+                    <div class="panel-heading panel-title">发布公告</div>
+                    <div class="panel-body">
+                        <div id="page2-form">
+                            <div class="form-group">
+<!--                                标题不超过20字-->
+<!--                                正文不超过200字-->
+                                <div class="alert alert-info" role="alert">标题与正文不能为空，并且标题不超过20字，正文不超过两百字。</div>
+                                <label for="page2-form-title">标题</label>
+                                <input type="text" class="form-control" id="page2-form-title" placeholder="Title">
+                                <div style="display: none" id="page2-form-title-warn" class="alert alert-warning alert-dismissible" role="alert">
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                    <strong>注意：</strong> 标题不能超过20字或者为空
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="page2-form-text">正文</label>
+                                <textarea class="form-control" id="page2-form-text" rows="5" placeholder="Text"></textarea>
+                                <div style="display: none" id="page2-form-text-warn" class="alert alert-warning alert-dismissible" role="alert">
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                    <strong>注意：</strong> 正文不能超过200字或者为空
+                                </div>
+                            </div>
+                            <button class="btn btn-default">提交</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="page" id="page-3">
+                <div class="panel panel-primary context-inner-div">
+                    <div class="panel-heading panel-title">计算机科普活动</div>
+                    <div class="panel-body">在6月31日下午5点，计算机协会将会在D1213举行计算机科普活动，让大家能够了解计算机相关的知识，欢迎大家来参加本次活动~</div>
+                    <div class="panel-footer"><p>发布时间：2020-7-1      社团id:2      社团名称:计算机协会</p></div>
+                    <div style="margin: 15px"><button class="btn btn-primary">同意</button><span>                      </span><button class="btn btn-danger">拒绝</button></div>
+                </div>
+
+                <div class="panel panel-primary context-inner-div">
+                    <div class="panel-heading panel-title">测试标题</div>
+                    <div class="panel-body">在这里填写活动内容</div>
+                    <div class="panel-footer"><p>发布时间：2020-7-1      社团id:1      社团名称：测试社团</p></div>
+                    <div style="margin: 15px"><button class="btn btn-primary">同意</button><span>                      </span><button class="btn btn-danger">拒绝</button></div>
+                </div>
+                <div style="text-align: center">
+                    暂无更多
+                </div>
+            </div>
+
+            <div class="page" id="page-4">
+                <div class="panel panel-success context-inner-div"  id="b">
+                    <div class="panel-heading panel-title">修改社团信息</div>
+                    <div class="panel-body">在这里输入描述信息</div>
+                    <div class="panel-footer"><p>发布时间：2020-7-1      社团id:1      社团名称:测试社团</p></div>
+                    <div style="margin: 15px"><button class="btn btn-primary" id="yes">同意</button><span>                      </span><button class="btn btn-danger">拒绝</button></div>
+                </div>
+                <div style="text-align: center">
+                    暂无更多
+                </div>
+            </div>
+    </div>
+    <div class = "clear-float"></div>
+</div>
+</body>
+</html>
+<script type="text/javascript" src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script type="text/javascript" src="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.js"></script>
+<script type="text/javascript" src="./js/admin.js"></script>
