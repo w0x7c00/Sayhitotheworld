@@ -126,4 +126,13 @@ public class FormatCheckTool extends BasicTool{
         }
         return true;
     }
+    public static boolean checkNotNull(String input){
+        return input!=null;
+    }
+    public static boolean checkMaxLength(String input,int length){
+        return input.length() <= length;
+    }
+    public static boolean checkTeacherApplyAppendInf(String input){
+        return checkNotNull(input)&&checkMaxLength(input,1000);
+    }
 }

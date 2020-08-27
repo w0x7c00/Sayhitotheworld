@@ -26,6 +26,7 @@ public class Teacher extends BasicDataBasePacket{
     public short country;
     public short country_to_live;
 
+    public String append_inf;
     @Override
     public boolean setWithResultSet(ResultSet rs) {
         try {
@@ -51,6 +52,7 @@ public class Teacher extends BasicDataBasePacket{
             this.country = rs.getShort("country");
             this.second_language = rs.getShort("second_language");
             this.country_to_live = rs.getShort("country_to_live");
+            this.append_inf = rs.getString("append_inf");
             return true;
         }
         catch (SQLException e){
