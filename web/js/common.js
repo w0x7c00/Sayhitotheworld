@@ -90,3 +90,13 @@ function checkEducation(input) {
     return /^.{1,100}$/.test(input);
 }
 /* Part1:Form Input Format Check  */
+
+/* Part2:Common Tool Function */
+function getData(str) {
+    if(str === undefined){
+        return "1970-9-9";
+    }
+    var date = new Date(parseInt(str));
+    return date.getFullYear()+"-"+(date.getMonth()+1)+"-"+date.getDay();
+}
+/* Part2:Common Tool Function */

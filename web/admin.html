@@ -60,11 +60,11 @@
     </div>
     <div id="right-context" class="r-context">
         <div class="container-fluid" id="context-head">
-            <p><span class="glyphicon glyphicon-home"></span>  主页</p>
+            <p><span class="glyphicon glyphicon-repeat"></span>  刷新</p>
             <div class="clear-float"></div>
         </div>
         <div id="context-container">
-            <div class="page page-active" id="page-1">
+            <div class="page page-active" id="page-1" target-function="func1" page-loaded-flag = true>
                 <div id="page-1-head-welcome" class="hidden-xs">
                     <p></p>
                 </div>
@@ -88,34 +88,18 @@
                     </div>
                 </div>
             </div>
-            <div class="page" id="page-2">
+            <div class="page" id="page-2" target-function="func2">
                 <div class="panel panel-default context-inner-div">
                     <h1>暂未开放</h1>
                 </div>
             </div>
-
-
+        
 <!--            教师信息审核页面~-->
-            <div class="page" id="page-3">
-<!--                <div class="panel panel-primary context-inner-div">-->
-<!--                    <div class="panel-heading panel-title">计算机科普活动</div>-->
-<!--                    <div class="panel-body">在6月31日下午5点，计算机协会将会在D1213举行计算机科普活动，让大家能够了解计算机相关的知识，欢迎大家来参加本次活动~</div>-->
-<!--                    <div class="panel-footer"><p>发布时间：2020-7-1      社团id:2      社团名称:计算机协会</p></div>-->
-<!--                    <div style="margin: 15px"><button class="btn btn-primary">同意</button><span>                      </span><button class="btn btn-danger">拒绝</button></div>-->
-<!--                </div>-->
+            <div class="page" id="page-3" target-function="func3">
 
-<!--                <div class="panel panel-primary context-inner-div">-->
-<!--                    <div class="panel-heading panel-title">测试标题</div>-->
-<!--                    <div class="panel-body">在这里填写活动内容</div>-->
-<!--                    <div class="panel-footer"><p>发布时间：2020-7-1      社团id:1      社团名称：测试社团</p></div>-->
-<!--                    <div style="margin: 15px"><button class="btn btn-primary">同意</button><span>                      </span><button class="btn btn-danger">拒绝</button></div>-->
-<!--                </div>-->
-<!--                <div style="text-align: center">-->
-<!--                    暂无更多-->
-<!--                </div>-->
             </div>
 
-            <div class="page" id="page-4">
+            <div class="page" id="page-4" target-function="func4">
                 <div class="panel panel-success context-inner-div"  id="b">
                     <h1>暂未开放</h1>
                 </div>
@@ -127,6 +111,7 @@
 </html>
 <script type="text/javascript" src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script type="text/javascript" src="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="js/common.js"></script>
 <script>
     $(document).ready(init);
     function init() {
@@ -140,62 +125,18 @@
         $(window).resize(setContextWidth);
         $(".outer-ul>li").on("click",click_li_active);
         $(".outer-ul>li.inner-li").on("click",click_li_toggle);
+
+        //刷新的绑定事件
         $("#context-head>p").click(function () {
-            window.location="/mainPage.html";
+            var active_page = $("#context-container>.page.page-active");
+            console.log(active_page);
+            var function_str = active_page.attr("target-function");
+            //执行目标的绑定函数
+            eval(function_str+"()");
         })
         initPage();
         //为每个page绑定事件
         pageBindClick();
-        $("#page2-form>button").off("click").on("click",page_2_form_submit);
-    }
-
-    //输出字段： state：  - 0 保留     -1 成功     -2 未登录
-    //         data:
-    function initPage() {
-        //首先检查权限
-        $.ajax({
-            type: 'post',
-            url: "/adminBasicInformation",
-            dataType: "json",
-        }).done(function (data) {
-            var state = data.state;
-            switch (state) {
-                case 1:
-                    //成功
-                    $("#admin_name").text(data.admin_name);
-                    $("#page-1-head-welcome>p").text("欢迎管理员 ："+data.admin_name);
-                    $("#level").text(function () {
-                         var type = data.type;
-                         if(type===0){
-                             return "超级管理员";
-                         }
-                         else{
-                             return "普通管理员";
-                         }
-                    });
-                    $("#registe_time").text(getData(data.create_time));
-                    // //进行一些界面的控制 某些情况不能够被展开
-                    if(data.type!==0){
-                         $("#super_user_li").css("display","none");
-                    }
-                    break;
-                case 2:
-                    console.log("未登录！");
-                    window.location.href = "/adminLogin.html";
-                    break;
-                default:
-                    console.log("未知错误！");
-            }
-        }).fail(function (data) {
-            console.log("网络连接错误！");
-        })
-    }
-    function getData(str) {
-        if(str === undefined){
-            return "1970-9-9";
-        }
-        var date = new Date(parseInt(str));
-        return date.getFullYear()+"-"+(date.getMonth()+1)+"-"+date.getDay();
     }
     function setContextWidth() {
         // var nav_height = window.innerHeight
@@ -246,43 +187,119 @@
                 target_page.addClass("page-active");
                 setContextWidth();
             }
+            var func_str = target_page.attr("target-function");
+            var flag = target_page.attr("page-loaded-flag");
+            //判断是否预加载过
+            if(typeof(flag)==="undefined"){
+                //进行界面的加载
+                eval(func_str+"()");
+                //设置预加载标志
+                target_page.attr("page-loaded-flag",true);
+            }
+            else {
+                //不进行界面加载
+            }
         });
-    }
-    function page_2_form_submit() {
-        var title = $("#page2-form-title");
-        var text = $("#page2-form-text");
-        var result = true;
-        if(title.val().length>20||title.val().length===0){
-            $("#page2-form-title-warn").show();
-            result=false;
-        }
-        if (text.val().length>200||text.val().length===0){
-            $("#page2-form-text-warn").show();
-            result=false;
-        }
-        if(result){
-            $.post("/adminNoticeSubmit",{
-                "title":title.val(),
-                "text":text.val(),
-            },function (data,status) {
-                if(data=="1"){
-                    alert("提交成功！");
-                }
-                else if(data=="0"){
-                    alert("没有合法的提交权限");
-                    window.location = "/adminLogin";
-                }
-                else if(data=="2"){
-                    alert("不要使用脚本提交或者修改js文件，好吗？");
-                }
-                else{
-                    alert("服务器故障");
-                }
-            });
-        }
     }
     $("#yes").on("click",function () {
         alert("已提交审核！");
         $("#b").hide();
     })
+
+    //初始化界面
+    //输出字段： state：  - 0 保留     -1 成功     -2 未登录
+    //         data:
+    function initPage() {
+        //首先检查权限
+        $.ajax({
+            type: 'post',
+            url: "/adminBasicInformation",
+            dataType: "json",
+        }).done(function (data) {
+            var state = data.state;
+            switch (state) {
+                case 1:
+                    //成功
+                    $("#admin_name").text(data.admin_name);
+                    $("#page-1-head-welcome>p").text("欢迎管理员 ："+data.admin_name);
+                    $("#level").text(function () {
+                        var type = data.type;
+                        if(type===0){
+                            return "超级管理员";
+                        }
+                        else{
+                            return "普通管理员";
+                        }
+                    });
+                    $("#registe_time").text(getData(data.create_time));
+                    // //进行一些界面的控制 某些情况不能够被展开
+                    if(data.type!==0){
+                        $("#super_user_li").css("display","none");
+                    }
+                    break;
+                case 2:
+                    console.log("未登录！");
+                    window.location.href = "/adminLogin.html";
+                    break;
+                default:
+                    console.log("未知错误！");
+            }
+        }).fail(function (data) {
+            console.log("网络连接错误！");
+        })
+    }
+
+
+    //************注意 界面加载函数之前应该清除之前的加载内容****************
+    function func1() {
+        initPage();
+    }
+
+    function func2() {
+        alert("page2");
+    }
+
+    //教师审核
+    function func3() {
+        //输入字段：空
+        //输出字段：state:    -1 成功     -2  登陆过但是无相关权限   -3 登录过期
+        //        data:  [{},{},{}]形式
+
+        //清空此页面
+        $("page-3").empty();
+
+        $.ajax(
+            {
+                type: 'post',
+                url: "/adminBasicInformation",
+                dataType: "json",
+            }
+        ).done(function (data) {
+            var state = data.state;
+            if(state===1){
+                //成功
+                var item_list = data.data;
+                if(item_list.length===0){
+                    $("#page-3").append("<h1>没有待审核的项目</h1>")
+                }
+                else{
+
+                }
+            }
+            else if(state === 2){
+                alert("没有获取教师审核信息的相关权限！");
+                window.location.href = "/adminLogin.html";
+            }
+            else{
+                alert("未登录或者登录已经过期！");
+                window.location.href = "/adminLogin.html";
+            }
+        }).fail(function (data) {
+            alert("网络连接故障！无法获取教师审核信息！");
+        });
+    }
+
+    function func4() {
+        alert("page4");
+    }
 </script>
