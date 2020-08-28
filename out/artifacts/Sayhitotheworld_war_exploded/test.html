@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <h1>文件上传实例 - 菜鸟教程</h1>
+</head>
+<body>
+    <form id="form1" enctype="multipart/form-data">
+        <input name="file" type="file">
+    </form>
+    <form id="form2" enctype="multipart/form-data">
+
+    </form>
+<button onclick="func1()">btn</button>
+</body>
+
+<script type="text/javascript" src="js/jquery.min.js"></script>
+<script>
+    function func1() {
+        $("#form1 input").clone().appendTo("#form2");
+        var formData2 = new FormData(document.getElementById("form2"));
+        $.ajax({
+            type: 'post',
+            url: "/uploadFile",
+            data: formData2,
+            cache: false,
+            processData: false,
+            contentType: false,
+        }).success(function (data) {
+            alert(data);
+        }).error(function () {
+            alert("上传失败");
+        });
+    }
+</script>
+</html>

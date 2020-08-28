@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Admin Page</title>
+    <link href="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="./css/admin.css">
+</head>
+<body class ="body">
+<!--头部导航栏-->
+<div class="container-fluid div-head">
+    <div style="height: 100%">
+        <div id="close-open-control" style="float: left"><img style="height: 40px;position: relative;top:7px;cursor: pointer" src="images/left.png"></div>
+        <div style="float:left;height: 100%"><p style="height:100%;text-align:center;font-size: 25px;color: white;position: relative;top: 8px;left: 20px"><span>管理员后台</span></p></div>
+        <div class="clear-float"></div>
+    </div>
+</div>
+<!--    防止margin对其后的父元素击穿 使用间隔div代替margin-->
+<div class="div-inv"></div>
+<div class="div-main" id="div-main">
+    <div id="left-nav" class = "l-nav" show="true">
+        <ul class="outer-ul">
+            <li class="page-link" target-page="#page-1">
+                <p><span class="glyphicon glyphicon-user"></span>  管理员个人信息</p>
+            </li>
+            <li class="page-link" target-page="#page-2">
+                <p><span class="glyphicon glyphicon-pencil"></span>  每日统计</p>
+            </li>
+            <li class="page-link" target-page="#page-3">
+                <p><span class="glyphicon glyphicon-globe"></span>  教师信息审核</p>
+            </li>
+            <li class="page-link" target-page="#page-4">
+                <p><span class="glyphicon glyphicon-comment"></span>  教师信息修改审核</p>
+            </li>
+            <li class="inner-li" target-ul="#ul-2">
+                <p><span class="glyphicon glyphicon-user"></span>  用户管理</p>
+            </li>
+            <ul id="ul-2" class="inner-ul">
+                <li class="page-link" target-page="#page-5"><p>用户信息</p></li>
+                <li class="page-link" target-page="#page-6"><p>用户禁用</p></li>
+                <li class="page-link" target-page="#page-7"><p>黑名单</p></li>
+            </ul>
+            <li class="page-link" target-page="#page-8">
+                <p><span class="glyphicon glyphicon-list-alt"></span>  公告发布</p>
+            </li>
+            <li class="inner-li" target-ul="#ul-5" id="super_user_li">
+                <p><span class="glyphicon glyphicon-lock"></span>  超级管理员选项</p>
+            </li>
+            <ul id="ul-5" class="inner-ul">
+                <li class="page-link" target-page="#page-9"><p>内部兑换码</p></li>
+                <li class="page-link" target-page="#page-10"><p>教师信息修改</p></li>
+                <li class="page-link" target-page="#page-11"><p>普通管理员注册</p></li>
+                <li class="page-link" target-page="#page-12"><p>普通管理员设置</p></li>
+            </ul>
+        </ul>
+    </div>
+    <div id="right-context" class="r-context">
+        <div class="container-fluid" id="context-head">
+            <p><span class="glyphicon glyphicon-repeat"></span>  刷新</p>
+            <div class="clear-float"></div>
+        </div>
+        <div id="context-container">
+            <div class="page page-active" id="page-1" target-function="func1" page-loaded-flag = true>
+                <div id="page-1-head-welcome" class="hidden-xs">
+                    <p></p>
+                </div>
+                <div class="panel panel-default context-inner-div">
+                    <div class="panel-heading panel-title">管理员信息</div>
+                    <div class="panel-body">
+                        <div class="list-group edit-list">
+                            <a href="#" class="list-group-item">
+                                <h4 class="list-group-item-heading">用户名</h4>
+                                <p class="list-group-item-text" id="admin_name"></p>
+                            </a>
+                            <a href="#" class="list-group-item">
+                                <h4 class="list-group-item-heading">权限级</h4>
+                                <p class="list-group-item-text" id="level"></p>
+                            </a>
+                            <a href="#" class="list-group-item">
+                                <h4 class="list-group-item-heading">注册时间</h4>
+                                <p class="list-group-item-text" id="registe_time"></p>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="page" id="page-2" target-function="func2">
+                <div class="panel panel-default context-inner-div">
+                    <h1>暂未开放</h1>
+                </div>
+            </div>
+        
+<!--            教师信息审核页面~-->
+            <div class="page" id="page-3">
+
+            </div>
+
+            <div class="page" id="page-4">
+                <div class="panel panel-success context-inner-div"  id="b">
+                    <h1>暂未开放</h1>
+                </div>
+            </div>
+    </div>
+    <div class = "clear-float"></div>
+</div>
+</body>
+</html>
+<script type="text/javascript" src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script type="text/javascript" src="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="js/common.js"></script>
+<script>
+    $(document).ready(init);
+    function init() {
+        var window_width = $(window).width();
+        if(window_width<768) {       //小屏幕
+            $("#left-nav").css("left", "-285px");
+            $("#left-nav").attr("show", "false");
+        }
+        setContextWidth();
+        $("#close-open-control").click(animator_toggle_nav);
+        $(window).resize(setContextWidth);
+        $(".outer-ul>li").on("click",click_li_active);
+        $(".outer-ul>li.inner-li").on("click",click_li_toggle);
+
+        //刷新的绑定事件
+        $("#context-head>p").click(function () {
+            var active_page = $("#context-container>.page.page-active");
+            console.log(active_page);
+            var function_str = active_page.attr("target-function");
+            //执行目标的绑定函数
+            eval(function_str+"()");
+        })
+        initPage();
+        //为每个page绑定事件
+        pageBindClick();
+    }
+    function setContextWidth() {
+        // var nav_height = window.innerHeight
+        //     || document.documentElement.clientHeight
+        //     || document.body.clientHeight;
+        var nav_height = $(window).height();
+        $("#left-nav").css("height",nav_height+"px");
+
+        var jq_left_nav = $("#left-nav");
+        var jq_div_main = $("#div-main");
+        var width_par;
+        if(jq_left_nav.attr("show")==="true") {
+            width_par= jq_div_main.width() - jq_left_nav.width();
+        }
+        else{
+            width_par= jq_div_main.width();
+        }
+        $("#right-context").css("width",width_par+"px");
+    }
+    function animator_toggle_nav() {
+        if($("#left-nav").attr("show")==="true") {
+            $("#left-nav").animate({left: "-285px"}, {duration: 500, queue: false});
+            $("#right-context").animate({width: $("#right-context").width() + 285 + "px"}, {duration: 500, queue: false});
+            $("#left-nav").attr("show", "false");
+        }
+        else{
+            $("#left-nav").animate({left:"0"},{duration:500,queue:false});
+            $("#right-context").animate({width:$("#right-context").width()-285+"px"},{duration:500,queue:false});
+            $("#left-nav").attr("show","true");
+        }
+    }
+    function click_li_active() {
+        $(this).siblings().removeClass("active");
+        $(this).addClass("active");
+    }
+    function click_li_toggle() {
+        var target = $(this).attr("target-ul");
+        $(target).slideToggle("slow");
+    }
+    function pageBindClick() {
+        $(".page-link").on("click",function () {
+            var target_page = $($(this).attr("target-page"));
+            if(target_page.hasClass("page-active")){
+                //do nothing
+            }
+            else{
+                $(".page").removeClass("page-active");
+                target_page.addClass("page-active");
+                setContextWidth();
+            }
+            var func_str = target_page.attr("target-function");
+            var flag = target_page.attr("page-loaded-flag");
+            //判断是否预加载过
+            if(typeof(flag)==="undefined"){
+                //进行界面的加载
+                eval(func_str+"()");
+                //设置预加载标志
+                target_page.attr("page-loaded-flag",true);
+            }
+            else {
+                //不进行界面加载
+            }
+        });
+    }
+    $("#yes").on("click",function () {
+        alert("已提交审核！");
+        $("#b").hide();
+    })
+
+    //初始化界面
+    //输出字段： state：  - 0 保留     -1 成功     -2 未登录
+    //         data:
+    function initPage() {
+        //首先检查权限
+        $.ajax({
+            type: 'post',
+            url: "/adminBasicInformation",
+            dataType: "json",
+        }).done(function (data) {
+            var state = data.state;
+            switch (state) {
+                case 1:
+                    //成功
+                    $("#admin_name").text(data.admin_name);
+                    $("#page-1-head-welcome>p").text("欢迎管理员 ："+data.admin_name);
+                    $("#level").text(function () {
+                        var type = data.type;
+                        if(type===0){
+                            return "超级管理员";
+                        }
+                        else{
+                            return "普通管理员";
+                        }
+                    });
+                    $("#registe_time").text(getData(data.create_time));
+                    // //进行一些界面的控制 某些情况不能够被展开
+                    if(data.type!==0){
+                        $("#super_user_li").css("display","none");
+                    }
+                    break;
+                case 2:
+                    console.log("未登录！");
+                    window.location.href = "/adminLogin.html";
+                    break;
+                default:
+                    console.log("未知错误！");
+            }
+        }).fail(function (data) {
+            console.log("网络连接错误！");
+        })
+    }
+
+
+    //注意 界面加载函数之前应该清除之前的加载内容
+    function func1() {
+        initPage();
+    }
+
+    function func2() {
+        alert("page2");
+    }
+    
+    function func3() {
+        alert("page3");
+    }
+
+    function func4() {
+        alert("page4");
+    }
+</script>
