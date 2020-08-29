@@ -113,6 +113,8 @@
 <script type="text/javascript" src="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="js/common.js"></script>
 <script>
+    var country_list;
+    var language_list;
     $(document).ready(init);
     function init() {
         var window_width = $(window).width();
@@ -138,6 +140,7 @@
         //为每个page绑定事件
         pageBindClick();
     }
+
     function setContextWidth() {
         // var nav_height = window.innerHeight
         //     || document.documentElement.clientHeight
@@ -266,12 +269,14 @@
         //        data:  [{},{},{}]形式
 
         //清空此页面
-        $("page-3").empty();
+
+        var this_page = $("#page-3");
+        this_page.empty();
 
         $.ajax(
             {
                 type: 'post',
-                url: "/adminBasicInformation",
+                url: "/getTeacherApply",
                 dataType: "json",
             }
         ).done(function (data) {
@@ -283,7 +288,97 @@
                     $("#page-3").append("<h1>没有待审核的项目</h1>")
                 }
                 else{
+                    //加载全局code信息
+                    setCountryAndLanguageJson();
+                    var item;
+                    var dom_str = "<div class=\"panel panel-primary context-inner-div\">\n" +
+                        "                    <div class=\"panel-heading panel-title\">教师审核</div>\n" +
+                        "                    <div class=\"panel-body\">\n" +
+                        "                        <img style=\"max-height: 200px;margin: 20px\">\n" +
+                        "                        <div class=\"list-group edit-list\">\n" +
+                        "                            <a class=\"list-group-item\">\n" +
+                        "                                <h4 class=\"list-group-item-heading\">姓名</h4>\n" +
+                        "                                <p class=\"list-group-item-text\"></p>\n" +
+                        "                            </a>\n" +
+                        "                            <a class=\"list-group-item\">\n" +
+                        "                                <h4 class=\"list-group-item-heading\">年龄</h4>\n" +
+                        "                                <p class=\"list-group-item-text\"></p>\n" +
+                        "                            </a>\n" +
+                        "                            <a class=\"list-group-item\">\n" +
+                        "                                <h4 class=\"list-group-item-heading\">母语</h4>\n" +
+                        "                                <p class=\"list-group-item-text\"></p>\n" +
+                        "                            </a>\n" +
+                        "                            <a class=\"list-group-item\">\n" +
+                        "                                <h4 class=\"list-group-item-heading\">第二语言</h4>\n" +
+                        "                                <p class=\"list-group-item-text\"></p>\n" +
+                        "                            </a>\n" +
+                        "                            <a class=\"list-group-item\">\n" +
+                        "                                <h4 class=\"list-group-item-heading\">国籍</h4>\n" +
+                        "                                <p class=\"list-group-item-text\"></p>\n" +
+                        "                            </a>\n" +
+                        "                            <a class=\"list-group-item\">\n" +
+                        "                                <h4 class=\"list-group-item-heading\">现居国家</h4>\n" +
+                        "                                <p class=\"list-group-item-text\"></p>\n" +
+                        "                            </a>\n" +
+                        "                            <a class=\"list-group-item\">\n" +
+                        "                                <h4 class=\"list-group-item-heading\">希望薪酬</h4>\n" +
+                        "                                <p class=\"list-group-item-text\"></p>\n" +
+                        "                            </a>\n" +
+                        "                            <a class=\"list-group-item\">\n" +
+                        "                                <h4 class=\"list-group-item-heading\">性别</h4>\n" +
+                        "                                <p class=\"list-group-item-text\"></p>\n" +
+                        "                            </a>\n" +
+                        "                            <a class=\"list-group-item\">\n" +
+                        "                                <h4 class=\"list-group-item-heading\">学校</h4>\n" +
+                        "                                <p class=\"list-group-item-text\"></p>\n" +
+                        "                            </a>\n" +
+                        "                            <a class=\"list-group-item\">\n" +
+                        "                                <h4 class=\"list-group-item-heading\">邮箱</h4>\n" +
+                        "                                <p class=\"list-group-item-text\"></p>\n" +
+                        "                            </a>\n" +
+                        "                            <a class=\"list-group-item\">\n" +
+                        "                                <h4 class=\"list-group-item-heading\">自我简介</h4>\n" +
+                        "                                <p style=\"width: 100%\" class=\"list-group-item-text\"></p>\n" +
+                        "                            </a>\n" +
+                        "                        </div>\n" +
+                        "                    </div>\n" +
+                        "                    <div class=\"panel-footer\"><p>发布时间：2020-7-1</p></div>\n" +
+                        "                    <div style=\"margin: 15px\"><button class=\"btn btn-primary btn_yes\">同意</button><span>                      </span><button class=\"btn btn-danger btn_no\">拒绝</button></div>\n" +
+                        "                </div>"
+                    for (i in item_list){
+                        var item = item_list[i];
+                        var now_node = $(dom_str);
+                        now_node.attr("teacher_name",item.teacher_name);
+                        var context_list = now_node.children().eq(1).children().eq(1).children();
+                        //图片
+                        now_node.children().eq(1).children().eq(0).attr("src",item.pic);
 
+                        context_list.eq(0).children("p").text(item.name);
+                        context_list.eq(1).children("p").text(item.age);
+                        context_list.eq(2).children("p").text(language_list[item.language][1]);
+                        context_list.eq(3).children("p").text(language_list[item.second_language][1]);
+                        context_list.eq(4).children("p").text(country_list[item.country][1]);
+                        context_list.eq(5).children("p").text(country_list[item.country_to_live][1]);
+                        context_list.eq(6).children("p").text(item.price+"(USD)");
+                        context_list.eq(7).children("p").text(function () {
+                            if(item.sex===0){
+                                return "男";
+                            }
+                            else{
+                                return "女";
+                            }
+                        });
+                        context_list.eq(8).children("p").text(item.education);
+                        context_list.eq(9).children("p").text(item.email);
+                        context_list.eq(10).children("p").text(item.self_introduction);
+
+                        now_node.children().eq(2).children().text("申请时间："+getData(item.create_time));
+                        //添加按钮点击事件
+                        now_node.find("button.btn_yes").attr("onclick","submitTeacherApply(this,true)");
+                        now_node.find("button.btn_no").attr("onclick","submitTeacherApply(this,false)");
+
+                        this_page.append(now_node);
+                    }
                 }
             }
             else if(state === 2){
@@ -301,5 +396,98 @@
 
     function func4() {
         alert("page4");
+    }
+
+    function setCountryAndLanguageJson() {
+        if((typeof country_list)==="undefined"||(typeof language_list)==="undefined"){
+            $.ajax({
+                "url":"/json/countryCode.json",
+                "type":"post",
+                //必须同步！！！
+                "async":false,
+                "dataType":"json"
+            }).done(function (data) {
+                country_list = data;
+            }).fail(function () {
+                alert("加载国家列表失败，请检查网络连接！");
+            });
+
+            $.ajax({
+                "url":"/json/languageCode.json",
+                "type":"post",
+                "async":false,
+                "dataType":"json"
+            }).done(function (data) {
+                language_list = data;
+            }).fail(function () {
+                alert("加载语言列表失败，请检查网络连接！");
+            });
+        }
+    }
+    
+    function submitTeacherApply(dom,flag) {
+        if(flag){
+            if(confirm("确认通过此申请吗？")){
+                //提交
+                $.post("/confirmTeacherApply",{"teacher_name":$(dom).parent().parent().attr("teacher_name"),"state":1},function (data) {
+                    //输出字段：state   -1 成功     -2 字段错误     -3 查询不到此教师   -4 邮箱通知发送失败    -5 服务器/数据库问题
+                    var state = data.state;
+                    switch (state) {
+                        //1和4都要删除节点
+                        case 1:
+                            alert("成功提交！");
+                            $(dom).parent().parent().remove();
+                            break;
+                        case 2:
+                            alert("字段错误！");
+                            break;
+                        case 3:
+                            alert("查询不到此教师！");
+                            break;
+                        case 4:
+                            alert("成功提交，但是无法向老师发送邮件通知！");
+                            $(dom).parent().parent().remove();
+                            break;
+                        case 5:
+                            alert("服务器故障");
+                            break;
+                    }
+                },"json");
+            }
+        }
+        else {
+            var append_inf;
+            append_inf=prompt("输入拒绝原因（会通过邮件通知相应教师，请使用英文）?");
+            console.log(append_inf);
+            if(append_inf!==""){
+                $.post("/confirmTeacherApply",{"teacher_name":$(dom).parent().parent().attr("teacher_name"),"state":2,"append_inf":append_inf},function (data) {
+                    //输出字段：state   -1 成功     -2 字段错误     -3 查询不到此教师   -4 邮箱通知发送失败    -5 服务器/数据库问题
+                    var state = data.state;
+                    switch (state) {
+                        //1和4都要删除节点
+                        case 1:
+                            alert("成功提交！");
+                            $(dom).parent().parent().remove();
+                            break;
+                        case 2:
+                            alert("字段错误！");
+                            break;
+                        case 3:
+                            alert("查询不到此教师！");
+                            break;
+                        case 4:
+                            alert("成功提交，但是无法向老师发送邮件通知！");
+                            $(dom).parent().parent().remove();
+                            break;
+                        case 5:
+                            alert("服务器故障");
+                            break;
+                    }
+                },"json");
+            }
+            else{
+                alert("输入项为空！请重试！");
+            }
+        }
     }
 </script>

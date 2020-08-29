@@ -33,7 +33,7 @@ function checkCountry(input) {
 }
 
 function checkPrice(input) {
-    if(!(/^\d{1，2}$/.test(input))){
+    if(!(/^\d{1,2}$/.test(input))){
         return false;
     }
     try{

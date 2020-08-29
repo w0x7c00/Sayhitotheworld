@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 //方法：post
-//输入字段： teacher_name：用于索引教师   state：   -1/-2        -1---通过      -2---不通过       append_inf 当为-2时必须要append_inf
+//输入字段： teacher_name：用于索引教师   state：   1/2        1---通过      2---不通过       append_inf 当为2时必须要append_inf
 //输出字段：state   -1 成功     -2 字段错误     -3 查询不到此教师   -4 邮箱通知发送失败    -5 服务器/数据库问题
 
 @WebServlet("/confirmTeacherApply")
