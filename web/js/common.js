@@ -89,6 +89,49 @@ function checkSelfIntroduction(input) {
 function checkEducation(input) {
     return /^.{1,100}$/.test(input);
 }
+
+function checkNotNull(input) {
+    return input!=="";
+}
+
+function inputCheck(documentElement,checkFunc) {
+    var $d = $(documentElement);
+    var value = $d.val();
+    var $parent = $d.parent();
+    var $span = $parent.children("span.input-check-span");
+    if(checkFunc(value)){
+        //检测通过
+        //span需要特殊的标志 .class=input-check-span 否则会与动态生成的select中span相互冲突
+        if($span.length==1){
+            //已存在此元素
+            $d.attr("check-flag",true);
+            $span.children("i:first").removeClass("glyphicon-remove").addClass('glyphicon-ok').css("color","RGB(23,164,59)");
+            $span.children("i:last").text($d.attr("valid-msg")).css("color","RGB(23,164,59)");
+        }
+        else{
+            //不存在此元素
+            $d.attr("check-flag",true);
+            $parent.append("<span class='input-check-span'><i style='color: RGB(23,164,59);font-size: 13px;font-weight: bolder' class='glyphicon glyphicon-ok'></i><i style='color: RGB(23,164,59);font-size: 13px;font-weight: bolder'>"+$d.attr("valid-msg")+"</i></span>");
+        }
+    }
+    else{
+        //检测不通过
+        if($span.length==1){
+            //已存在此元素
+            $d.attr("check-flag",false);
+            $span.children("i:first").removeClass("glyphicon-ok").addClass('glyphicon-remove').css("color","RGB(255,150,0)");
+            $span.children("i:last").text($d.attr("invalid-msg")).css("color","RGB(255,150,0)");
+        }
+        else{
+            //不存在此元素
+            $d.attr("check-flag",false);
+            $parent.append("<span class='input-check-span'><i style='color: RGB(255,150,0);font-size: 13px;font-weight: bolder' class='glyphicon glyphicon-remove'></i><i style='color: RGB(255,150,0);font-size: 13px;font-weight: bolder'>"+$d.attr("invalid-msg")+"</i></span>");
+        }
+    }
+}
+
+
+
 /* Part1:Form Input Format Check  */
 
 /* Part2:Common Tool Function */
@@ -100,3 +143,4 @@ function getData(str) {
     return date.getFullYear()+"-"+(date.getMonth()+1)+"-"+date.getDay();
 }
 /* Part2:Common Tool Function */
+

@@ -276,9 +276,9 @@
     //字段检查
     var $input_list = $(".form-outer input");
     $input_list.push($(".form-outer textarea")[0]);
+    var submit_flag = true;
     for(var i =0;i<$input_list.length;i++){
        var $item = $($input_list[i]);
-       var submit_flag = true;
        if(typeof($item.attr("check-flag"))=="undefined"){
          //存在未填写的内容
          submit_flag = false;
@@ -290,6 +290,7 @@
     }
     //通过submit
     if(!submit_flag){
+      customAlert("Please check your form before submit!");
       return;
     }
 
@@ -392,42 +393,6 @@
   function customAlert(msg) {
     $("#alertModal .custom-alert-context").text(msg);
     $("#alertModal").modal("show");
-  }
-
-  function inputCheck(documentElement,checkFunc) {
-    var $d = $(documentElement);
-    var value = $d.val();
-    var $parent = $d.parent();
-    var $span = $parent.children("span.input-check-span");
-    if(checkFunc(value)){
-      //检测通过
-      //span需要特殊的标志 .class=input-check-span 否则会与动态生成的select中span相互冲突
-      if($span.length==1){
-        //已存在此元素
-        $d.attr("check-flag",true);
-        $span.children("i:first").removeClass("glyphicon-remove").addClass('glyphicon-ok').css("color","RGB(23,164,59)");
-        $span.children("i:last").text($d.attr("valid-msg")).css("color","RGB(23,164,59)");
-      }
-      else{
-        //不存在此元素
-        $d.attr("check-flag",true);
-        $parent.append("<span class='input-check-span'><i style='color: RGB(23,164,59);font-size: 13px;font-weight: bolder' class='glyphicon glyphicon-ok'></i><i style='color: RGB(23,164,59);font-size: 13px;font-weight: bolder'>"+$d.attr("valid-msg")+"</i></span>");
-      }
-    }
-    else{
-      //检测不通过
-      if($span.length==1){
-        //已存在此元素
-        $d.attr("check-flag",false);
-        $span.children("i:first").removeClass("glyphicon-ok").addClass('glyphicon-remove').css("color","RGB(255,150,0)");
-        $span.children("i:last").text($d.attr("invalid-msg")).css("color","RGB(255,150,0)");
-      }
-      else{
-        //不存在此元素
-        $d.attr("check-flag",false);
-        $parent.append("<span class='input-check-span'><i style='color: RGB(255,150,0);font-size: 13px;font-weight: bolder' class='glyphicon glyphicon-remove'></i><i style='color: RGB(255,150,0);font-size: 13px;font-weight: bolder'>"+$d.attr("invalid-msg")+"</i></span>");
-      }
-    }
   }
 
   function selectOnchange(selectElement,checkFunc) {

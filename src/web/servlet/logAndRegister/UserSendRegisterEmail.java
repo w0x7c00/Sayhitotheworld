@@ -83,6 +83,6 @@ public class UserSendRegisterEmail extends HttpServlet {
         else{
             state = 2;
         }
-        resp.getWriter().write("{state:"+state+",appendInf:"+appendInf+"}");
+        resp.getWriter().write("{\"state\":"+state+",\"append_inf\":"+appendInf+"}");
     }
 }
