@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Admin Page</title>
+    <link href="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="./css/admin.css">
+</head>
+<body class ="body">
+<!--头部导航栏-->
+<div class="container-fluid div-head">
+    <div style="height: 100%">
+        <div id="close-open-control" style="float: left"><img style="height: 40px;position: relative;top:7px;cursor: pointer" src="images/left.png"></div>
+        <div style="float:left;height: 100%"><p style="height:100%;text-align:center;font-size: 25px;color: white;position: relative;top: 8px;left: 20px"><span>管理员后台</span></p></div>
+        <div class="clear-float"></div>
+    </div>
+</div>
+<!--    防止margin对其后的父元素击穿 使用间隔div代替margin-->
+<div class="div-inv"></div>
+<div class="div-main" id="div-main">
+    <div id="left-nav" class = "l-nav" show="true">
+        <ul class="outer-ul">
+            <li class="page-link" target-page="#page-1">
+                <p><span class="glyphicon glyphicon-user"></span>  管理员个人信息</p>
+            </li>
+            <li class="page-link" target-page="#page-2">
+                <p><span class="glyphicon glyphicon-pencil"></span>  每日统计</p>
+            </li>
+            <li class="page-link" target-page="#page-3">
+                <p><span class="glyphicon glyphicon-globe"></span>  教师信息审核</p>
+            </li>
+            <li class="page-link" target-page="#page-4">
+                <p><span class="glyphicon glyphicon-comment"></span>  教师信息修改审核</p>
+            </li>
+            <li class="inner-li" target-ul="#ul-2">
+                <p><span class="glyphicon glyphicon-user"></span>  用户管理</p>
+            </li>
+            <ul id="ul-2" class="inner-ul">
+                <li class="page-link" target-page="#page-5"><p>用户信息</p></li>
+                <li class="page-link" target-page="#page-6"><p>用户禁用</p></li>
+                <li class="page-link" target-page="#page-7"><p>黑名单</p></li>
+            </ul>
+            <li class="page-link" target-page="#page-8">
+                <p><span class="glyphicon glyphicon-list-alt"></span>  公告发布</p>
+            </li>
+            <li class="inner-li" target-ul="#ul-5" id="super_user_li">
+                <p><span class="glyphicon glyphicon-lock"></span>  超级管理员选项</p>
+            </li>
+            <ul id="ul-5" class="inner-ul">
+                <li class="page-link" target-page="#page-9"><p>内部兑换码</p></li>
+                <li class="page-link" target-page="#page-10"><p>教师信息修改</p></li>
+                <li class="page-link" target-page="#page-11"><p>普通管理员注册</p></li>
+                <li class="page-link" target-page="#page-12"><p>普通管理员设置</p></li>
+            </ul>
+        </ul>
+    </div>
+    <div id="right-context" class="r-context">
+        <div class="container-fluid" id="context-head">
+            <p><span class="glyphicon glyphicon-repeat"></span>  刷新</p>
+            <div class="clear-float"></div>
+        </div>
+        <div id="context-container">
+            <div class="page page-active" id="page-1" target-function="func1" page-loaded-flag = true>
+                <div id="page-1-head-welcome" class="hidden-xs">
+                    <p></p>
+                </div>
+                <div class="panel panel-default context-inner-div">
+                    <div class="panel-heading panel-title">管理员信息</div>
+                    <div class="panel-body">
+                        <div class="list-group edit-list">
+                            <a href="#" class="list-group-item">
+                                <h4 class="list-group-item-heading">用户名</h4>
+                                <p class="list-group-item-text" id="admin_name"></p>
+                            </a>
+                            <a href="#" class="list-group-item">
+                                <h4 class="list-group-item-heading">权限级</h4>
+                                <p class="list-group-item-text" id="level"></p>
+                            </a>
+                            <a href="#" class="list-group-item">
+                                <h4 class="list-group-item-heading">注册时间</h4>
+                                <p class="list-group-item-text" id="registe_time"></p>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="page" id="page-2" target-function="func2">
+                <div class="panel panel-default context-inner-div">
+                    <h1>暂未开放</h1>
+                </div>
+            </div>
+        
+<!--            教师信息审核页面~-->
+            <div class="page" id="page-3" target-function="func3">
+
+            </div>
+
+            <div class="page" id="page-4" target-function="func4">
+                <div class="panel panel-success context-inner-div"  id="b">
+                    <h1>暂未开放</h1>
+                </div>
+            </div>
+    </div>
+    <div class = "clear-float"></div>
+</div>
+</body>
+</html>
+<script type="text/javascript" src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script type="text/javascript" src="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="js/common.js"></script>
+<script>
+    var country_list;
+    var language_list;
+    $(document).ready(init);
+    function init() {
+        var window_width = $(window).width();
+        if(window_width<768) {       //小屏幕
+            $("#left-nav").css("left", "-285px");
+            $("#left-nav").attr("show", "false");
+        }
+        setContextWidth();
+        $("#close-open-control").click(animator_toggle_nav);
+        $(window).resize(setContextWidth);
+        $(".outer-ul>li").on("click",click_li_active);
+        $(".outer-ul>li.inner-li").on("click",click_li_toggle);
+
+        //刷新的绑定事件
+        $("#context-head>p").click(function () {
+            var active_page = $("#context-container>.page.page-active");
+            console.log(active_page);
+            var function_str = active_page.attr("target-function");
+            //执行目标的绑定函数
+            eval(function_str+"()");
+        })
+        initPage();
+        //为每个page绑定事件
+        pageBindClick();
+    }
+
+    function setContextWidth() {
+        // var nav_height = window.innerHeight
+        //     || document.documentElement.clientHeight
+        //     || document.body.clientHeight;
+        var nav_height = $(window).height();
+        $("#left-nav").css("height",nav_height+"px");
+
+        var jq_left_nav = $("#left-nav");
+        var jq_div_main = $("#div-main");
+        var width_par;
+        if(jq_left_nav.attr("show")==="true") {
+            width_par= jq_div_main.width() - jq_left_nav.width();
+        }
+        else{
+            width_par= jq_div_main.width();
+        }
+        $("#right-context").css("width",width_par+"px");
+    }
+    function animator_toggle_nav() {
+        if($("#left-nav").attr("show")==="true") {
+            $("#left-nav").animate({left: "-285px"}, {duration: 500, queue: false});
+            $("#right-context").animate({width: $("#right-context").width() + 285 + "px"}, {duration: 500, queue: false});
+            $("#left-nav").attr("show", "false");
+        }
+        else{
+            $("#left-nav").animate({left:"0"},{duration:500,queue:false});
+            $("#right-context").animate({width:$("#right-context").width()-285+"px"},{duration:500,queue:false});
+            $("#left-nav").attr("show","true");
+        }
+    }
+    function click_li_active() {
+        $(this).siblings().removeClass("active");
+        $(this).addClass("active");
+    }
+    function click_li_toggle() {
+        var target = $(this).attr("target-ul");
+        $(target).slideToggle("slow");
+    }
+    function pageBindClick() {
+        $(".page-link").on("click",function () {
+            var target_page = $($(this).attr("target-page"));
+            if(target_page.hasClass("page-active")){
+                //do nothing
+            }
+            else{
+                $(".page").removeClass("page-active");
+                target_page.addClass("page-active");
+                setContextWidth();
+            }
+            var func_str = target_page.attr("target-function");
+            var flag = target_page.attr("page-loaded-flag");
+            //判断是否预加载过
+            if(typeof(flag)==="undefined"){
+                //进行界面的加载
+                eval(func_str+"()");
+                //设置预加载标志
+                target_page.attr("page-loaded-flag",true);
+            }
+            else {
+                //不进行界面加载
+            }
+        });
+    }
+    $("#yes").on("click",function () {
+        alert("已提交审核！");
+        $("#b").hide();
+    })
+
+    //初始化界面
+    //输出字段： state：  - 0 保留     -1 成功     -2 未登录
+    //         data:
+    function initPage() {
+        //首先检查权限
+        $.ajax({
+            type: 'post',
+            url: "/adminBasicInformation",
+            dataType: "json",
+        }).done(function (data) {
+            var state = data.state;
+            switch (state) {
+                case 1:
+                    //成功
+                    $("#admin_name").text(data.admin_name);
+                    $("#page-1-head-welcome>p").text("欢迎管理员 ："+data.admin_name);
+                    $("#level").text(function () {
+                        var type = data.type;
+                        if(type===0){
+                            return "超级管理员";
+                        }
+                        else{
+                            return "普通管理员";
+                        }
+                    });
+                    $("#registe_time").text(getData(data.create_time));
+                    // //进行一些界面的控制 某些情况不能够被展开
+                    if(data.type!==0){
+                        $("#super_user_li").css("display","none");
+                    }
+                    break;
+                case 2:
+                    console.log("未登录！");
+                    window.location.href = "/adminLogin.html";
+                    break;
+                default:
+                    console.log("未知错误！");
+            }
+        }).fail(function (data) {
+            console.log("网络连接错误！");
+        })
+    }
+
+
+    //************注意 界面加载函数之前应该清除之前的加载内容****************
+    function func1() {
+        initPage();
+    }
+
+    function func2() {
+        alert("page2");
+    }
+
+    //教师审核
+    function func3() {
+        //输入字段：空
+        //输出字段：state:    -1 成功     -2  登陆过但是无相关权限   -3 登录过期
+        //        data:  [{},{},{}]形式
+
+        //清空此页面
+
+        var this_page = $("#page-3");
+        this_page.empty();
+
+        $.ajax(
+            {
+                type: 'post',
+                url: "/getTeacherApply",
+                dataType: "json",
+            }
+        ).done(function (data) {
+            var state = data.state;
+            if(state===1){
+                //成功
+                var item_list = data.data;
+                if(item_list.length===0){
+                    $("#page-3").append("<h1>没有待审核的项目</h1>")
+                }
+                else{
+                    //加载全局code信息
+                    setCountryAndLanguageJson();
+                    var item;
+                    var dom_str = "<div class=\"panel panel-primary context-inner-div\">\n" +
+                        "                    <div class=\"panel-heading panel-title\">教师审核</div>\n" +
+                        "                    <div class=\"panel-body\">\n" +
+                        "                        <img style=\"max-height: 200px;margin: 20px\">\n" +
+                        "                        <div class=\"list-group edit-list\">\n" +
+                        "                            <a class=\"list-group-item\">\n" +
+                        "                                <h4 class=\"list-group-item-heading\">姓名</h4>\n" +
+                        "                                <p class=\"list-group-item-text\"></p>\n" +
+                        "                            </a>\n" +
+                        "                            <a class=\"list-group-item\">\n" +
+                        "                                <h4 class=\"list-group-item-heading\">年龄</h4>\n" +
+                        "                                <p class=\"list-group-item-text\"></p>\n" +
+                        "                            </a>\n" +
+                        "                            <a class=\"list-group-item\">\n" +
+                        "                                <h4 class=\"list-group-item-heading\">母语</h4>\n" +
+                        "                                <p class=\"list-group-item-text\"></p>\n" +
+                        "                            </a>\n" +
+                        "                            <a class=\"list-group-item\">\n" +
+                        "                                <h4 class=\"list-group-item-heading\">第二语言</h4>\n" +
+                        "                                <p class=\"list-group-item-text\"></p>\n" +
+                        "                            </a>\n" +
+                        "                            <a class=\"list-group-item\">\n" +
+                        "                                <h4 class=\"list-group-item-heading\">国籍</h4>\n" +
+                        "                                <p class=\"list-group-item-text\"></p>\n" +
+                        "                            </a>\n" +
+                        "                            <a class=\"list-group-item\">\n" +
+                        "                                <h4 class=\"list-group-item-heading\">现居国家</h4>\n" +
+                        "                                <p class=\"list-group-item-text\"></p>\n" +
+                        "                            </a>\n" +
+                        "                            <a class=\"list-group-item\">\n" +
+                        "                                <h4 class=\"list-group-item-heading\">希望薪酬</h4>\n" +
+                        "                                <p class=\"list-group-item-text\"></p>\n" +
+                        "                            </a>\n" +
+                        "                            <a class=\"list-group-item\">\n" +
+                        "                                <h4 class=\"list-group-item-heading\">性别</h4>\n" +
+                        "                                <p class=\"list-group-item-text\"></p>\n" +
+                        "                            </a>\n" +
+                        "                            <a class=\"list-group-item\">\n" +
+                        "                                <h4 class=\"list-group-item-heading\">学校</h4>\n" +
+                        "                                <p class=\"list-group-item-text\"></p>\n" +
+                        "                            </a>\n" +
+                        "                            <a class=\"list-group-item\">\n" +
+                        "                                <h4 class=\"list-group-item-heading\">邮箱</h4>\n" +
+                        "                                <p class=\"list-group-item-text\"></p>\n" +
+                        "                            </a>\n" +
+                        "                            <a class=\"list-group-item\">\n" +
+                        "                                <h4 class=\"list-group-item-heading\">自我简介</h4>\n" +
+                        "                                <p style=\"width: 100%\" class=\"list-group-item-text\"></p>\n" +
+                        "                            </a>\n" +
+                        "                        </div>\n" +
+                        "                    </div>\n" +
+                        "                    <div class=\"panel-footer\"><p>发布时间：2020-7-1</p></div>\n" +
+                        "                    <div style=\"margin: 15px\"><button class=\"btn btn-primary btn_yes\">同意</button><span>                      </span><button class=\"btn btn-danger btn_no\">拒绝</button></div>\n" +
+                        "                </div>"
+                    for (i in item_list){
+                        var item = item_list[i];
+                        var now_node = $(dom_str);
+                        now_node.attr("teacher_name",item.teacher_name);
+                        var context_list = now_node.children().eq(1).children().eq(1).children();
+                        //图片
+                        now_node.children().eq(1).children().eq(0).attr("src",item.pic);
+
+                        context_list.eq(0).children("p").text(item.name);
+                        context_list.eq(1).children("p").text(item.age);
+                        context_list.eq(2).children("p").text(language_list[item.language][1]);
+                        context_list.eq(3).children("p").text(language_list[item.second_language][1]);
+                        context_list.eq(4).children("p").text(country_list[item.country][1]);
+                        context_list.eq(5).children("p").text(country_list[item.country_to_live][1]);
+                        context_list.eq(6).children("p").text(item.price+"(USD)");
+                        context_list.eq(7).children("p").text(function () {
+                            if(item.sex===0){
+                                return "男";
+                            }
+                            else{
+                                return "女";
+                            }
+                        });
+                        context_list.eq(8).children("p").text(item.education);
+                        context_list.eq(9).children("p").text(item.email);
+                        context_list.eq(10).children("p").text(item.self_introduction);
+
+                        now_node.children().eq(2).children().text("申请时间："+getData(item.create_time));
+                        //添加按钮点击事件
+                        now_node.find("button.btn_yes").attr("onclick","submitTeacherApply(this,true)");
+                        now_node.find("button.btn_no").attr("onclick","submitTeacherApply(this,false)");
+
+                        this_page.append(now_node);
+                    }
+                }
+            }
+            else if(state === 2){
+                alert("没有获取教师审核信息的相关权限！");
+                window.location.href = "/adminLogin.html";
+            }
+            else{
+                alert("未登录或者登录已经过期！");
+                window.location.href = "/adminLogin.html";
+            }
+        }).fail(function (data) {
+            alert("网络连接故障！无法获取教师审核信息！");
+        });
+    }
+
+    function func4() {
+        alert("page4");
+    }
+
+    function setCountryAndLanguageJson() {
+        if((typeof country_list)==="undefined"||(typeof language_list)==="undefined"){
+            $.ajax({
+                "url":"/json/countryCode.json",
+                "type":"post",
+                //必须同步！！！
+                "async":false,
+                "dataType":"json"
+            }).done(function (data) {
+                country_list = data;
+            }).fail(function () {
+                alert("加载国家列表失败，请检查网络连接！");
+            });
+
+            $.ajax({
+                "url":"/json/languageCode.json",
+                "type":"post",
+                "async":false,
+                "dataType":"json"
+            }).done(function (data) {
+                language_list = data;
+            }).fail(function () {
+                alert("加载语言列表失败，请检查网络连接！");
+            });
+        }
+    }
+    
+    function submitTeacherApply(dom,flag) {
+        if(flag){
+            if(confirm("确认通过此申请吗？")){
+                //提交
+                $.post("/confirmTeacherApply",{"teacher_name":$(dom).parent().parent().attr("teacher_name"),"state":1},function (data) {
+                    //输出字段：state   -1 成功     -2 字段错误     -3 查询不到此教师   -4 邮箱通知发送失败    -5 服务器/数据库问题
+                    var state = data.state;
+                    switch (state) {
+                        //1和4都要删除节点
+                        case 1:
+                            alert("成功提交！");
+                            $(dom).parent().parent().remove();
+                            break;
+                        case 2:
+                            alert("字段错误！");
+                            break;
+                        case 3:
+                            alert("查询不到此教师！");
+                            break;
+                        case 4:
+                            alert("成功提交，但是无法向老师发送邮件通知！");
+                            $(dom).parent().parent().remove();
+                            break;
+                        case 5:
+                            alert("服务器故障");
+                            break;
+                    }
+                },"json");
+            }
+        }
+        else {
+            var append_inf;
+            append_inf=prompt("输入拒绝原因（会通过邮件通知相应教师，请使用英文）?");
+            console.log(append_inf);
+            if(append_inf!==""){
+                $.post("/confirmTeacherApply",{"teacher_name":$(dom).parent().parent().attr("teacher_name"),"state":2,"append_inf":append_inf},function (data) {
+                    //输出字段：state   -1 成功     -2 字段错误     -3 查询不到此教师   -4 邮箱通知发送失败    -5 服务器/数据库问题
+                    var state = data.state;
+                    switch (state) {
+                        //1和4都要删除节点
+                        case 1:
+                            alert("成功提交！");
+                            $(dom).parent().parent().remove();
+                            break;
+                        case 2:
+                            alert("字段错误！");
+                            break;
+                        case 3:
+                            alert("查询不到此教师！");
+                            break;
+                        case 4:
+                            alert("成功提交，但是无法向老师发送邮件通知！");
+                            $(dom).parent().parent().remove();
+                            break;
+                        case 5:
+                            alert("服务器故障");
+                            break;
+                    }
+                },"json");
+            }
+            else{
+                alert("输入项为空！请重试！");
+            }
+        }
+    }
+</script>

@@ -12,11 +12,13 @@
     <!-- Custom Fonts -->
     <link href="css/fonts.css" rel="stylesheet" type="text/css">
     <!-- Bootstrap -->
-    <link href="assets/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <link href="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.css" rel="stylesheet" type="text/css">
     <!-- Select2 -->
     <link href="assets/select2/css/select2.min.css" rel="stylesheet" type="text/css">
     <!-- Font Awesome -->
-    <link href="assets/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+<!--    <link href="assets/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">-->
+    <link href="https://cdn.bootcdn.net/ajax/libs/font-awesome/5.14.0/css/fontawesome.min.css" rel="stylesheet" type="text/css">
+
     <!-- Iconmoon -->
     <link href="assets/iconmoon/css/iconmoon.css" rel="stylesheet" type="text/css">
     <!-- Date Picker -->
@@ -33,8 +35,26 @@
     <!--        width:100%;-->
     <!--      }-->
     <!--    </style>-->
+
+
+    <style>
+        .form-outer input{
+            margin-bottom: 0;
+        }
+        .form-outer .select2.select2-container {
+            margin-bottom: 0;
+        }
+        .form-outer .row:not(.ignore) div{
+            padding-bottom: 30px;
+        }
+        .form-outer textarea{
+            margin-bottom: 0 !important;
+        }
+    </style>
+
 </head>
 <body class="fill-bg">
+
 
 
 <!-- Start Preloader -->
@@ -50,67 +70,95 @@
 </div>
 <!-- End Preloader -->
 
+<!--Start Alert Modal-->
+<div class="modal fade" id="alertModal" tabindex="-1" role="dialog" aria-labelledby="alertModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="alertModalLabel">信息</h4>
+            </div>
+            <div class="modal-body custom-alert-context">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Ok</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!--End Alert Modal-->
+
 <!-- Start Register -->
 <section class="login-wrapper register">
     <div class="inner">
         <div class="regiter-inner">
             <div class="login-logo"><a href="index.html"><img src="images/login-logo.png" class="img-responsive" alt=""></a>
             </div>
-<!--            <div class="cnt-block">-->
-<!--                <img src=" images/用户注册流程7.6.jpg" alt="">-->
-<!--            </div>-->
             <div class="head-block">
                 <h1><strong>用户注册</strong></h1>
             </div>
             <div class="cnt-block">
-                <form action="#" method="get" class="form-outer">
-                    <div class="row">
-                        <div class="col-sm-12">
-                            <h2>I Am</h2>
-                            <ul class="select-opt clearfix">
-                                <li>
-                                    <input type="radio" id="f-option" name="selector">
-                                    <label for="f-option">学生</label>
-                                    <div class="check"></div>
-                                </li>
-                                <li>
-                                    <input type="radio" id="s-option" name="selector">
-                                    <label for="s-option">教育专业</label>
-                                    <div class="check">
-                                        <div class="inside"></div>
-                                    </div>
-                                </li>
-                                <li>
-                                    <input type="radio" id="t-option" name="selector">
-                                    <label for="t-option">父母或其他成年人</label>
-                                    <div class="check">
-                                        <div class="inside"></div>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="col-sm-6">
-                            <input name="First Name" type="text" placeholder="名">
-                        </div>
-                        <div class="col-sm-6">
-                            <input name="Last Name" type="text" placeholder="姓">
-                        </div>
-                    </div>
+                <form action="/userRegister" type="post" class="form-outer">
+<!--                    <div class="row ignore">-->
+<!--                        <div class="col-sm-12">-->
+<!--                            <h2>I Am</h2>-->
+<!--                            <ul class="select-opt clearfix">-->
+<!--                                <li>-->
+<!--                                    <input type="radio" id="f-option" name="selector">-->
+<!--                                    <label for="f-option">学生</label>-->
+<!--                                    <div class="check"></div>-->
+<!--                                </li>-->
+<!--                                <li>-->
+<!--                                    <input type="radio" id="s-option" name="selector">-->
+<!--                                    <label for="s-option">教育专业</label>-->
+<!--                                    <div class="check">-->
+<!--                                        <div class="inside"></div>-->
+<!--                                    </div>-->
+<!--                                </li>-->
+<!--                                <li>-->
+<!--                                    <input type="radio" id="t-option" name="selector">-->
+<!--                                    <label for="t-option">父母或其他成年人</label>-->
+<!--                                    <div class="check">-->
+<!--                                        <div class="inside"></div>-->
+<!--                                    </div>-->
+<!--                                </li>-->
+<!--                            </ul>-->
+<!--                        </div>-->
+<!--                    </div>-->
+
                     <div class="row">
                         <div class="col-sm-6">
-                            <textarea name="Address" placeholder="地址"></textarea>
+                            <input name="user_name" type="text" placeholder="用户名" onchange="inputCheck(this,checkUserName)" valid-msg=" 可用" invalid-msg=" 必须为6到25位、可选大小写字母、可选数字、可选下划线">
                         </div>
                         <div class="col-sm-6">
-                            <input name="Country Code" type="text" placeholder="+91" class="country-code">
-                            <input name="phone-no" type="text" placeholder="000-000-0000" class="phone-no">
-                            <div class="clearfix"></div>
-                            <div class="date">
-                                <input type='text' class="datepicker" placeholder="生日"/>
-                                <span class="icon-calander-icon"></span></div>
+                            <input name="password" type="password" placeholder="密码" onchange="inputCheck(this,checkPassword)" valid-msg=" 可用" invalid-msg=" 必须为6-25位、必选字母、必选数字、可选特殊字符、可选下划线">
                         </div>
                     </div>
+
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <input name="name" placeholder="姓名" onchange="inputCheck(this,checkName)" valid-msg=" 可用" invalid-msg=" 2-254位字符(不能为数字)">
+                        </div>
+                        <div class="date col-sm-6">
+                            <input check-flag=true type='text' class="datepicker" placeholder="生日" onchange="inputCheck(this,checkNotNull)" valid-msg=" 可用" invalid-msg="不能为空">
+                            <span class="icon-calander-icon"></span>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <input id="input-email" type="text" placeholder="邮箱" name="email" onchange="inputCheck(this,checkEmail)" valid-msg=" 可用" invalid-msg=" 不正确的邮箱格式">
+                        </div>
+                        <div class="col-sm-3">
+                            <input type="text" placeholder="验证码" name="emailCode" onchange="inputCheck(this,checkEmailCode)" valid-msg=" 可用" invalid-msg=" 必须为6位数字">
+                        </div>
+                        <div class="col-sm-3">
+                            <button type="button" class="btn" style="margin-bottom: 30px" onclick="getEmailCode(this)">获取验证码</button>
+                        </div>
+                    </div>
+
                     <div class="button-outer">
-                        <button class="btn">现在注册 <span class="icon-more-icon"></span></button>
+                        <button type="button" class="btn" onclick="userRegister()">现在注册 <span class="icon-more-icon"></span></button>
                     </div>
                 </form>
             </div>
@@ -121,15 +169,121 @@
 <!-- End Register -->
 
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-<script type="text/javascript" src="js/jquery.min.js"></script>
+<!--<script type="text/javascript" src="js/jquery.min.js"></script>-->
+<script type="text/javascript" src="https://cdn.bootcdn.net/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+
 <!-- Bootsrap JS -->
-<script type="text/javascript" src="assets/bootstrap/js/bootstrap.min.js"></script>
+<!--<script type="text/javascript" src="assets/bootstrap/js/bootstrap.min.js"></script>-->
+<script type="text/javascript" src="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
 <!-- Select2 JS -->
-<script type="text/javascript" src="assets/select2/js/select2.min.js"></script>
+<!--<script type="text/javascript" src="assets/select2/js/select2.min.js"></script>-->
+<script type="text/javascript" src="https://cdn.bootcdn.net/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
+
 <!-- Date Picker JS -->
 <script type="text/javascript" src="assets/datepicker/js/datepicker.js"></script>
 <!-- Custom JS -->
 <script type="text/javascript" src="js/custom.js"></script>
+
+<script type="text/javascript" src="js/common.js"></script>
+
+<script>
+    // -0 保留    -1 发送邮件成功    -2 字段错误    -3 请求间隔时间过短    -4 已经绑定过的邮箱    -5 发送邮件失败，检查邮箱格式或者检查邮箱是否存在
+    function getEmailCode(me) {
+        var email_str = $("#input-email").val()
+
+        if (!checkEmail(email_str)) {
+            customAlert("不正确的邮箱格式!");
+            return;
+        }
+        $(me).text("发送中...");
+        $(me).addClass("disabled");
+        $(me).attr("onclick", "null");
+        $.post("/userSendRegisterEmail", {"email": email_str}, function (data) {
+            var state = data.state;
+            if (state == 1) {
+                customAlert("发送成功(如果你没有收到邮件，在60秒以后你可以重新发送)");
+            } else if (state == 2) {
+                customAlert("输入的字段不正确!请不要使用脚本提交或者修改网页代码!");
+            } else if (state == 3) {
+                customAlert("请等待" + (Math.trunc(60 - data.append_inf / 1000) + " 秒后你可以重试!"));
+            } else if (state == 4) {
+                customAlert("这个邮箱已经被其他账号绑定了！");
+            } else {
+                customAlert("邮箱格式不正确！");
+            }
+            $(me).text("获取验证码");
+            $(me).removeClass("disabled");
+            $(me).attr("onclick", "getEmailCode(this)");
+        }, "json")
+    }
+
+    function customAlert(msg) {
+        $("#alertModal .custom-alert-context").text(msg);
+        $("#alertModal").modal("show");
+    }
+    
+    function userRegister() {
+        var $form = $("form.form-outer");
+        var $input_list = $(".form-outer input");
+        var submit_flag = true;
+        for(var i =0;i<$input_list.length;i++){
+            var $item = $($input_list[i]);
+            if(typeof($item.attr("check-flag"))=="undefined"){
+                //存在未填写的内容
+                submit_flag = false;
+                showEmptyAlert($item);
+            }
+            else if($item.attr("check-flag")===false){
+                submit_flag = false;
+            }
+        }
+        //通过submit
+        if(!submit_flag){
+            customAlert("在提交之前请先检查并修改不正确的填写");
+            return;
+        }
+        $.ajax({
+            type: 'post',
+            url: "/",
+            data: $form.serialize(),
+            dataType: "json",
+        }).success(function (data) {
+            //返回字段：state： -0 保留  -1 成功注册   -2 字段错误   -3 已存在的用户名  -4 未发送过验证码（没有session）-5 验证码不正确/重新发送  -6 数据库/服务器故障(不符合长度要求的字段)
+            var state = data.state;
+            console.log(data);
+            switch (state) {
+                case 1:
+                    //成功
+                    customAlert("注册成功!");
+                    window.location.href = "/userLogin";
+                    break;
+                case 2:
+                    customAlert("输入字段错误!");
+                    break;
+                case 3:
+                    customAlert("用户名已存在!");
+                    break;
+                case 4:
+                    customAlert("未发送给验证码,请点击发送验证码以后在重试!");
+                    break;
+                case 5:
+                    customAlert("验证码不正确,如果没有收到验证码,请点击重新发送验证码!");
+                    break;
+                case 6:
+                    customAlert("服务器故障!刷新界面后重试");
+                    break;
+            }
+        }).error(function () {
+            customAlert("网络故障,请检查网络连接!");
+        });
+    }
+
+    function showEmptyAlert($item) {
+        $item.parent().append("<span class='input-check-span'><i style='color: RGB(255,150,0);font-size: 13px;font-weight: bolder' class='glyphicon glyphicon-remove'></i><i style='color: RGB(255,150,0);font-size: 13px;font-weight: bolder'>"+"Please Input"+"</i></span>");
+    }
+
+</script>
 </body>
 </html>
 

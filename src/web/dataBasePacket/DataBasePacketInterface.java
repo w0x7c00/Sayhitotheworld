@@ -3,9 +3,9 @@ package web.dataBasePacket;
 import java.sql.ResultSet;
 
 public interface DataBasePacketInterface {
-    public boolean setWithResultSet(ResultSet rs);
-    public boolean insert();
-    public boolean update();
-    public boolean delete();
-    public boolean set();
+    boolean setWithResultSet(ResultSet rs);
+    boolean insert();
+    boolean update();
+    boolean delete();
+    boolean set();
 }

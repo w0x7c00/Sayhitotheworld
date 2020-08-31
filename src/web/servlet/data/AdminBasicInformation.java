@@ -15,13 +15,12 @@ import java.io.IOException;
 //无输入字段
 //输出字段： state：  - 0 保留     -1 成功     -2 未登录
 //         data:
-//@WebServlet("/adminBasicInformation")
+@WebServlet("/adminBasicInformation")
 public class AdminBasicInformation extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         BasicTool.setCharacterEncoding(req, resp);
         int state = 0;
-        AdminBasicInformationPacket adminBasicInformationPacket = new AdminBasicInformationPacket();
         AdminSessionPacket adminSessionPacket =(AdminSessionPacket)req.getSession().getAttribute("admin");
         if(adminSessionPacket == null){
             //未登录
@@ -31,13 +30,23 @@ public class AdminBasicInformation extends HttpServlet {
             //登录后
             state = 1;
         }
+        AdminBasicInformationPacket adminBasicInformationPacket = new AdminBasicInformationPacket(adminSessionPacket,state);
         Gson gson = new Gson();
-        adminBasicInformationPacket.state=state;
         resp.getWriter().write(gson.toJson(adminBasicInformationPacket));
     }
 
     public class AdminBasicInformationPacket{
-        public int state=0;
-        public String data = "123";
+        private int state;
+        private String admin_name;
+        private short type;
+        private long create_time;
+        public AdminBasicInformationPacket(AdminSessionPacket adminSessionPacket,int state){
+            this.state = state;
+            if(adminSessionPacket!=null){
+                this.admin_name = adminSessionPacket.admin_name;
+                this.type = adminSessionPacket.type;
+                this.create_time = adminSessionPacket.create_time;
+            }
+        }
     }
 }

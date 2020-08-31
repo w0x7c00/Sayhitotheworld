@@ -54,8 +54,7 @@ public class TeacherRegister extends HttpServlet {
         String name = req.getParameter("name");
         String price_str = req.getParameter("price");
         String email = req.getParameter("email");
-        //String education = req.getParameter("education");
-        String education = "CQU";
+        String education = req.getParameter("education");
         String language_str = req.getParameter("language");
         String pic = req.getParameter("pic");
         String age_str = req.getParameter("age");
