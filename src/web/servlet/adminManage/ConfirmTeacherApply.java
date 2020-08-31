@@ -28,10 +28,10 @@ public class ConfirmTeacherApply extends HttpServlet{
         teacher.teacher_name = teahcer_name;
         if(teacher.set()){
             if("1".equals(state_str)){
-                teacher.state = 1;
+                teacher.state = 3;    //3-通过初次审核
                 teacher.update();
                 //发送邮箱的通知消息
-                String msg = "<h1>Sayhitotheworld:<h1/> Congratulations on your passing the teacher application";
+                String msg = "<h1>Sayhitotheworld:<h1/> Congratulations on your passing the teacher application,we will contact you later!";
                 if(BasicEmailTool.sendMail(teacher.email,msg)){
                     state = 1;
                 }
@@ -42,11 +42,11 @@ public class ConfirmTeacherApply extends HttpServlet{
             else if("2".equals(state_str)){
                 String append_inf = req.getParameter("append_inf");
                 if(FormatCheckTool.checkTeacherApplyAppendInf(append_inf)){
-                    teacher.state =2;
+                    teacher.state =2;   //-2未通过！
                     teacher.append_inf = append_inf;
                     teacher.update();
                     //发送邮箱通知消息
-                    String msg = "<h1>Sayhitotheworld:<h1/> You didn't pass the teacher application because of:<br/>"+append_inf;
+                    String msg = "<h1>Sayhitotheworld:<h1/> You didn't pass the teacher application because of:<br/>"+append_inf+".However,you can login your teacher account to change your application information before resubmit it!";
                     if(BasicEmailTool.sendMail(teacher.email,msg)){
                         state = 1;
                     }
