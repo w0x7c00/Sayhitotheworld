@@ -22,6 +22,7 @@ public class BasicTool {
     public static void clearSession(HttpSession httpSession){
         httpSession.removeAttribute("user");
         httpSession.removeAttribute("admin");
+        httpSession.removeAttribute("teacher");
     }
     public static String generateRandomEmailCode(){
         Random random = new Random();
