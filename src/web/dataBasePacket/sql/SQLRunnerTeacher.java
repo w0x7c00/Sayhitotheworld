@@ -130,4 +130,19 @@ public class SQLRunnerTeacher extends BasicSQLRunner implements SafeSQLInterface
             return false;
         }
     }
+
+    public boolean setWithEmail(DataBasePacketInterface dataBasePacketInterface){
+        Teacher teacher = (Teacher)dataBasePacketInterface;
+        String preSQL = "select * from teacher where email=?";
+        try{
+            PreparedStatement st = con.prepareStatement(preSQL);
+            st.setString(1,teacher.email);
+            ResultSet rs = st.executeQuery();
+            return teacher.setWithResultSet(rs);
+        }
+        catch (SQLException e){
+            e.printStackTrace();
+            return false;
+        }
+    }
 }

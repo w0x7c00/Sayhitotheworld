@@ -71,6 +71,13 @@ public class Teacher extends BasicDataBasePacket{
         return result;
     }
 
+    public boolean setWithEmail(){
+        SQLRunnerTeacher sqlRunnerTeacher = new SQLRunnerTeacher();
+        boolean result = sqlRunnerTeacher.setWithEmail(this);
+        sqlRunnerTeacher.close();
+        return result;
+    }
+
     @Override
     public boolean insert() {
         SQLRunnerTeacher sqlRunnerTeacher = new SQLRunnerTeacher();

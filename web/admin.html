@@ -216,7 +216,7 @@
         //首先检查权限
         $.ajax({
             type: 'post',
-            url: "/adminBasicInformation",
+            url: "/adminPageInit",
             dataType: "json",
         }).done(function (data) {
             var state = data.state;
