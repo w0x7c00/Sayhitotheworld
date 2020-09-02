@@ -10,7 +10,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-
 //输入输出字段要求见GetTeacherInformation
 @WebServlet("/useJmpGalleryDetail")
 public class UseJmpGalleryDetail extends HttpServlet{

@@ -53,6 +53,6 @@ public class UserRedeemBalance extends HttpServlet {
                 }
             }
         }
-        resp.getWriter().write("{state:"+state+"}");
+        resp.getWriter().write(BasicTool.getStateStr(state));
     }
 }
