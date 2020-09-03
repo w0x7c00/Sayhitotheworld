@@ -18,7 +18,14 @@ public class BasicTool {
     public static void setCharacterEncoding(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         req.setCharacterEncoding("utf-8");
         resp.setCharacterEncoding("utf-8");
+        resp.setHeader("Content-Type", "application/json;charset=utf-8");
     }
+    public static void setGetPageEncoding(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+        req.setCharacterEncoding("utf-8");
+        resp.setCharacterEncoding("utf-8");
+        resp.setHeader("Content-Type", "text/html;charset=utf-8");
+    }
+
     public static void clearSession(HttpSession httpSession){
         httpSession.removeAttribute("user");
         httpSession.removeAttribute("admin");

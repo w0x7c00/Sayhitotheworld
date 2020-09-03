@@ -19,10 +19,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 //输入字段： type：1-state为1/用户或未登录及其以上权限/屏蔽password、balance   ------用于面向用户的信息展示
-//               2-state为2/管理员及以上/屏蔽password     ------用于教师审核
-//               3-state为1/管理员以上权限/屏蔽password   ------用于面向管理员的教师信息展示
-//               4-state为123/admin及以上权限/屏蔽password   ------用于面向管理员的教师信息展示
-//               5-state为123/super admin及以上权限/不屏蔽password   --------用于超级管理员教师信息展示
+//               2-state为2/管理员及以上/屏蔽password     ------用于教师初次审核
+//               3-state为3/管理员及以上/屏蔽password     ------用于教师再次审核
+//               4-state为1/管理员以上权限/屏蔽password   ------用于面向管理员的教师信息展示
+//               5-state为0123/admin及以上权限/屏蔽password   ------用于面向管理员的教师信息展示
+//               6-state为0123/super admin及以上权限/不屏蔽password   --------用于超级管理员教师信息展示
 //         begin: 起始索引（int 从0开始）
 //         length: 要求长度(int)    当此为0是要做特别的优化
 
@@ -98,6 +99,28 @@ public class GetTeacherSimpleList extends HttpServlet {
                 break;
             case 3:
                 if(permissionCheck.checkAdmin()){
+                    preSQL = "select * from teacher where state = 3 limit ?,?";
+                    maxLengthSQL = "select count(*) as l from teacher where state = 3";
+                    rs = sqlRunner.getTeacherListRS(preSQL,begin_int,length_int);
+                    try{
+                        while(rs!=null && rs.next()){
+                            Teacher teacher_item = new Teacher();
+                            teacher_item.setWithResultSet(rs);
+                            teacher_item.password = null;
+                            teacherList.add(teacher_item);
+                        }
+                        state = 1;
+                    }
+                    catch (SQLException e){
+                        state = 4;
+                    }
+                }
+                else{
+                    state = 3;
+                }
+                break;
+            case 4:
+                if(permissionCheck.checkAdmin()){
                     preSQL = "select * from teacher where state = 1 limit ?,?";
                     maxLengthSQL = "select count(*) as l from teacher where state = 1";
                     rs = sqlRunner.getTeacherListRS(preSQL,begin_int,length_int);
@@ -118,7 +141,7 @@ public class GetTeacherSimpleList extends HttpServlet {
                     state = 3;
                 }
                 break;
-            case 4:
+            case 5:
                 if(permissionCheck.checkAdmin()){
                     preSQL = "select * from teacher limit ?,?";
                     maxLengthSQL = "select count(*) as l from teacher";
@@ -140,7 +163,7 @@ public class GetTeacherSimpleList extends HttpServlet {
                     state = 3;
                 }
                 break;
-            case 5:
+            case 6:
                 if(permissionCheck.checkSuperAdmin()){
                     preSQL = "select * from teacher limit ?,?";
                     maxLengthSQL = "select count(*) as l from teacher where state";
