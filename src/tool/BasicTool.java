@@ -15,6 +15,9 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class BasicTool {
+    //26+10 = 36 个
+    final private static char [] codeCharList = {'A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z','0','1','2','3','4','5','6','7','8','9'};
+
     public static void setCharacterEncoding(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         req.setCharacterEncoding("utf-8");
         resp.setCharacterEncoding("utf-8");
@@ -25,7 +28,6 @@ public class BasicTool {
         resp.setCharacterEncoding("utf-8");
         resp.setHeader("Content-Type", "text/html;charset=utf-8");
     }
-
     public static void clearSession(HttpSession httpSession){
         httpSession.removeAttribute("user");
         httpSession.removeAttribute("admin");
@@ -42,7 +44,12 @@ public class BasicTool {
     }
 
     public static String generateRedeemCode(){
-        return "ABC123";
+        Random random = new Random();
+        char [] tempCharList = new char[36];
+        for(int i = 0;i<36;i++){
+            tempCharList[i] = codeCharList[random.nextInt(36)];
+        }
+        return String.valueOf(tempCharList);
     }
 
     public static int str2int(String input){
@@ -152,5 +159,8 @@ public class BasicTool {
             e.printStackTrace();
             return null;
         }
+    }
+    public static String generateDefaultCommentText(){
+        return "长时间未评论，默认好评~";
     }
 }

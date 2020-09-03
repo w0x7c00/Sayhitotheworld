@@ -1,4 +1,4 @@
-package web.servlet.data;
+package web.servlet.data.admin;
 
 import com.google.gson.Gson;
 import tool.BasicTool;

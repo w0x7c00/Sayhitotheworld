@@ -1,4 +1,4 @@
-package web.servlet.data;
+package web.servlet.data.common;
 
 import tool.BasicTool;
 
