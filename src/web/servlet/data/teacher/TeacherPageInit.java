@@ -79,6 +79,7 @@ public class TeacherPageInit extends HttpServlet{
         comment.create_time = System.currentTimeMillis();
         comment.level = 5;//好评
         comment.update();
+        return true;
     }
 
     public class TeacherPageInitReturnPacket{
