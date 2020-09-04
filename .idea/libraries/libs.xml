@@ -2,11 +2,10 @@
   <library name="libs">
     <CLASSES>
       <root url="file://$PROJECT_DIR$/web/WEB-INF/libs" />
-      <root url="file://$PROJECT_DIR$/../Documents/apache-tomcat-8.5.57/lib" />
+      <root url="file://$USER_HOME$/Documents/apache-tomcat-8.5.57/lib" />
     </CLASSES>
-    <JAVADOC />
     <SOURCES />
-    <jarDirectory url="file://$PROJECT_DIR$/../Documents/apache-tomcat-8.5.57/lib" recursive="false" />
+    <jarDirectory url="file://$USER_HOME$/Documents/apache-tomcat-8.5.57/lib" recursive="false" />
     <jarDirectory url="file://$PROJECT_DIR$/web/WEB-INF/libs" recursive="false" />
   </library>
 </component>

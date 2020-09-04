@@ -779,6 +779,7 @@ input:focus, textarea:focus, select:focus {
 }
 .about .left-block {
 	display: block;
+	
 }
 .video-block {
 	height: 0;
