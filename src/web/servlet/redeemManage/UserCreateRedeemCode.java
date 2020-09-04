@@ -13,7 +13,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-
 //输入字段：  amount
 //返回字段：  state: -0 保留   -1 成功    -2 未登录    -3 输入字段不正确    -4 不正确的amount值/格式不正确也算    -5 amount过大     -6 长时间生成冲突code
 //                 -7 插入失败（一般不会）

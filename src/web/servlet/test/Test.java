@@ -3,7 +3,6 @@ package web.servlet.test;
 
 import tool.BasicTool;
 
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -16,8 +15,10 @@ import java.io.IOException;
 public class Test extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        BasicTool.setCharacterEncoding(req,resp);
-        resp.getWriter().write(req.getServletContext().getRealPath("/img"));
+        BasicTool.setGetPageEncoding(req,resp);
+        String result = BasicTool.generateRedeemCode();
+        System.out.println(result);
+        resp.getWriter().write(result);
     }
 
     @Override
