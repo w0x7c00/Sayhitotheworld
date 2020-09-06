@@ -84,44 +84,46 @@ public class GetTeacherOrderList extends HttpServlet{
         int state = 0;
         SQLRunnerGetOrderInf sqlRunner = new SQLRunnerGetOrderInf();
         ResultSet rs = sqlRunner.getAllOrderByTeacherName(teacher_name);
-        try{
-            Order order;
-            while (rs!=null&&rs.next()){
-                switch (type){
-                    case 1:
-                        order = new Order();
-                        order.setWithResultSet(rs);
-                        if(order.state==0){
-                            ls.add(order);
-                        }
+        Order order;
+        while (rs!=null){
+            switch (type){
+                case 1:
+                    order = new Order();
+                    if(!order.setWithResultSet(rs)){
                         break;
-                    case 2:
-                        order = new Order();
-                        order.setWithResultSet(rs);
-                        if(order.state==1){
-                            ls.add(order);
-                        }
-                        break;
-                    case 3:
-                        order = new Order();
-                        order.setWithResultSet(rs);
-                        if(order.state==0||order.state==1){
-                            ls.add(order);
-                        }
-                        break;
-                    case 4:
-                        order = new Order();
-                        order.setWithResultSet(rs);
+                    }
+                    if(order.state==0){
                         ls.add(order);
+                    }
+                    break;
+                case 2:
+                    order = new Order();
+                    if(!order.setWithResultSet(rs)){
                         break;
-                }
+                    }
+                    if(order.state==1){
+                        ls.add(order);
+                    }
+                    break;
+                case 3:
+                    order = new Order();
+                    if(!order.setWithResultSet(rs)){
+                        break;
+                    }
+                    if(order.state==0||order.state==1){
+                        ls.add(order);
+                    }
+                    break;
+                case 4:
+                    order = new Order();
+                    if(!order.setWithResultSet(rs)){
+                        break;
+                    }
+                    ls.add(order);
+                    break;
             }
-            state = 1;
         }
-        catch (SQLException e){
-            e.printStackTrace();
-            state = 5;
-        }
+        state = 1;
         sqlRunner.close();
         return state;
     }

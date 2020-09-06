@@ -27,7 +27,11 @@ public class GetTeacherInformation extends HttpServlet {
         BasicTool.setCharacterEncoding(req, resp);
         int state = 0;
         Teacher teacher = null;
-        String teacher_name = req.getParameter("teacher_name");
+        String teacher_name = (String) req.getAttribute("teacher_name");
+        //用于转发判断
+        if(teacher_name==null){
+            req.getParameter("teacher_name");
+        }
         if(FormatCheckTool.checkNotNull(teacher_name)){
             teacher = new Teacher();
             teacher.teacher_name = teacher_name;
@@ -58,7 +62,19 @@ public class GetTeacherInformation extends HttpServlet {
     //权限的检查是由高到低的
     public void mask(Teacher teacher, HttpSession httpSession){
         PermissionCheck permissionCheck = new PermissionCheck(httpSession);
-        if(permissionCheck.checkSuperAdmin()||teacher.teacher_name.equals(((TeacherSessionPacket)httpSession.getAttribute("Teacher")).teacher_name)){
+        boolean teacher_flag = true;
+        if(httpSession.getAttribute("teacher")==null){
+            teacher_flag=false;
+        }
+        else{
+            if(teacher.teacher_name.equals(((TeacherSessionPacket)httpSession.getAttribute("teacher")).teacher_name)){
+
+            }
+            else{
+                teacher_flag=false;
+            }
+        }
+        if(permissionCheck.checkSuperAdmin()||teacher_flag){
             //super、target_teacher
             //do nothing
         }

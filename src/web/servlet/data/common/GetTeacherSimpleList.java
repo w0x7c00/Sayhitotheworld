@@ -61,37 +61,31 @@ public class GetTeacherSimpleList extends HttpServlet {
                 preSQL = "select * from teacher where state = 1 limit ?,?";
                 maxLengthSQL = "select count(*) as l from teacher where state = 1";
                 rs = sqlRunner.getTeacherListRS(preSQL,begin_int,length_int);
-                try{
-                    while(rs!=null && rs.next()){
-                        Teacher teacher_item = new Teacher();
-                        teacher_item.setWithResultSet(rs);
-                        teacher_item.password = null;
-                        teacher_item.balance = -1;
-                        teacherList.add(teacher_item);
+                while(rs!=null){
+                    Teacher teacher_item = new Teacher();
+                    if(!teacher_item.setWithResultSet(rs)){
+                        break;
                     }
-                    state = 1;
+                    teacher_item.password = null;
+                    teacher_item.balance = -1;
+                    teacherList.add(teacher_item);
                 }
-                catch (SQLException e){
-                    state = 4;
-                }
+                state = 1;
                 break;
             case 2:
                 if(permissionCheck.checkAdmin()){
                     preSQL = "select * from teacher where state = 2 limit ?,?";
                     maxLengthSQL = "select count(*) as l from teacher where state = 2";
                     rs = sqlRunner.getTeacherListRS(preSQL,begin_int,length_int);
-                    try{
-                        while(rs!=null && rs.next()){
-                            Teacher teacher_item = new Teacher();
-                            teacher_item.setWithResultSet(rs);
-                            teacher_item.password = null;
-                            teacherList.add(teacher_item);
+                    while(rs!=null){
+                        Teacher teacher_item = new Teacher();
+                        if(!teacher_item.setWithResultSet(rs)){
+                            break;
                         }
-                        state = 1;
+                        teacher_item.password = null;
+                        teacherList.add(teacher_item);
                     }
-                    catch (SQLException e){
-                        state = 4;
-                    }
+                    state = 1;
                 }
                 else{
                     state = 3;
@@ -102,18 +96,15 @@ public class GetTeacherSimpleList extends HttpServlet {
                     preSQL = "select * from teacher where state = 3 limit ?,?";
                     maxLengthSQL = "select count(*) as l from teacher where state = 3";
                     rs = sqlRunner.getTeacherListRS(preSQL,begin_int,length_int);
-                    try{
-                        while(rs!=null && rs.next()){
-                            Teacher teacher_item = new Teacher();
-                            teacher_item.setWithResultSet(rs);
-                            teacher_item.password = null;
-                            teacherList.add(teacher_item);
+                    while(rs!=null){
+                        Teacher teacher_item = new Teacher();
+                        if(!teacher_item.setWithResultSet(rs)){
+                            break;
                         }
-                        state = 1;
+                        teacher_item.password = null;
+                        teacherList.add(teacher_item);
                     }
-                    catch (SQLException e){
-                        state = 4;
-                    }
+                    state = 1;
                 }
                 else{
                     state = 3;
@@ -124,18 +115,15 @@ public class GetTeacherSimpleList extends HttpServlet {
                     preSQL = "select * from teacher where state = 1 limit ?,?";
                     maxLengthSQL = "select count(*) as l from teacher where state = 1";
                     rs = sqlRunner.getTeacherListRS(preSQL,begin_int,length_int);
-                    try{
-                        while(rs!=null && rs.next()){
-                            Teacher teacher_item = new Teacher();
-                            teacher_item.setWithResultSet(rs);
-                            teacher_item.password = null;
-                            teacherList.add(teacher_item);
+                    while(rs!=null){
+                        Teacher teacher_item = new Teacher();
+                        if(!teacher_item.setWithResultSet(rs)){
+                            break;
                         }
-                        state = 1;
+                        teacher_item.password = null;
+                        teacherList.add(teacher_item);
                     }
-                    catch (SQLException e){
-                        state = 4;
-                    }
+                    state = 1;
                 }
                 else{
                     state = 3;
@@ -146,18 +134,15 @@ public class GetTeacherSimpleList extends HttpServlet {
                     preSQL = "select * from teacher limit ?,?";
                     maxLengthSQL = "select count(*) as l from teacher";
                     rs = sqlRunner.getTeacherListRS(preSQL,begin_int,length_int);
-                    try{
-                        while(rs!=null && rs.next()){
-                            Teacher teacher_item = new Teacher();
-                            teacher_item.setWithResultSet(rs);
-                            teacher_item.password = null;
-                            teacherList.add(teacher_item);
+                    while(rs!=null){
+                        Teacher teacher_item = new Teacher();
+                        if(!teacher_item.setWithResultSet(rs)){
+                            break;
                         }
-                        state = 1;
+                        teacher_item.password = null;
+                        teacherList.add(teacher_item);
                     }
-                    catch (SQLException e){
-                        state = 4;
-                    }
+                    state = 1;
                 }
                 else{
                     state = 3;
@@ -168,17 +153,14 @@ public class GetTeacherSimpleList extends HttpServlet {
                     preSQL = "select * from teacher limit ?,?";
                     maxLengthSQL = "select count(*) as l from teacher where state";
                     rs = sqlRunner.getTeacherListRS(preSQL,begin_int,length_int);
-                    try{
-                        while(rs!=null && rs.next()){
-                            Teacher teacher_item = new Teacher();
-                            teacher_item.setWithResultSet(rs);
-                            teacherList.add(teacher_item);
+                    while(rs!=null){
+                        Teacher teacher_item = new Teacher();
+                        if(!teacher_item.setWithResultSet(rs)){
+                            break;
                         }
-                        state = 1;
+                        teacherList.add(teacher_item);
                     }
-                    catch (SQLException e){
-                        state = 4;
-                    }
+                    state = 1;
                 }
                 else{
                     state = 3;

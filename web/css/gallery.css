@@ -99,4 +99,8 @@ h3  {
 
 }
 
+.pagination *{
+    cursor: pointer;
+}
+
 

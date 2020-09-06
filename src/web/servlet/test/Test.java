@@ -16,9 +16,8 @@ public class Test extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         BasicTool.setGetPageEncoding(req,resp);
-        String result = BasicTool.generateRedeemCode();
+        boolean result ="123".equals(null);
         System.out.println(result);
-        resp.getWriter().write(result);
     }
 
     @Override

@@ -16,7 +16,13 @@ public class UseJmpGalleryDetail extends HttpServlet{
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         BasicTool.setCharacterEncoding(req, resp);
-        req.setAttribute("teacher_name",((JmpSessionPacket)req.getSession().getAttribute("jmp")).gallery_detail);
-        req.getRequestDispatcher("/GetTeacherInformation").forward(req,resp);
+        JmpSessionPacket j = ((JmpSessionPacket)req.getSession().getAttribute("jmp"));
+        if(j==null){
+            resp.getWriter().write(BasicTool.getStateStr(-1));
+        }
+        else{
+            req.setAttribute("teacher_name",j.gallery_detail);
+            req.getRequestDispatcher("/getTeacherInformation").forward(req,resp);
+        }
     }
 }

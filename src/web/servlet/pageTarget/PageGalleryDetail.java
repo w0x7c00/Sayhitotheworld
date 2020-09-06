@@ -14,7 +14,7 @@ import java.io.IOException;
 @WebServlet("/pageGalleryDetail")
 public class PageGalleryDetail extends HttpServlet{
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         BasicTool.setGetPageEncoding(req, resp);
         String teacher_name = req.getParameter("teacher_name");
         if(teacher_name==null){
@@ -32,7 +32,7 @@ public class PageGalleryDetail extends HttpServlet{
             else{
                 jmpSessionPacket.gallery_detail = teacher_name;
             }
-            req.getRequestDispatcher("/gallery_detail.html").forward(req,resp);
+            resp.sendRedirect("/gallery_detail.html");
         }
     }
 }

@@ -19,14 +19,14 @@ public class BasicTool {
     final private static char [] codeCharList = {'A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z','0','1','2','3','4','5','6','7','8','9'};
 
     public static void setCharacterEncoding(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-        req.setCharacterEncoding("utf-8");
-        resp.setCharacterEncoding("utf-8");
-        resp.setHeader("Content-Type", "application/json;charset=utf-8");
+        req.setCharacterEncoding("UTF-8");
+        resp.setCharacterEncoding("UTF-8");
+        resp.setHeader("Content-Type", "application/json;charset=UTF-8");
     }
     public static void setGetPageEncoding(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-        req.setCharacterEncoding("utf-8");
-        resp.setCharacterEncoding("utf-8");
-        resp.setHeader("Content-Type", "text/html;charset=utf-8");
+        req.setCharacterEncoding("UTF-8");
+        resp.setCharacterEncoding("UTF-8");
+        resp.setHeader("Content-Type", "text/html;charset=UTF-8");
     }
     public static void clearSession(HttpSession httpSession){
         httpSession.removeAttribute("user");
