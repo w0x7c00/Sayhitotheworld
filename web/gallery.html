@@ -344,7 +344,7 @@
 </div>
 <!-- 参考bootstrap分页样式 -->
 <div class="pagination-con">
-    <ul class="pagination  ">
+    <ul class="pagination">
         <li><a href="#">&laquo;</a></li>
         <li class="active"><a href="#">1</a></li>
         <li class="disabled"><a href="#">2</a></li>
@@ -585,6 +585,72 @@
 <script type="text/javascript" src="assets/isotope/js/isotope.min.js"></script>
 <!-- Custom JS -->
 <script type="text/javascript" src="js/custom.js"></script>
+
+<script>
+    var max_item_per_page = 6;
+    $.post("/getTeacherSimpleList",{
+        "begin":0,
+        "length":max_item_per_page,
+        "type": 1,
+    },function (data) {
+        switch (data.state){
+            case 1:
+                pageInit(data);
+                break;
+            case 2:
+                customAlert("字段错误！");
+                break;
+            case 3:
+                customAlert("无权限！");
+                break;
+            default:
+                customAlert("服务器故障");
+                break;
+        }
+    },"json")
+
+    function jmpTargetPage(target_li_dom){
+        var $target_li = $(target_li_dom);
+    }
+    function pre() {
+
+    }
+
+    function fullTeacherList(data) {
+
+    }
+    function pageInit(data) {
+        var max_length =  data.max_length; //列表最长长度
+        console.log(max_length);
+        var max_page_count;
+        if(max_length===0){
+            max_page_count = 1;
+        }
+        else{
+            max_page_count = Math.ceil(max_length/max_item_per_page);     //向上取整
+        }
+        var $foot_ul = $("ul.pagination");
+        $foot_ul.empty();
+        $pre_li = $("<li><a onclick=\"pre()\">&laquo;</a></li>");
+        $next_li = $("<li><a href=\"#\">&raquo;</a></li>");
+        $foot_ul.add($pre_li);
+        for(var i=0;i<max_page_count;i++){
+            var index = i+1;
+            var new_li = $("<li><a onclick='jmpTargetPage(this)'></a></li>");
+            new_li.text(index);
+            new_li.attr("index",index);
+            if(index===1){
+                new_li.addClass("active");
+            }
+        }
+        $foot_ul.add($next_li);
+        fullTeacherList(data.teacherList);
+    }
+
+    function customAlert(str){
+        alert(str);
+    }
+</script>
 </body>
 
 </html>
