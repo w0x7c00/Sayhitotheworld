@@ -1,6 +1,7 @@
 package web.servlet.init;
 
 import sql.BasicSQLRunner;
+import tool.BasicTool;
 import tool.ServerConfig;
 
 import javax.servlet.ServletException;
@@ -14,13 +15,14 @@ import java.io.IOException;
 public class Init extends HttpServlet {
     @Override
     public void init() throws ServletException {
-        ServerConfig.initGlobalConfig();
+
     }
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        req.setCharacterEncoding("utf-8");
-        resp.setCharacterEncoding("utf-8");
-        resp.getWriter().write("default init");
+        BasicTool.setGetPageEncoding(req, resp);
+        String filePath = getServletContext().getRealPath("/WEB-INF/")+"server.properties";
+        new ServerConfig(filePath).loadConfigToServer();
+        resp.getWriter().write("Init Success！");
     }
 }

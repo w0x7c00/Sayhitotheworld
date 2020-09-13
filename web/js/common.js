@@ -19,7 +19,6 @@ function checkPassword(input) {
     return (/^.*(?=.{6,})(?=.*\d)(?=.*[A-Za-z])(?=.*[!@#$%^&*?]*).*$/.test(input))&&(input.length<=MAX_PASSWORD_LENGTH);
 }
 
-
 function checkName(input) {
     return /^[^\d]{2,254}$/.test(input);
 }

@@ -22,7 +22,8 @@ public class AdminLogin extends HttpServlet {
         String admin_name = req.getParameter("admin_name");
         String password = req.getParameter("password");
         int state = 0;
-        if(FormatCheckTool.checkAdminName(admin_name)&&FormatCheckTool.checkPassword(password)){
+        //不要验证密码格式
+        if(FormatCheckTool.checkAdminName(admin_name)&&FormatCheckTool.checkNotNull(password)){
             HttpSession httpSession = req.getSession();
             if(httpSession.getAttribute("admin")!=null){
                 //已经登录过了

@@ -112,10 +112,10 @@
           <h4 style="margin-bottom: 30px">Input Your Self Information</h4>
           <div class="row">
             <div class="col-sm-6">
-              <input onchange="inputCheck(this,checkName)" valid-msg ="  Allowed Name" invalid-msg = "  Unexpected Name" id="input-name" name="name" type="text" placeholder="Name">
+              <input onchange="inputCheck(this,checkName)" valid-msg ="  Allowed Name" invalid-msg = "  must be 2 to 254 characters" id="input-name" name="name" type="text" placeholder="Name">
             </div>
             <div class="col-sm-6">
-              <input onchange="inputCheck(this,checkAge)" valid-msg="  Allowed Name"  invalid-msg="  Unexcepted Age" id="input-age" name="age" type="text" placeholder="AGE">
+              <input onchange="inputCheck(this,checkAge)" valid-msg="  Allowed Name"  invalid-msg="  must be 0 to 120" id="input-age" name="age" type="text" placeholder="AGE">
             </div>
           </div>
           <div class="row">
@@ -148,7 +148,7 @@
           </div>
           <div class="row">
             <div class="col-sm-6">
-              <input id="input-price" name="price" type="text" placeholder="expect salary per hour(USD)" valid-msg=" Allowed" invalid-msg=" Unexpected Salary" onchange="inputCheck(this,checkPrice)">
+              <input id="input-price" name="price" type="text" placeholder="expect salary per hour(USD)" valid-msg=" Allowed" invalid-msg=" Must Be a number from 0 to 20" onchange="inputCheck(this,checkPrice)">
             </div>
             <div class="col-sm-6">
               <input id="input-gender" name="sex" class="hidden" valid-msg=" Allowed" invalid-msg=" Can`t Be Empty">
@@ -162,7 +162,7 @@
 
           <div class="row">
             <div class="col-sm-6">
-              <input id="input-education" name="education" type="text" placeholder="University" valid-msg=" Allowed" invalid-msg=" Unexpected University(No more than 100 characters)" onchange="inputCheck(this,checkEducation)">
+              <input id="input-education" name="education" type="text" placeholder="University" valid-msg=" Allowed" invalid-msg=" No more than 100 characters or be empty" onchange="inputCheck(this,checkEducation)">
             </div>
             <div class="col-sm-6">
             </div>
@@ -170,7 +170,7 @@
 
           <div class="row">
             <div class="col-sm-12">
-              <textarea id="input-self-introduction" name="self_introduction" placeholder="self introduction(No more than 1000 characters)" valid-msg=" Allowed" invalid-msg=" Unexpected Self Introduction" onchange="inputCheck(this,checkSelfIntroduction)"></textarea>
+              <textarea id="input-self-introduction" name="self_introduction" placeholder="self introduction(No more than 1000 characters)" valid-msg=" Allowed" invalid-msg=" Can`t be empty or more than 1000 characters" onchange="inputCheck(this,checkSelfIntroduction)"></textarea>
             </div>
           </div>
 
@@ -195,10 +195,10 @@
 
           <div class="row">
             <div class="col-sm-6">
-              <input id="input-email" name="email" type="email" placeholder="email" valid-msg=" Allowed" invalid-msg=" Unexpected Email" onchange="inputCheck(this,checkEmail)">
+              <input id="input-email" name="email" type="email" placeholder="email" valid-msg=" Allowed" invalid-msg=" Unexpected Email Format" onchange="inputCheck(this,checkEmail)">
             </div>
             <div class="col-sm-3">
-              <input id="input-emailCode" name="emailCode" type="text" placeholder="CHECK CODE" valid-msg=" Allowed" invalid-msg=" Unexpected Email Code" onchange="inputCheck(this,checkEmailCode)">
+              <input id="input-emailCode" name="emailCode" type="text" placeholder="CHECK CODE" valid-msg=" Allowed" invalid-msg=" Unexpected Email Code Format" onchange="inputCheck(this,checkEmailCode)">
             </div>
             <div class="col-sm-3">
               <button style="width: 100%" type="button" onclick="getEmailCode(this)" class="btn" id="btn-get-email-code">GET Check Code</button>
@@ -207,10 +207,10 @@
 
           <div class="row">
             <div class="col-sm-6">
-              <input id="input-teacher-name" name="teacher_name" type="text" placeholder="Account name" valid-msg=" Allowed" invalid-msg=" Unexpected Account Name" onchange="inputCheck(this,checkUserName)">
+              <input id="input-teacher-name" name="teacher_name" type="text" placeholder="Account name" valid-msg=" Allowed" invalid-msg=" Unexpected Account Name(6-25 characters)" onchange="inputCheck(this,checkUserName)">
             </div>
             <div class="col-sm-6">
-              <input id="input-password" name="password" type="password" placeholder="password" valid-msg=" Allowed" invalid-msg=" Unexpected Password" onchange="inputCheck(this,checkPassword)">
+              <input id="input-password" name="password" type="password" placeholder="password" valid-msg=" Allowed" invalid-msg=" Unexpected Password(6-25 characters which must contain letters and numbers)" onchange="inputCheck(this,checkPassword)">
             </div>
           </div>
 
@@ -250,7 +250,6 @@
   // 带json后缀文件请求会自动解析为json obj
   $("#instruction-modal").modal('show');
   $.get("/json/languageCode.json", function (data) {
-    // console.log("la:"+data.length);
     for (var i = 0; i < data.length; i++) {
       var name = data[i][1];
       var new_opt = "<option value=\"" + i + "\">" + name + "</option>";
@@ -259,7 +258,6 @@
     }
   })
   $.get("/json/countryCode.json", function (data) {
-    // console.log("cou:"+data.length);
     for (var i = 0; i < data.length; i++) {
       var name = data[i][1];
       var new_opt = "<option value=\"" + i + "\">" + name + "</option>";

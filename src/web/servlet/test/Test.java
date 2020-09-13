@@ -1,7 +1,9 @@
 package web.servlet.test;
 
 
+import sql.BasicSQLRunner;
 import tool.BasicTool;
+import tool.FormatCheckTool;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,6 +11,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.Properties;
 
 
 @WebServlet("/test")
@@ -16,8 +19,7 @@ public class Test extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         BasicTool.setGetPageEncoding(req,resp);
-        boolean result ="123".equals(null);
-        System.out.println(result);
+        BasicSQLRunner basicSQLRunner = new BasicSQLRunner();
     }
 
     @Override

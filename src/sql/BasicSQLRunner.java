@@ -5,22 +5,27 @@ package sql;
 import java.sql.*;
 
 public class BasicSQLRunner {
-    public static String sqlConnectStr = "jdbc:mysql://localhost:3306/test?serverTimezone=UTC&user=root&password=deng13508108659";
+    public static String sqlConnectStr;
     public Connection con =null;
     //初始化mysql driver
-    public static void initSQL(){
+    public static boolean initSQL(String SQLConnectStr){
         try{
             Class.forName("com.mysql.jdbc.Driver");
         }
         catch (Exception e){
             e.printStackTrace();
+            return false;
         }
+        sqlConnectStr = SQLConnectStr;
+        return true;
     }
     public BasicSQLRunner(){
         try{
             con = DriverManager.getConnection(sqlConnectStr);
+            System.out.println("succ");
         }
         catch (SQLException e){
+            System.out.println("The Connect Str:"+sqlConnectStr+"  can`t use!");
             e.printStackTrace();
         }
     }
