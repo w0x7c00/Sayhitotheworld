@@ -22,7 +22,11 @@ public class Init extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         BasicTool.setGetPageEncoding(req, resp);
         String filePath = getServletContext().getRealPath("/WEB-INF/")+"server.properties";
-        new ServerConfig(filePath).loadConfigToServer();
-        resp.getWriter().write("Init Success！");
+        if(new ServerConfig(filePath).loadConfigToServer()) {
+            resp.getWriter().write("Init Success！");
+        }
+        else{
+            resp.getWriter().write("ERRO:Load Config Fail！");
+        }
     }
 }

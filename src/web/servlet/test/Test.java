@@ -1,9 +1,13 @@
 package web.servlet.test;
 
 
+import com.google.gson.Gson;
 import sql.BasicSQLRunner;
 import tool.BasicTool;
 import tool.FormatCheckTool;
+import web.email.BasicEmailTool;
+import web.pay.AliPay;
+import web.pay.AlipayQueryPacket;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -13,13 +17,16 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Properties;
 
-
 @WebServlet("/test")
 public class Test extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         BasicTool.setGetPageEncoding(req,resp);
-        BasicSQLRunner basicSQLRunner = new BasicSQLRunner();
+        AliPay aliPay = new AliPay();
+        //String form = aliPay.createOrderForm(113,1000);
+        AlipayQueryPacket f2 = aliPay.queryOrderStatus(113);
+        System.out.println(new Gson().toJson(f2));
+        //resp.getWriter().write(form==null?"null":form);
     }
 
     @Override

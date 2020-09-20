@@ -122,7 +122,7 @@
             <div class="bilibili-con" style="width: 90%;">
                 <h3>视频介绍：</h3>
                 <div class="bilibili-con_container">
-                    <iframe src="https://player.bilibili.com/player.html?aid=286500083&bvid=BV1Vf4y1d7fg&cid=220903343&page=1"
+                    <iframe src=""
                             allowfullscreen="allowfullscreen"  scrolling="no"
                             frameborder="0" class="ifarma-bilib"
                             sandbox="allow-top-navigation allow-same-origin allow-forms allow-scripts"></iframe>
@@ -297,7 +297,7 @@
     function initPage(data) {
         setCountryAndLanguageJson();
         var USDTOCNY = 7;
-        var BasicUrl = "http://localhost:8080"
+        var BasicUrl = "";
         var $container = $(".gallery_detail");
         var block1 = $container.find(".photo-con");
         block1.children().eq(0).attr("src",BasicUrl+"/uploadImage/"+data.pic);

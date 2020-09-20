@@ -391,7 +391,7 @@
     }
     function fullTeacherList(data) {
         //data就是教师列表信息
-        var Basic_url = "http://localhost:8080";
+        var Basic_url = "";
         var USDTOCNY = 7;
         var elem_str = "<div class=\" gallery-item col-xs-12 col-sm-12 col-md-6 col-lg-6 \">\n" +
             "            <div class=\"photo col-lg-4 col-md-4  col-xs-6 col-sm-6\">\n" +
@@ -438,7 +438,7 @@
             for(var i =0;i<length;i++){
                 var data_item = data[i];
                 var $item = $(elem_str);
-                $item.find("img").attr("src",Basic_url+"/uploadImage/"+data_item.pic);
+                $item.find("img").attr("src","/uploadImage/"+data_item.pic);
                 var $item_ul = $item.find("ul");
                 $item_ul.children().eq(0).children().eq(2).text(data_item.name);
                 $item_ul.children().eq(1).children().eq(2).text(data_item.education);

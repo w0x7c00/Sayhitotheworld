@@ -1,6 +1,8 @@
 package tool;
 
 import sql.BasicSQLRunner;
+import web.email.BasicEmailTool;
+import web.pay.AliPay;
 
 import java.io.*;
 import java.util.Properties;
@@ -22,7 +24,14 @@ public class ServerConfig {
         }
     }
     public boolean loadConfigToServer(){
-        return BasicSQLRunner.initSQL(properties.getProperty("SQLConnectStr"));
+        BasicSQLRunner.initSQL(properties.getProperty("SQLConnectStr"));
+
+        //初始化目录：
+        //1-EMAIL
+        //2-ALYPAY
+        //3-WECHATPAY
+        return BasicEmailTool.initEmail(properties.getProperty("Email.smtphost"),properties.getProperty("Email.from"),properties.getProperty("Email.username"),properties.getProperty("Email.password"),properties.getProperty("Email.port"))&&
+                AliPay.initAlipay(properties);
     }
     public boolean saveConfig(String comment){
         try{

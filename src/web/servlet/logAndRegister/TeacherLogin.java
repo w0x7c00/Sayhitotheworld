@@ -1,6 +1,5 @@
 package web.servlet.logAndRegister;
 
-import com.aliyun.tea.Tea;
 import tool.BasicTool;
 import tool.FormatCheckTool;
 import web.dataBasePacket.Teacher;

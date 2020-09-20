@@ -22,7 +22,6 @@ public class BasicSQLRunner {
     public BasicSQLRunner(){
         try{
             con = DriverManager.getConnection(sqlConnectStr);
-            System.out.println("succ");
         }
         catch (SQLException e){
             System.out.println("The Connect Str:"+sqlConnectStr+"  can`t use!");
