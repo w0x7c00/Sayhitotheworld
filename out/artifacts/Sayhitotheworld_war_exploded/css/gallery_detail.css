@@ -85,6 +85,12 @@
     height: 500px;
 }
 
+
+.photo-con>img{
+    max-width: 200px;
+    max-height: 200px;
+}
+
 @media (max-width: 800px) {
     .ifarma-bilib {
         width: 100%;
@@ -105,5 +111,4 @@
     .gallery_detail .left{
         padding: 40px 10px;
     }
-
 }

@@ -87,7 +87,7 @@
                     <li><a href="register.html"><strong>用户注册</strong></a></li>
                     <li><a href="about.html"><strong>关于我们</strong></a></li>
                     <li><a href="gallery.html"><strong>教师信息</strong></a></li>
-                    <li><a href="assets/howtobe7.6.pdf" download="howtobe"><strong>How to become a teacher</strong></a>
+                    <li><a href="apply-online.html"><strong>How to become a teacher</strong></a>
                     </li>
                     <li></li>
                 </ul>
@@ -336,7 +336,7 @@
         }
         else{
             var $foot_ul = $("ul.pagination");
-            var begin = parseInt($target_li.attr("index"));
+            var begin = (parseInt($target_li.attr("index"))-1)*6;
             loadDataAndFull(begin,6);
             $foot_ul.children().removeClass("active");
             $target_li.addClass("active");
